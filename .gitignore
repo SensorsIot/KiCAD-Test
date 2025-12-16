@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# KiCAD backups
+*-backups/
+*.kicad_prl
+fp-info-cache
+
+# IDE
+.vscode/
+.idea/
+
+# AI Agents
+.claude/
+.cursor/
+.aider/
+.continue/
+.codeium/
+.tabnine/
+.copilot/
+
+# OS
+.DS_Store
+Thumbs.db

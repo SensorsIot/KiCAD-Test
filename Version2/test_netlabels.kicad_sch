@@ -1,0 +1,63 @@
+(kicad_sch (version 20231120) (generator "python_test")
+  (uuid "a1b2c3d4-e5f6-7890-abcd-ef1234567890")
+  (paper "A3")
+  (title_block
+    (title "Test - Parts with Net Labels on Pin Endpoints")
+    (date "2025-12-16")
+    (rev "1.0")
+  )
+  (lib_symbols)
+
+  (symbol (lib_id "JLCPCB:TP4056") (at 100 80 0)
+    (uuid "11111111-1111-1111-1111-111111111111")
+    (property "Reference" "U2" (at 100 60 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Value" "TP4056" (at 100 100 0)
+      (effects (font (size 1.27 1.27))))
+    (property "Footprint" "JLCPCB:ESOP-8_L4.9-W3.9-P1.27-LS6.0-BL-EP" (at 100 103 0)
+      (effects (font (size 1.27 1.27)) hide))
+    (instances (project "" (path "/" (reference "U2") (unit 1))))
+  )
+
+  (label "U2_1" (at 120.32 80 0) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid "22222222-0001-0000-0000-000000000000"))
+
+  (label "U2_2" (at 120.32 87.62 0) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid "22222222-0002-0000-0000-000000000000"))
+
+  (label "U2_3" (at 100 105.4 270) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid "22222222-0003-0000-0000-000000000000"))
+
+  (label "U2_4" (at 79.68 64.76 180) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid "22222222-0004-0000-0000-000000000000"))
+
+  (label "U2_5" (at 120.32 64.76 0) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid "22222222-0005-0000-0000-000000000000"))
+
+  (label "U2_6" (at 79.68 87.62 180) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid "22222222-0006-0000-0000-000000000000"))
+
+  (label "U2_7" (at 79.68 80 180) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid "22222222-0007-0000-0000-000000000000"))
+
+  (label "U2_8" (at 79.68 72.38 180) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid "22222222-0008-0000-0000-000000000000"))
+
+  (label "U2_9" (at 120.32 73.65 0) (fields_autoplaced yes)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid "22222222-0009-0000-0000-000000000000"))
+
+  (text "TP4056 with 9 net labels (U2_1 to U2_9)" (at 50 30 0)
+    (effects (font (size 3 3) bold) (justify left))
+    (uuid "99999999-9999-9999-9999-999999999999"))
+
+  (sheet_instances (path "/" (page "1")))
+)

@@ -1,0 +1,730 @@
+{
+  "PJ-227-5A": [
+    {
+      "name": "1",
+      "number": "1"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    },
+    {
+      "name": "3",
+      "number": "3"
+    },
+    {
+      "name": "4",
+      "number": "4"
+    },
+    {
+      "name": "5",
+      "number": "5"
+    }
+  ],
+  "0603WAF1002T5E": [
+    {
+      "name": "2",
+      "number": "2"
+    },
+    {
+      "name": "1",
+      "number": "1"
+    }
+  ],
+  "CL10B104KB8NNNC": [
+    {
+      "name": "1",
+      "number": "1"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    }
+  ],
+  "WS2812B-B{slash}W": [
+    {
+      "name": "VDD",
+      "number": "1"
+    },
+    {
+      "name": "DOUT",
+      "number": "2"
+    },
+    {
+      "name": "VSS",
+      "number": "3"
+    },
+    {
+      "name": "DIN",
+      "number": "4"
+    }
+  ],
+  "EC11E18244A5": [
+    {
+      "name": "A",
+      "number": "A"
+    },
+    {
+      "name": "B",
+      "number": "B"
+    },
+    {
+      "name": "C",
+      "number": "C"
+    },
+    {
+      "name": "D",
+      "number": "D"
+    },
+    {
+      "name": "E",
+      "number": "E"
+    },
+    {
+      "name": "6",
+      "number": "6"
+    },
+    {
+      "name": "7",
+      "number": "7"
+    }
+  ],
+  "0603WAF5101T5E": [
+    {
+      "name": "2",
+      "number": "2"
+    },
+    {
+      "name": "1",
+      "number": "1"
+    }
+  ],
+  "0603WAF1000T5E": [
+    {
+      "name": "2",
+      "number": "2"
+    },
+    {
+      "name": "1",
+      "number": "1"
+    }
+  ],
+  "0603WAF2001T5E": [
+    {
+      "name": "2",
+      "number": "2"
+    },
+    {
+      "name": "1",
+      "number": "1"
+    }
+  ],
+  "CL21A226MQQNNNE": [
+    {
+      "name": "1",
+      "number": "1"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    }
+  ],
+  "B2B-PH-K-S(LF)(SN)": [
+    {
+      "name": "1",
+      "number": "1"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    }
+  ],
+  "Q13FC1350000400": [
+    {
+      "name": "1",
+      "number": "1"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    }
+  ],
+  "0603WAF4701T5E": [
+    {
+      "name": "2",
+      "number": "2"
+    },
+    {
+      "name": "1",
+      "number": "1"
+    }
+  ],
+  "CL21A106KOQNNNE": [
+    {
+      "name": "1",
+      "number": "1"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    }
+  ],
+  "K2-1102SP-C4SC-04": [
+    {
+      "name": "4",
+      "number": "4"
+    },
+    {
+      "name": "3",
+      "number": "3"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    },
+    {
+      "name": "1",
+      "number": "1"
+    }
+  ],
+  "Header-Male-2_54_1x40": [
+    {
+      "name": "1",
+      "number": "1"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    },
+    {
+      "name": "3",
+      "number": "3"
+    },
+    {
+      "name": "4",
+      "number": "4"
+    },
+    {
+      "name": "5",
+      "number": "5"
+    },
+    {
+      "name": "6",
+      "number": "6"
+    },
+    {
+      "name": "7",
+      "number": "7"
+    },
+    {
+      "name": "8",
+      "number": "8"
+    },
+    {
+      "name": "9",
+      "number": "9"
+    },
+    {
+      "name": "10",
+      "number": "10"
+    },
+    {
+      "name": "11",
+      "number": "11"
+    },
+    {
+      "name": "12",
+      "number": "12"
+    },
+    {
+      "name": "13",
+      "number": "13"
+    },
+    {
+      "name": "14",
+      "number": "14"
+    },
+    {
+      "name": "15",
+      "number": "15"
+    },
+    {
+      "name": "16",
+      "number": "16"
+    },
+    {
+      "name": "17",
+      "number": "17"
+    },
+    {
+      "name": "18",
+      "number": "18"
+    },
+    {
+      "name": "19",
+      "number": "19"
+    },
+    {
+      "name": "20",
+      "number": "20"
+    },
+    {
+      "name": "21",
+      "number": "21"
+    },
+    {
+      "name": "22",
+      "number": "22"
+    },
+    {
+      "name": "23",
+      "number": "23"
+    },
+    {
+      "name": "24",
+      "number": "24"
+    },
+    {
+      "name": "25",
+      "number": "25"
+    },
+    {
+      "name": "26",
+      "number": "26"
+    },
+    {
+      "name": "27",
+      "number": "27"
+    },
+    {
+      "name": "28",
+      "number": "28"
+    },
+    {
+      "name": "29",
+      "number": "29"
+    },
+    {
+      "name": "30",
+      "number": "30"
+    },
+    {
+      "name": "31",
+      "number": "31"
+    },
+    {
+      "name": "32",
+      "number": "32"
+    },
+    {
+      "name": "33",
+      "number": "33"
+    },
+    {
+      "name": "34",
+      "number": "34"
+    },
+    {
+      "name": "35",
+      "number": "35"
+    },
+    {
+      "name": "36",
+      "number": "36"
+    },
+    {
+      "name": "37",
+      "number": "37"
+    },
+    {
+      "name": "38",
+      "number": "38"
+    },
+    {
+      "name": "39",
+      "number": "39"
+    },
+    {
+      "name": "40",
+      "number": "40"
+    }
+  ],
+  "TP4056": [
+    {
+      "name": "BAT",
+      "number": "5"
+    },
+    {
+      "name": "TEMP",
+      "number": "1"
+    },
+    {
+      "name": "PROG",
+      "number": "2"
+    },
+    {
+      "name": "GND",
+      "number": "3"
+    },
+    {
+      "name": "VCC",
+      "number": "4"
+    },
+    {
+      "name": "CE",
+      "number": "8"
+    },
+    {
+      "name": "CHRG#",
+      "number": "7"
+    },
+    {
+      "name": "STDBY#",
+      "number": "6"
+    },
+    {
+      "name": "EP",
+      "number": "9"
+    }
+  ],
+  "ESP32-S3-MINI-1-N8": [
+    {
+      "name": "GND",
+      "number": "1"
+    },
+    {
+      "name": "GND",
+      "number": "2"
+    },
+    {
+      "name": "3V3",
+      "number": "3"
+    },
+    {
+      "name": "IO0",
+      "number": "4"
+    },
+    {
+      "name": "IO1",
+      "number": "5"
+    },
+    {
+      "name": "IO2",
+      "number": "6"
+    },
+    {
+      "name": "IO3",
+      "number": "7"
+    },
+    {
+      "name": "IO4",
+      "number": "8"
+    },
+    {
+      "name": "IO5",
+      "number": "9"
+    },
+    {
+      "name": "IO6",
+      "number": "10"
+    },
+    {
+      "name": "IO7",
+      "number": "11"
+    },
+    {
+      "name": "IO8",
+      "number": "12"
+    },
+    {
+      "name": "IO9",
+      "number": "13"
+    },
+    {
+      "name": "IO10",
+      "number": "14"
+    },
+    {
+      "name": "IO11",
+      "number": "15"
+    },
+    {
+      "name": "IO12",
+      "number": "16"
+    },
+    {
+      "name": "IO13",
+      "number": "17"
+    },
+    {
+      "name": "IO14",
+      "number": "18"
+    },
+    {
+      "name": "IO15",
+      "number": "19"
+    },
+    {
+      "name": "IO16",
+      "number": "20"
+    },
+    {
+      "name": "IO17",
+      "number": "21"
+    },
+    {
+      "name": "IO18",
+      "number": "22"
+    },
+    {
+      "name": "IO19",
+      "number": "23"
+    },
+    {
+      "name": "IO20",
+      "number": "24"
+    },
+    {
+      "name": "IO21",
+      "number": "25"
+    },
+    {
+      "name": "IO26",
+      "number": "26"
+    },
+    {
+      "name": "IO47",
+      "number": "27"
+    },
+    {
+      "name": "IO33",
+      "number": "28"
+    },
+    {
+      "name": "IO34",
+      "number": "29"
+    },
+    {
+      "name": "IO48",
+      "number": "30"
+    },
+    {
+      "name": "IO35",
+      "number": "31"
+    },
+    {
+      "name": "IO36",
+      "number": "32"
+    },
+    {
+      "name": "IO37",
+      "number": "33"
+    },
+    {
+      "name": "IO38",
+      "number": "34"
+    },
+    {
+      "name": "IO39",
+      "number": "35"
+    },
+    {
+      "name": "IO40",
+      "number": "36"
+    },
+    {
+      "name": "IO41",
+      "number": "37"
+    },
+    {
+      "name": "IO42",
+      "number": "38"
+    },
+    {
+      "name": "TXD0",
+      "number": "39"
+    },
+    {
+      "name": "RXD0",
+      "number": "40"
+    },
+    {
+      "name": "IO45",
+      "number": "41"
+    },
+    {
+      "name": "GND",
+      "number": "42"
+    },
+    {
+      "name": "GND",
+      "number": "43"
+    },
+    {
+      "name": "IO46",
+      "number": "44"
+    },
+    {
+      "name": "EN",
+      "number": "45"
+    },
+    {
+      "name": "GND",
+      "number": "46"
+    },
+    {
+      "name": "GND",
+      "number": "47"
+    },
+    {
+      "name": "GND",
+      "number": "48"
+    },
+    {
+      "name": "GND",
+      "number": "49"
+    },
+    {
+      "name": "GND",
+      "number": "50"
+    },
+    {
+      "name": "GND",
+      "number": "51"
+    },
+    {
+      "name": "GND",
+      "number": "52"
+    },
+    {
+      "name": "GND",
+      "number": "53"
+    },
+    {
+      "name": "GND",
+      "number": "54"
+    },
+    {
+      "name": "GND",
+      "number": "55"
+    },
+    {
+      "name": "GND",
+      "number": "56"
+    },
+    {
+      "name": "GND",
+      "number": "57"
+    },
+    {
+      "name": "GND",
+      "number": "58"
+    },
+    {
+      "name": "GND",
+      "number": "59"
+    },
+    {
+      "name": "GND",
+      "number": "60"
+    },
+    {
+      "name": "GND",
+      "number": "GND"
+    }
+  ],
+  "CL10C220JB8NNNC": [
+    {
+      "name": "1",
+      "number": "1"
+    },
+    {
+      "name": "2",
+      "number": "2"
+    }
+  ],
+  "TYPE-C16PIN": [
+    {
+      "name": "GND",
+      "number": "A1B12"
+    },
+    {
+      "name": "VBUS",
+      "number": "A4B9"
+    },
+    {
+      "name": "CC1",
+      "number": "A5"
+    },
+    {
+      "name": "DP1",
+      "number": "A6"
+    },
+    {
+      "name": "DN1",
+      "number": "A7"
+    },
+    {
+      "name": "SBU1",
+      "number": "A8"
+    },
+    {
+      "name": "CC2",
+      "number": "B5"
+    },
+    {
+      "name": "DP2",
+      "number": "B6"
+    },
+    {
+      "name": "DN2",
+      "number": "B7"
+    },
+    {
+      "name": "SBU2",
+      "number": "B8"
+    },
+    {
+      "name": "VBUS",
+      "number": "B4A9"
+    },
+    {
+      "name": "GND",
+      "number": "B1A12"
+    },
+    {
+      "name": "SHELL",
+      "number": "1"
+    },
+    {
+      "name": "SHELL",
+      "number": "2"
+    },
+    {
+      "name": "SHELL",
+      "number": "3"
+    },
+    {
+      "name": "SHELL",
+      "number": "4"
+    }
+  ],
+  "AMS1117-3_3": [
+    {
+      "name": "GND",
+      "number": "1"
+    },
+    {
+      "name": "VOUT",
+      "number": "2"
+    },
+    {
+      "name": "VIN",
+      "number": "3"
+    },
+    {
+      "name": "VOUT",
+      "number": "4"
+    }
+  ]
+}

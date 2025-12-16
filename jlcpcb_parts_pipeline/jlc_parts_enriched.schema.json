@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JLCPCB Parts Enriched",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object"
+    },
+    "parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "query",
+          "candidates"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "selection": {
+            "type": "object",
+            "properties": {
+              "lcsc": {
+                "type": "string"
+              },
+              "jlc_basic_extended": {
+                "type": "string"
+              },
+              "manufacturer": {
+                "type": "string"
+              },
+              "mpn": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "package": {
+                "type": "string"
+              },
+              "datasheet_url": {
+                "type": "string"
+              },
+              "jlc_url": {
+                "type": "string"
+              },
+              "stock": {
+                "type": "number"
+              },
+              "prices": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "qty": {
+                      "type": "number"
+                    },
+                    "unit_price": {
+                      "type": "number"
+                    },
+                    "currency": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "candidates": {
+            "type": "array"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "meta",
+    "parts"
+  ]
+}

@@ -1,0 +1,1499 @@
+{
+  "parts": [
+    {
+      "designator": "C1",
+      "symbol": "CL21A106KOQNNNE",
+      "footprint": "JLCPCB:C0805",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C1_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C1_2"
+        }
+      ]
+    },
+    {
+      "designator": "C10",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C10_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C10_2"
+        }
+      ]
+    },
+    {
+      "designator": "C11",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C11_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C11_2"
+        }
+      ]
+    },
+    {
+      "designator": "C12",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C12_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C12_2"
+        }
+      ]
+    },
+    {
+      "designator": "C13",
+      "symbol": "CL10C220JB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C13_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C13_2"
+        }
+      ]
+    },
+    {
+      "designator": "C14",
+      "symbol": "CL10C220JB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C14_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C14_2"
+        }
+      ]
+    },
+    {
+      "designator": "C15",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C15_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C15_2"
+        }
+      ]
+    },
+    {
+      "designator": "C16",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C16_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C16_2"
+        }
+      ]
+    },
+    {
+      "designator": "C17",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C17_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C17_2"
+        }
+      ]
+    },
+    {
+      "designator": "C2",
+      "symbol": "CL21A106KOQNNNE",
+      "footprint": "JLCPCB:C0805",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C2_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C2_2"
+        }
+      ]
+    },
+    {
+      "designator": "C3",
+      "symbol": "CL21A106KOQNNNE",
+      "footprint": "JLCPCB:C0805",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C3_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C3_2"
+        }
+      ]
+    },
+    {
+      "designator": "C4",
+      "symbol": "CL21A226MQQNNNE",
+      "footprint": "JLCPCB:C0805",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C4_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C4_2"
+        }
+      ]
+    },
+    {
+      "designator": "C5",
+      "symbol": "CL21A226MQQNNNE",
+      "footprint": "JLCPCB:C0805",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C5_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C5_2"
+        }
+      ]
+    },
+    {
+      "designator": "C6",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C6_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C6_2"
+        }
+      ]
+    },
+    {
+      "designator": "C7",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C7_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C7_2"
+        }
+      ]
+    },
+    {
+      "designator": "C8",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C8_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C8_2"
+        }
+      ]
+    },
+    {
+      "designator": "C9",
+      "symbol": "CL10B104KB8NNNC",
+      "footprint": "JLCPCB:C0603",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "C9_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "C9_2"
+        }
+      ]
+    },
+    {
+      "designator": "D1",
+      "symbol": "WS2812B-B{slash}W",
+      "footprint": "JLCPCB:LED-SMD_4P-L5.0-W5.0-TL_WS2812B-B",
+      "pins": [
+        {
+          "number": "1",
+          "name": "VDD",
+          "net_label": "D1_1"
+        },
+        {
+          "number": "2",
+          "name": "DOUT",
+          "net_label": "D1_2"
+        },
+        {
+          "number": "3",
+          "name": "VSS",
+          "net_label": "D1_3"
+        },
+        {
+          "number": "4",
+          "name": "DIN",
+          "net_label": "D1_4"
+        }
+      ]
+    },
+    {
+      "designator": "D2",
+      "symbol": "WS2812B-B{slash}W",
+      "footprint": "JLCPCB:LED-SMD_4P-L5.0-W5.0-TL_WS2812B-B",
+      "pins": [
+        {
+          "number": "1",
+          "name": "VDD",
+          "net_label": "D2_1"
+        },
+        {
+          "number": "2",
+          "name": "DOUT",
+          "net_label": "D2_2"
+        },
+        {
+          "number": "3",
+          "name": "VSS",
+          "net_label": "D2_3"
+        },
+        {
+          "number": "4",
+          "name": "DIN",
+          "net_label": "D2_4"
+        }
+      ]
+    },
+    {
+      "designator": "D3",
+      "symbol": "WS2812B-B{slash}W",
+      "footprint": "JLCPCB:LED-SMD_4P-L5.0-W5.0-TL_WS2812B-B",
+      "pins": [
+        {
+          "number": "1",
+          "name": "VDD",
+          "net_label": "D3_1"
+        },
+        {
+          "number": "2",
+          "name": "DOUT",
+          "net_label": "D3_2"
+        },
+        {
+          "number": "3",
+          "name": "VSS",
+          "net_label": "D3_3"
+        },
+        {
+          "number": "4",
+          "name": "DIN",
+          "net_label": "D3_4"
+        }
+      ]
+    },
+    {
+      "designator": "ENC1",
+      "symbol": "EC11E18244A5",
+      "footprint": "JLCPCB:SW-TH_EC11E18244A5",
+      "pins": [
+        {
+          "number": "A",
+          "name": "A",
+          "net_label": "ENC1_A"
+        },
+        {
+          "number": "B",
+          "name": "B",
+          "net_label": "ENC1_B"
+        },
+        {
+          "number": "C",
+          "name": "C",
+          "net_label": "ENC1_C"
+        },
+        {
+          "number": "D",
+          "name": "D",
+          "net_label": "ENC1_D"
+        },
+        {
+          "number": "E",
+          "name": "E",
+          "net_label": "ENC1_E"
+        },
+        {
+          "number": "6",
+          "name": "6",
+          "net_label": "ENC1_6"
+        },
+        {
+          "number": "7",
+          "name": "7",
+          "net_label": "ENC1_7"
+        }
+      ]
+    },
+    {
+      "designator": "ENC2",
+      "symbol": "EC11E18244A5",
+      "footprint": "JLCPCB:SW-TH_EC11E18244A5",
+      "pins": [
+        {
+          "number": "A",
+          "name": "A",
+          "net_label": "ENC2_A"
+        },
+        {
+          "number": "B",
+          "name": "B",
+          "net_label": "ENC2_B"
+        },
+        {
+          "number": "C",
+          "name": "C",
+          "net_label": "ENC2_C"
+        },
+        {
+          "number": "D",
+          "name": "D",
+          "net_label": "ENC2_D"
+        },
+        {
+          "number": "E",
+          "name": "E",
+          "net_label": "ENC2_E"
+        },
+        {
+          "number": "6",
+          "name": "6",
+          "net_label": "ENC2_6"
+        },
+        {
+          "number": "7",
+          "name": "7",
+          "net_label": "ENC2_7"
+        }
+      ]
+    },
+    {
+      "designator": "J1",
+      "symbol": "TYPE-C16PIN",
+      "footprint": "JLCPCB:USB-C-SMD_TYPE-C16PIN",
+      "pins": [
+        {
+          "number": "A1B12",
+          "name": "GND",
+          "net_label": "J1_A1B12"
+        },
+        {
+          "number": "A4B9",
+          "name": "VBUS",
+          "net_label": "J1_A4B9"
+        },
+        {
+          "number": "A5",
+          "name": "CC1",
+          "net_label": "J1_A5"
+        },
+        {
+          "number": "A6",
+          "name": "DP1",
+          "net_label": "J1_A6"
+        },
+        {
+          "number": "A7",
+          "name": "DN1",
+          "net_label": "J1_A7"
+        },
+        {
+          "number": "A8",
+          "name": "SBU1",
+          "net_label": "J1_A8"
+        },
+        {
+          "number": "B5",
+          "name": "CC2",
+          "net_label": "J1_B5"
+        },
+        {
+          "number": "B6",
+          "name": "DP2",
+          "net_label": "J1_B6"
+        },
+        {
+          "number": "B7",
+          "name": "DN2",
+          "net_label": "J1_B7"
+        },
+        {
+          "number": "B8",
+          "name": "SBU2",
+          "net_label": "J1_B8"
+        },
+        {
+          "number": "B4A9",
+          "name": "VBUS",
+          "net_label": "J1_B4A9"
+        },
+        {
+          "number": "B1A12",
+          "name": "GND",
+          "net_label": "J1_B1A12"
+        },
+        {
+          "number": "1",
+          "name": "SHELL",
+          "net_label": "J1_1"
+        },
+        {
+          "number": "2",
+          "name": "SHELL",
+          "net_label": "J1_2"
+        },
+        {
+          "number": "3",
+          "name": "SHELL",
+          "net_label": "J1_3"
+        },
+        {
+          "number": "4",
+          "name": "SHELL",
+          "net_label": "J1_4"
+        }
+      ]
+    },
+    {
+      "designator": "J2",
+      "symbol": "B2B-PH-K-S(LF)(SN)",
+      "footprint": "JLCPCB:CONN-TH_B2B-PH-K-S",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "J2_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "J2_2"
+        }
+      ]
+    },
+    {
+      "designator": "J3",
+      "symbol": "PJ-227-5A",
+      "footprint": "JLCPCB:AUDIO-SMD_PJ-227-5A",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "J3_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "J3_2"
+        },
+        {
+          "number": "3",
+          "name": "3",
+          "net_label": "J3_3"
+        },
+        {
+          "number": "4",
+          "name": "4",
+          "net_label": "J3_4"
+        },
+        {
+          "number": "5",
+          "name": "5",
+          "net_label": "J3_5"
+        }
+      ]
+    },
+    {
+      "designator": "J4",
+      "symbol": "Header-Male-2_54_1x40",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "J4_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "J4_2"
+        },
+        {
+          "number": "3",
+          "name": "3",
+          "net_label": "J4_3"
+        },
+        {
+          "number": "4",
+          "name": "4",
+          "net_label": "J4_4"
+        },
+        {
+          "number": "5",
+          "name": "5",
+          "net_label": "J4_5"
+        },
+        {
+          "number": "6",
+          "name": "6",
+          "net_label": "J4_6"
+        },
+        {
+          "number": "7",
+          "name": "7",
+          "net_label": "J4_7"
+        },
+        {
+          "number": "8",
+          "name": "8",
+          "net_label": "J4_8"
+        },
+        {
+          "number": "9",
+          "name": "9",
+          "net_label": "J4_9"
+        },
+        {
+          "number": "10",
+          "name": "10",
+          "net_label": "J4_10"
+        },
+        {
+          "number": "11",
+          "name": "11",
+          "net_label": "J4_11"
+        },
+        {
+          "number": "12",
+          "name": "12",
+          "net_label": "J4_12"
+        },
+        {
+          "number": "13",
+          "name": "13",
+          "net_label": "J4_13"
+        },
+        {
+          "number": "14",
+          "name": "14",
+          "net_label": "J4_14"
+        },
+        {
+          "number": "15",
+          "name": "15",
+          "net_label": "J4_15"
+        },
+        {
+          "number": "16",
+          "name": "16",
+          "net_label": "J4_16"
+        },
+        {
+          "number": "17",
+          "name": "17",
+          "net_label": "J4_17"
+        },
+        {
+          "number": "18",
+          "name": "18",
+          "net_label": "J4_18"
+        },
+        {
+          "number": "19",
+          "name": "19",
+          "net_label": "J4_19"
+        },
+        {
+          "number": "20",
+          "name": "20",
+          "net_label": "J4_20"
+        },
+        {
+          "number": "21",
+          "name": "21",
+          "net_label": "J4_21"
+        },
+        {
+          "number": "22",
+          "name": "22",
+          "net_label": "J4_22"
+        },
+        {
+          "number": "23",
+          "name": "23",
+          "net_label": "J4_23"
+        },
+        {
+          "number": "24",
+          "name": "24",
+          "net_label": "J4_24"
+        },
+        {
+          "number": "25",
+          "name": "25",
+          "net_label": "J4_25"
+        },
+        {
+          "number": "26",
+          "name": "26",
+          "net_label": "J4_26"
+        },
+        {
+          "number": "27",
+          "name": "27",
+          "net_label": "J4_27"
+        },
+        {
+          "number": "28",
+          "name": "28",
+          "net_label": "J4_28"
+        },
+        {
+          "number": "29",
+          "name": "29",
+          "net_label": "J4_29"
+        },
+        {
+          "number": "30",
+          "name": "30",
+          "net_label": "J4_30"
+        },
+        {
+          "number": "31",
+          "name": "31",
+          "net_label": "J4_31"
+        },
+        {
+          "number": "32",
+          "name": "32",
+          "net_label": "J4_32"
+        },
+        {
+          "number": "33",
+          "name": "33",
+          "net_label": "J4_33"
+        },
+        {
+          "number": "34",
+          "name": "34",
+          "net_label": "J4_34"
+        },
+        {
+          "number": "35",
+          "name": "35",
+          "net_label": "J4_35"
+        },
+        {
+          "number": "36",
+          "name": "36",
+          "net_label": "J4_36"
+        },
+        {
+          "number": "37",
+          "name": "37",
+          "net_label": "J4_37"
+        },
+        {
+          "number": "38",
+          "name": "38",
+          "net_label": "J4_38"
+        },
+        {
+          "number": "39",
+          "name": "39",
+          "net_label": "J4_39"
+        },
+        {
+          "number": "40",
+          "name": "40",
+          "net_label": "J4_40"
+        }
+      ]
+    },
+    {
+      "designator": "R1",
+      "symbol": "0603WAF5101T5E",
+      "footprint": "JLCPCB:R0603",
+      "pins": [
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "R1_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "R1_1"
+        }
+      ]
+    },
+    {
+      "designator": "R2",
+      "symbol": "0603WAF5101T5E",
+      "footprint": "JLCPCB:R0603",
+      "pins": [
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "R2_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "R2_1"
+        }
+      ]
+    },
+    {
+      "designator": "R3",
+      "symbol": "0603WAF2001T5E",
+      "footprint": "JLCPCB:R0603",
+      "pins": [
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "R3_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "R3_1"
+        }
+      ]
+    },
+    {
+      "designator": "R4",
+      "symbol": "0603WAF1002T5E",
+      "footprint": "JLCPCB:R0603",
+      "pins": [
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "R4_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "R4_1"
+        }
+      ]
+    },
+    {
+      "designator": "R5",
+      "symbol": "0603WAF4701T5E",
+      "footprint": "JLCPCB:R0603",
+      "pins": [
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "R5_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "R5_1"
+        }
+      ]
+    },
+    {
+      "designator": "R6",
+      "symbol": "0603WAF4701T5E",
+      "footprint": "JLCPCB:R0603",
+      "pins": [
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "R6_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "R6_1"
+        }
+      ]
+    },
+    {
+      "designator": "R7",
+      "symbol": "0603WAF1000T5E",
+      "footprint": "JLCPCB:R0603",
+      "pins": [
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "R7_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "R7_1"
+        }
+      ]
+    },
+    {
+      "designator": "R8",
+      "symbol": "0603WAF1000T5E",
+      "footprint": "JLCPCB:R0603",
+      "pins": [
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "R8_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "R8_1"
+        }
+      ]
+    },
+    {
+      "designator": "SW1",
+      "symbol": "K2-1102SP-C4SC-04",
+      "footprint": "JLCPCB:KEY-SMD_4P-L6.0-W6.0-P4.50-LS9.5-BL",
+      "pins": [
+        {
+          "number": "4",
+          "name": "4",
+          "net_label": "SW1_4"
+        },
+        {
+          "number": "3",
+          "name": "3",
+          "net_label": "SW1_3"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "SW1_2"
+        },
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "SW1_1"
+        }
+      ]
+    },
+    {
+      "designator": "U1",
+      "symbol": "ESP32-S3-MINI-1-N8",
+      "footprint": "JLCPCB:BULETM-SMD_ESP32-S3-MINI-1-N8",
+      "pins": [
+        {
+          "number": "1",
+          "name": "GND",
+          "net_label": "U1_1"
+        },
+        {
+          "number": "2",
+          "name": "GND",
+          "net_label": "U1_2"
+        },
+        {
+          "number": "3",
+          "name": "3V3",
+          "net_label": "U1_3"
+        },
+        {
+          "number": "4",
+          "name": "IO0",
+          "net_label": "U1_4"
+        },
+        {
+          "number": "5",
+          "name": "IO1",
+          "net_label": "U1_5"
+        },
+        {
+          "number": "6",
+          "name": "IO2",
+          "net_label": "U1_6"
+        },
+        {
+          "number": "7",
+          "name": "IO3",
+          "net_label": "U1_7"
+        },
+        {
+          "number": "8",
+          "name": "IO4",
+          "net_label": "U1_8"
+        },
+        {
+          "number": "9",
+          "name": "IO5",
+          "net_label": "U1_9"
+        },
+        {
+          "number": "10",
+          "name": "IO6",
+          "net_label": "U1_10"
+        },
+        {
+          "number": "11",
+          "name": "IO7",
+          "net_label": "U1_11"
+        },
+        {
+          "number": "12",
+          "name": "IO8",
+          "net_label": "U1_12"
+        },
+        {
+          "number": "13",
+          "name": "IO9",
+          "net_label": "U1_13"
+        },
+        {
+          "number": "14",
+          "name": "IO10",
+          "net_label": "U1_14"
+        },
+        {
+          "number": "15",
+          "name": "IO11",
+          "net_label": "U1_15"
+        },
+        {
+          "number": "16",
+          "name": "IO12",
+          "net_label": "U1_16"
+        },
+        {
+          "number": "17",
+          "name": "IO13",
+          "net_label": "U1_17"
+        },
+        {
+          "number": "18",
+          "name": "IO14",
+          "net_label": "U1_18"
+        },
+        {
+          "number": "19",
+          "name": "IO15",
+          "net_label": "U1_19"
+        },
+        {
+          "number": "20",
+          "name": "IO16",
+          "net_label": "U1_20"
+        },
+        {
+          "number": "21",
+          "name": "IO17",
+          "net_label": "U1_21"
+        },
+        {
+          "number": "22",
+          "name": "IO18",
+          "net_label": "U1_22"
+        },
+        {
+          "number": "23",
+          "name": "IO19",
+          "net_label": "U1_23"
+        },
+        {
+          "number": "24",
+          "name": "IO20",
+          "net_label": "U1_24"
+        },
+        {
+          "number": "25",
+          "name": "IO21",
+          "net_label": "U1_25"
+        },
+        {
+          "number": "26",
+          "name": "IO26",
+          "net_label": "U1_26"
+        },
+        {
+          "number": "27",
+          "name": "IO47",
+          "net_label": "U1_27"
+        },
+        {
+          "number": "28",
+          "name": "IO33",
+          "net_label": "U1_28"
+        },
+        {
+          "number": "29",
+          "name": "IO34",
+          "net_label": "U1_29"
+        },
+        {
+          "number": "30",
+          "name": "IO48",
+          "net_label": "U1_30"
+        },
+        {
+          "number": "31",
+          "name": "IO35",
+          "net_label": "U1_31"
+        },
+        {
+          "number": "32",
+          "name": "IO36",
+          "net_label": "U1_32"
+        },
+        {
+          "number": "33",
+          "name": "IO37",
+          "net_label": "U1_33"
+        },
+        {
+          "number": "34",
+          "name": "IO38",
+          "net_label": "U1_34"
+        },
+        {
+          "number": "35",
+          "name": "IO39",
+          "net_label": "U1_35"
+        },
+        {
+          "number": "36",
+          "name": "IO40",
+          "net_label": "U1_36"
+        },
+        {
+          "number": "37",
+          "name": "IO41",
+          "net_label": "U1_37"
+        },
+        {
+          "number": "38",
+          "name": "IO42",
+          "net_label": "U1_38"
+        },
+        {
+          "number": "39",
+          "name": "TXD0",
+          "net_label": "U1_39"
+        },
+        {
+          "number": "40",
+          "name": "RXD0",
+          "net_label": "U1_40"
+        },
+        {
+          "number": "41",
+          "name": "IO45",
+          "net_label": "U1_41"
+        },
+        {
+          "number": "42",
+          "name": "GND",
+          "net_label": "U1_42"
+        },
+        {
+          "number": "43",
+          "name": "GND",
+          "net_label": "U1_43"
+        },
+        {
+          "number": "44",
+          "name": "IO46",
+          "net_label": "U1_44"
+        },
+        {
+          "number": "45",
+          "name": "EN",
+          "net_label": "U1_45"
+        },
+        {
+          "number": "46",
+          "name": "GND",
+          "net_label": "U1_46"
+        },
+        {
+          "number": "47",
+          "name": "GND",
+          "net_label": "U1_47"
+        },
+        {
+          "number": "48",
+          "name": "GND",
+          "net_label": "U1_48"
+        },
+        {
+          "number": "49",
+          "name": "GND",
+          "net_label": "U1_49"
+        },
+        {
+          "number": "50",
+          "name": "GND",
+          "net_label": "U1_50"
+        },
+        {
+          "number": "51",
+          "name": "GND",
+          "net_label": "U1_51"
+        },
+        {
+          "number": "52",
+          "name": "GND",
+          "net_label": "U1_52"
+        },
+        {
+          "number": "53",
+          "name": "GND",
+          "net_label": "U1_53"
+        },
+        {
+          "number": "54",
+          "name": "GND",
+          "net_label": "U1_54"
+        },
+        {
+          "number": "55",
+          "name": "GND",
+          "net_label": "U1_55"
+        },
+        {
+          "number": "56",
+          "name": "GND",
+          "net_label": "U1_56"
+        },
+        {
+          "number": "57",
+          "name": "GND",
+          "net_label": "U1_57"
+        },
+        {
+          "number": "58",
+          "name": "GND",
+          "net_label": "U1_58"
+        },
+        {
+          "number": "59",
+          "name": "GND",
+          "net_label": "U1_59"
+        },
+        {
+          "number": "60",
+          "name": "GND",
+          "net_label": "U1_60"
+        },
+        {
+          "number": "GND",
+          "name": "GND",
+          "net_label": "U1_GND"
+        }
+      ]
+    },
+    {
+      "designator": "U2",
+      "symbol": "TP4056",
+      "footprint": "JLCPCB:ESOP-8_L4.9-W3.9-P1.27-LS6.0-BL-EP",
+      "pins": [
+        {
+          "number": "5",
+          "name": "BAT",
+          "net_label": "U2_5"
+        },
+        {
+          "number": "1",
+          "name": "TEMP",
+          "net_label": "U2_1"
+        },
+        {
+          "number": "2",
+          "name": "PROG",
+          "net_label": "U2_2"
+        },
+        {
+          "number": "3",
+          "name": "GND",
+          "net_label": "U2_3"
+        },
+        {
+          "number": "4",
+          "name": "VCC",
+          "net_label": "U2_4"
+        },
+        {
+          "number": "8",
+          "name": "CE",
+          "net_label": "U2_8"
+        },
+        {
+          "number": "7",
+          "name": "CHRG#",
+          "net_label": "U2_7"
+        },
+        {
+          "number": "6",
+          "name": "STDBY#",
+          "net_label": "U2_6"
+        },
+        {
+          "number": "9",
+          "name": "EP",
+          "net_label": "U2_9"
+        }
+      ]
+    },
+    {
+      "designator": "U3",
+      "symbol": "AMS1117-3_3",
+      "footprint": "JLCPCB:SOT-223-3_L6.5-W3.4-P2.30-LS7.0-BR",
+      "pins": [
+        {
+          "number": "1",
+          "name": "GND",
+          "net_label": "U3_1"
+        },
+        {
+          "number": "2",
+          "name": "VOUT",
+          "net_label": "U3_2"
+        },
+        {
+          "number": "3",
+          "name": "VIN",
+          "net_label": "U3_3"
+        },
+        {
+          "number": "4",
+          "name": "VOUT",
+          "net_label": "U3_4"
+        }
+      ]
+    },
+    {
+      "designator": "U4",
+      "symbol": "SI4735-D60-GU",
+      "footprint": "Package_SO:SSOP-24_5.3x8.2mm_P0.65mm",
+      "pins": [
+        {
+          "number": "1",
+          "name": "DOUT",
+          "net_label": "U4_1"
+        },
+        {
+          "number": "2",
+          "name": "DFS",
+          "net_label": "U4_2"
+        },
+        {
+          "number": "3",
+          "name": "GPO1",
+          "net_label": "U4_3"
+        },
+        {
+          "number": "4",
+          "name": "GPO2",
+          "net_label": "U4_4"
+        },
+        {
+          "number": "5",
+          "name": "GPO3",
+          "net_label": "U4_5"
+        },
+        {
+          "number": "6",
+          "name": "SCLK",
+          "net_label": "U4_6"
+        },
+        {
+          "number": "7",
+          "name": "SDIO",
+          "net_label": "U4_7"
+        },
+        {
+          "number": "8",
+          "name": "SSB",
+          "net_label": "U4_8"
+        },
+        {
+          "number": "9",
+          "name": "NC1",
+          "net_label": "U4_9"
+        },
+        {
+          "number": "10",
+          "name": "NC2",
+          "net_label": "U4_10"
+        },
+        {
+          "number": "11",
+          "name": "ROUT",
+          "net_label": "U4_11"
+        },
+        {
+          "number": "12",
+          "name": "LOUT",
+          "net_label": "U4_12"
+        },
+        {
+          "number": "13",
+          "name": "DBYP",
+          "net_label": "U4_13"
+        },
+        {
+          "number": "14",
+          "name": "VA",
+          "net_label": "U4_14"
+        },
+        {
+          "number": "15",
+          "name": "GND",
+          "net_label": "U4_15"
+        },
+        {
+          "number": "16",
+          "name": "GND",
+          "net_label": "U4_16"
+        },
+        {
+          "number": "17",
+          "name": "VD",
+          "net_label": "U4_17"
+        },
+        {
+          "number": "18",
+          "name": "RCLK",
+          "net_label": "U4_18"
+        },
+        {
+          "number": "19",
+          "name": "NC3",
+          "net_label": "U4_19"
+        },
+        {
+          "number": "20",
+          "name": "RST",
+          "net_label": "U4_20"
+        },
+        {
+          "number": "21",
+          "name": "FMI",
+          "net_label": "U4_21"
+        },
+        {
+          "number": "22",
+          "name": "RFGND",
+          "net_label": "U4_22"
+        },
+        {
+          "number": "23",
+          "name": "AMI",
+          "net_label": "U4_23"
+        },
+        {
+          "number": "24",
+          "name": "GND",
+          "net_label": "U4_24"
+        }
+      ]
+    },
+    {
+      "designator": "Y1",
+      "symbol": "Q13FC1350000400",
+      "footprint": "JLCPCB:FC-135R_L3.2-W1.5",
+      "pins": [
+        {
+          "number": "1",
+          "name": "1",
+          "net_label": "Y1_1"
+        },
+        {
+          "number": "2",
+          "name": "2",
+          "net_label": "Y1_2"
+        }
+      ]
+    }
+  ]
+}

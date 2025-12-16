@@ -1,0 +1,447 @@
+meta:
+  generated_on: '2025-12-16'
+  source_document: DESIGN_SPEC.md
+  project: ESP32-S3 Portable Radio Receiver
+  notes:
+    - Prefer JLCPCB Basic parts where possible (lower assembly fee)
+    - Secondary preference for Promotional Extended parts
+    - LCSC codes provided where known from design spec
+    - KiCAD symbol/footprint mappings included for import
+  part_type_preference:
+    - basic
+    - promotional_extended
+    - extended
+
+parts:
+  # === MAIN ICs ===
+  - designator: U1
+    mpn: ESP32-S3-MINI-1-N8
+    lcsc: C2913206
+    function: Main MCU module
+    package: Module
+    part_type: extended
+    symbol: RF_Module:ESP32-S3-MINI-1
+    footprint: RF_Module:ESP32-S3-MINI-1
+    datasheet: https://www.espressif.com/sites/default/files/documentation/esp32-s3-mini-1_mini-1u_datasheet_en.pdf
+
+  - designator: U2
+    mpn: TP4056
+    lcsc: C16581
+    function: Li-Ion battery charger IC
+    package: ESOP-8
+    part_type: extended
+    symbol: Battery_Management:TP4056
+    footprint: Package_SO:SOIC-8_3.9x4.9mm_P1.27mm
+    datasheet: https://dlnmh9ip6v2uc.cloudfront.net/datasheets/Prototyping/TP4056.pdf
+
+  - designator: U3
+    mpn: AMS1117-3.3
+    lcsc: C6186
+    function: 3.3V LDO regulator
+    package: SOT-223
+    part_type: basic
+    symbol: Regulator_Linear:AMS1117-3.3
+    footprint: Package_TO_SOT_SMD:SOT-223-3_TabPin2
+    datasheet: http://www.advanced-monolithic.com/pdf/ds1117.pdf
+
+  - designator: U4
+    mpn: SI4735-D60-GU
+    lcsc: C195417
+    function: AM/FM/SW radio receiver IC
+    package: SSOP-24
+    part_type: extended
+    symbol: Interface_Expansion:SI4735-D60-GU
+    footprint: Package_SO:SSOP-24_5.3x8.2mm_P0.65mm
+    datasheet: https://www.silabs.com/documents/public/data-sheets/Si4730-31-34-35-D60.pdf
+
+  # === LEDs ===
+  - designator: D1
+    mpn: WS2812B-B
+    lcsc: C2761795
+    function: NeoPixel RGB LED
+    package: "5050"
+    part_type: extended
+    symbol: LED:WS2812B
+    footprint: LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm
+    datasheet: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+
+  - designator: D2
+    mpn: WS2812B-B
+    lcsc: C2761795
+    function: NeoPixel RGB LED
+    package: "5050"
+    part_type: extended
+    symbol: LED:WS2812B
+    footprint: LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm
+    datasheet: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+
+  - designator: D3
+    mpn: WS2812B-B
+    lcsc: C2761795
+    function: NeoPixel RGB LED
+    package: "5050"
+    part_type: extended
+    symbol: LED:WS2812B
+    footprint: LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm
+    datasheet: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+
+  # === CONNECTORS ===
+  - designator: J1
+    mpn: TYPE-C-31-M-12
+    lcsc: C393939
+    function: USB-C 16-pin power + data connector
+    package: SMD
+    part_type: basic
+    symbol: Connector:USB_C_Receptacle_USB2.0
+    footprint: Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12
+    datasheet: https://www.lcsc.com/datasheet/lcsc_datasheet_1811131825_Korean-Hroparts-Elec-TYPE-C-31-M-12_C393939.pdf
+
+  - designator: J2
+    mpn: S2B-PH-K-S
+    lcsc: C131337
+    function: JST-PH 2-pin battery connector
+    package: SMD
+    part_type: basic
+    symbol: Connector:Conn_01x02
+    footprint: Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal
+    datasheet: https://www.jst-mfg.com/product/pdf/eng/ePH.pdf
+
+  - designator: J3
+    mpn: PJ-320A
+    lcsc: C145819
+    function: 3.5mm TRS headphone jack
+    package: TH
+    part_type: extended
+    symbol: Connector:AudioJack3
+    footprint: Connector_Audio:Jack_3.5mm_PJ320A_Horizontal
+    datasheet: https://datasheet.lcsc.com/szlcsc/PJ-320A_C145819.pdf
+
+  - designator: J4
+    mpn: 1x04 Pin Header 2.54mm
+    lcsc: C2337
+    function: OLED I2C display header
+    package: TH 2.54mm
+    part_type: basic
+    symbol: Connector:Conn_01x04
+    footprint: Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical
+    datasheet: ""
+
+  # === USER INTERFACE ===
+  - designator: SW1
+    mpn: TS-1187A-B-A-B
+    lcsc: C127509
+    function: Reset button (tactile switch)
+    package: SMD 6x6mm
+    part_type: basic
+    symbol: Switch:SW_Push
+    footprint: Button_Switch_SMD:SW_SPST_TL3342
+    datasheet: https://datasheet.lcsc.com/szlcsc/TS-1187A-B-A-B_C127509.pdf
+
+  - designator: ENC1
+    mpn: EC11E18244A5
+    lcsc: C255515
+    function: Rotary encoder with push button (tuning)
+    package: TH
+    part_type: extended
+    symbol: Device:Rotary_Encoder_Switch
+    footprint: Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm
+    datasheet: https://tech.alpsalpine.com/prod/e/html/encoder/incremental/ec11/ec11e18244a5.html
+
+  - designator: ENC2
+    mpn: EC11E18244A5
+    lcsc: C255515
+    function: Rotary encoder with push button (volume)
+    package: TH
+    part_type: extended
+    symbol: Device:Rotary_Encoder_Switch
+    footprint: Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm
+    datasheet: https://tech.alpsalpine.com/prod/e/html/encoder/incremental/ec11/ec11e18244a5.html
+
+  # === CAPACITORS ===
+  - designator: C1
+    mpn: CL21A106KOQNNNE
+    lcsc: C15850
+    function: USB-C VBUS input filter
+    package: "0805"
+    value: 10uF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0805_2012Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A106KOQNNNE_C15850.pdf
+
+  - designator: C2
+    mpn: CL21A106KOQNNNE
+    lcsc: C15850
+    function: TP4056 input capacitor
+    package: "0805"
+    value: 10uF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0805_2012Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A106KOQNNNE_C15850.pdf
+
+  - designator: C3
+    mpn: CL21A106KOQNNNE
+    lcsc: C15850
+    function: TP4056 output/battery capacitor
+    package: "0805"
+    value: 10uF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0805_2012Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A106KOQNNNE_C15850.pdf
+
+  - designator: C4
+    mpn: CL21A226MQQNNNE
+    lcsc: C45783
+    function: AMS1117 input capacitor
+    package: "0805"
+    value: 22uF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0805_2012Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A226MQQNNNE_C45783.pdf
+
+  - designator: C5
+    mpn: CL21A226MQQNNNE
+    lcsc: C45783
+    function: AMS1117 output capacitor
+    package: "0805"
+    value: 22uF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0805_2012Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A226MQQNNNE_C45783.pdf
+
+  - designator: C6
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: ESP32 decoupling
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C7
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: ESP32 decoupling
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C8
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: ESP32 decoupling
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C9
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: WS2812B D1 decoupling
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C10
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: WS2812B D2 decoupling
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C11
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: WS2812B D3 decoupling
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C12
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: SI4735 VDD bypass
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C13
+    mpn: CL10C220JB8NNNC
+    lcsc: C1653
+    function: SI4735 crystal load capacitor
+    package: "0603"
+    value: 22pF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10C220JB8NNNC_C1653.pdf
+
+  - designator: C14
+    mpn: CL10C220JB8NNNC
+    lcsc: C1653
+    function: SI4735 crystal load capacitor
+    package: "0603"
+    value: 22pF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10C220JB8NNNC_C1653.pdf
+
+  - designator: C15
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: SI4735 VA bypass
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C16
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: SI4735 VD bypass
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  - designator: C17
+    mpn: CL10B104KB8NNNC
+    lcsc: C14663
+    function: ESP32 EN pin noise filter
+    package: "0603"
+    value: 100nF
+    part_type: basic
+    symbol: Device:C
+    footprint: Capacitor_SMD:C_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf
+
+  # === RESISTORS ===
+  - designator: R1
+    mpn: 0603WAF5101T5E
+    lcsc: C23186
+    function: USB-C CC1 pulldown
+    package: "0603"
+    value: 5.1k
+    part_type: basic
+    symbol: Device:R
+    footprint: Resistor_SMD:R_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF5101T5E_C23186.pdf
+
+  - designator: R2
+    mpn: 0603WAF5101T5E
+    lcsc: C23186
+    function: USB-C CC2 pulldown
+    package: "0603"
+    value: 5.1k
+    part_type: basic
+    symbol: Device:R
+    footprint: Resistor_SMD:R_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF5101T5E_C23186.pdf
+
+  - designator: R3
+    mpn: 0603WAF2001T5E
+    lcsc: C22975
+    function: TP4056 PROG (sets 500mA charge current)
+    package: "0603"
+    value: 2k
+    part_type: basic
+    symbol: Device:R
+    footprint: Resistor_SMD:R_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF2001T5E_C22975.pdf
+
+  - designator: R4
+    mpn: 0603WAF1002T5E
+    lcsc: C25804
+    function: ESP32 EN pullup
+    package: "0603"
+    value: 10k
+    part_type: basic
+    symbol: Device:R
+    footprint: Resistor_SMD:R_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF1002T5E_C25804.pdf
+
+  - designator: R5
+    mpn: 0603WAF4701T5E
+    lcsc: C25900
+    function: I2C SDA pullup
+    package: "0603"
+    value: 4.7k
+    part_type: basic
+    symbol: Device:R
+    footprint: Resistor_SMD:R_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF4701T5E_C25900.pdf
+
+  - designator: R6
+    mpn: 0603WAF4701T5E
+    lcsc: C25900
+    function: I2C SCL pullup
+    package: "0603"
+    value: 4.7k
+    part_type: basic
+    symbol: Device:R
+    footprint: Resistor_SMD:R_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF4701T5E_C25900.pdf
+
+  - designator: R7
+    mpn: 0603WAF1000T5E
+    lcsc: C22775
+    function: Audio output series resistor (Left)
+    package: "0603"
+    value: 100R
+    part_type: basic
+    symbol: Device:R
+    footprint: Resistor_SMD:R_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF1000T5E_C22775.pdf
+
+  - designator: R8
+    mpn: 0603WAF1000T5E
+    lcsc: C22775
+    function: Audio output series resistor (Right)
+    package: "0603"
+    value: 100R
+    part_type: basic
+    symbol: Device:R
+    footprint: Resistor_SMD:R_0603_1608Metric
+    datasheet: https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF1000T5E_C22775.pdf
+
+  # === CRYSTAL ===
+  - designator: Y1
+    mpn: X322532768KSB4SI
+    lcsc: C32346
+    function: SI4735 32.768kHz reference crystal
+    package: "3215"
+    value: 32.768kHz
+    part_type: basic
+    symbol: Device:Crystal
+    footprint: Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm
+    datasheet: https://datasheet.lcsc.com/szlcsc/Yangxing-Tech-X322532768KSB4SI_C32346.pdf

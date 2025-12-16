@@ -1,0 +1,1398 @@
+{
+  "meta": {
+    "generated_on": "2025-12-16",
+    "source_document": "DESIGN_SPEC.md",
+    "project": "ESP32-S3 Portable Radio Receiver",
+    "notes": [
+      "Prefer JLCPCB Basic parts where possible (lower assembly fee)",
+      "Secondary preference for Promotional Extended parts",
+      "LCSC codes provided where known from design spec",
+      "KiCAD symbol/footprint mappings included for import"
+    ],
+    "part_type_preference": [
+      "basic",
+      "promotional_extended",
+      "extended"
+    ]
+  },
+  "parts": [
+    {
+      "designator": "U1",
+      "query": "ESP32-S3-MINI-1-N8",
+      "function": "Main MCU module",
+      "package": "Module",
+      "value": null,
+      "known_lcsc": "C2913206",
+      "symbol": "RF_Module:ESP32-S3-MINI-1",
+      "footprint": "RF_Module:ESP32-S3-MINI-1",
+      "datasheet": "https://www.espressif.com/sites/default/files/documentation/esp32-s3-mini-1_mini-1u_datasheet_en.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C2913206",
+        "mpn": "ESP32-S3-MINI-1-N8",
+        "package": "Module",
+        "description": "Main MCU module",
+        "stock": null,
+        "price": null,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=ESP32-S3-MINI-1-N8&limit=10"
+    },
+    {
+      "designator": "U2",
+      "query": "TP4056",
+      "function": "Li-Ion battery charger IC",
+      "package": "ESOP-8",
+      "value": null,
+      "known_lcsc": "C16581",
+      "symbol": "Battery_Management:TP4056",
+      "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+      "datasheet": "https://dlnmh9ip6v2uc.cloudfront.net/datasheets/Prototyping/TP4056.pdf",
+      "candidates": [
+        {
+          "lcsc": 725790,
+          "mfr": "TP4056",
+          "package": "ESOP-8",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 407448,
+          "price": 0.061428571
+        },
+        {
+          "lcsc": 16581,
+          "mfr": "TP4056-42-ESOP8",
+          "package": "ESOP-8",
+          "is_basic": false,
+          "is_preferred": true,
+          "description": "",
+          "stock": 64751,
+          "price": 0.163714286
+        },
+        {
+          "lcsc": 7473158,
+          "mfr": "TP4056-MS",
+          "package": "SOP-8-EP",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 63975,
+          "price": 0.055142857
+        },
+        {
+          "lcsc": 382139,
+          "mfr": "TP4056",
+          "package": "ESOP-8",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 41632,
+          "price": 0.082857143
+        },
+        {
+          "lcsc": 5311018,
+          "mfr": "TP4056",
+          "package": "ESOP-8",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 30169,
+          "price": 0.079857143
+        },
+        {
+          "lcsc": 22470410,
+          "mfr": "TP4056",
+          "package": "ESOP-8",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 17525,
+          "price": 0.047285714
+        },
+        {
+          "lcsc": 49023496,
+          "mfr": "TP4056H-TD",
+          "package": "ESOP-8",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 7720,
+          "price": 0.065571429
+        },
+        {
+          "lcsc": 21713961,
+          "mfr": "TP4056",
+          "package": "ESOP-8",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 5287,
+          "price": 0.042285714
+        },
+        {
+          "lcsc": 21417,
+          "mfr": "TP4056-42-EMSOP8",
+          "package": "MSOP-8-EP",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 3533,
+          "price": 0.190142857
+        },
+        {
+          "lcsc": 51927325,
+          "mfr": "TP4056NS",
+          "package": "ESOP-8",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 2560,
+          "price": 0.029
+        }
+      ],
+      "selection": {
+        "lcsc": "C16581",
+        "mpn": "TP4056-42-ESOP8",
+        "package": "ESOP-8",
+        "description": "",
+        "stock": 64751,
+        "price": 0.163714286,
+        "part_type": "preferred",
+        "is_basic": false,
+        "is_preferred": true
+      },
+      "error": null
+    },
+    {
+      "designator": "U3",
+      "query": "AMS1117-3.3",
+      "function": "3.3V LDO regulator",
+      "package": "SOT-223",
+      "value": null,
+      "known_lcsc": "C6186",
+      "symbol": "Regulator_Linear:AMS1117-3.3",
+      "footprint": "Package_TO_SOT_SMD:SOT-223-3_TabPin2",
+      "datasheet": "http://www.advanced-monolithic.com/pdf/ds1117.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C6186",
+        "mpn": "AMS1117-3.3",
+        "package": "SOT-223",
+        "description": "3.3V LDO regulator",
+        "stock": null,
+        "price": null,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=AMS1117-3.3&limit=10"
+    },
+    {
+      "designator": "U4",
+      "query": "SI4735-D60-GU",
+      "function": "AM/FM/SW radio receiver IC",
+      "package": "SSOP-24",
+      "value": null,
+      "known_lcsc": "C195417",
+      "symbol": "Interface_Expansion:SI4735-D60-GU",
+      "footprint": "Package_SO:SSOP-24_5.3x8.2mm_P0.65mm",
+      "datasheet": "https://www.silabs.com/documents/public/data-sheets/Si4730-31-34-35-D60.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C195417",
+        "mpn": "SI4735-D60-GU",
+        "package": "SSOP-24",
+        "description": "AM/FM/SW radio receiver IC",
+        "stock": null,
+        "price": null,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=SI4735-D60-GU&limit=10"
+    },
+    {
+      "designator": "D1",
+      "query": "WS2812B-B",
+      "function": "NeoPixel RGB LED",
+      "package": "5050",
+      "value": null,
+      "known_lcsc": "C2761795",
+      "symbol": "LED:WS2812B",
+      "footprint": "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm",
+      "datasheet": "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C2761795",
+        "mpn": "WS2812B-B",
+        "package": "5050",
+        "description": "NeoPixel RGB LED",
+        "stock": null,
+        "price": null,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=WS2812B-B&limit=10"
+    },
+    {
+      "designator": "D2",
+      "query": "WS2812B-B",
+      "function": "NeoPixel RGB LED",
+      "package": "5050",
+      "value": null,
+      "known_lcsc": "C2761795",
+      "symbol": "LED:WS2812B",
+      "footprint": "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm",
+      "datasheet": "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C2761795",
+        "mpn": "WS2812B-B",
+        "package": "5050",
+        "description": "NeoPixel RGB LED",
+        "stock": null,
+        "price": null,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=WS2812B-B&limit=10"
+    },
+    {
+      "designator": "D3",
+      "query": "WS2812B-B",
+      "function": "NeoPixel RGB LED",
+      "package": "5050",
+      "value": null,
+      "known_lcsc": "C2761795",
+      "symbol": "LED:WS2812B",
+      "footprint": "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm",
+      "datasheet": "https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C2761795",
+        "mpn": "WS2812B-B",
+        "package": "5050",
+        "description": "NeoPixel RGB LED",
+        "stock": null,
+        "price": null,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=WS2812B-B&limit=10"
+    },
+    {
+      "designator": "J1",
+      "query": "TYPE-C-31-M-12",
+      "function": "USB-C 16-pin power + data connector",
+      "package": "SMD",
+      "value": null,
+      "known_lcsc": "C393939",
+      "symbol": "Connector:USB_C_Receptacle_USB2.0",
+      "footprint": "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12",
+      "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1811131825_Korean-Hroparts-Elec-TYPE-C-31-M-12_C393939.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C393939",
+        "mpn": "TYPE-C-31-M-12",
+        "package": "SMD",
+        "description": "USB-C 16-pin power + data connector",
+        "stock": null,
+        "price": null,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=TYPE-C-31-M-12&limit=10"
+    },
+    {
+      "designator": "J2",
+      "query": "S2B-PH-K-S",
+      "function": "JST-PH 2-pin battery connector",
+      "package": "SMD",
+      "value": null,
+      "known_lcsc": "C131337",
+      "symbol": "Connector:Conn_01x02",
+      "footprint": "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal",
+      "datasheet": "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C131337",
+        "mpn": "S2B-PH-K-S",
+        "package": "SMD",
+        "description": "JST-PH 2-pin battery connector",
+        "stock": null,
+        "price": null,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=S2B-PH-K-S&limit=10"
+    },
+    {
+      "designator": "J3",
+      "query": "PJ-320A",
+      "function": "3.5mm TRS headphone jack",
+      "package": "TH",
+      "value": null,
+      "known_lcsc": "C145819",
+      "symbol": "Connector:AudioJack3",
+      "footprint": "Connector_Audio:Jack_3.5mm_PJ320A_Horizontal",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/PJ-320A_C145819.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C145819",
+        "mpn": "PJ-320A",
+        "package": "TH",
+        "description": "3.5mm TRS headphone jack",
+        "stock": null,
+        "price": null,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=PJ-320A&limit=10"
+    },
+    {
+      "designator": "J4",
+      "query": "1x04 Pin Header 2.54mm",
+      "function": "OLED I2C display header",
+      "package": "TH 2.54mm",
+      "value": null,
+      "known_lcsc": "C2337",
+      "symbol": "Connector:Conn_01x04",
+      "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+      "datasheet": "",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C2337",
+        "mpn": "1x04 Pin Header 2.54mm",
+        "package": "TH 2.54mm",
+        "description": "OLED I2C display header",
+        "stock": null,
+        "price": null,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=1x04+Pin+Header+2.54mm&limit=10"
+    },
+    {
+      "designator": "SW1",
+      "query": "TS-1187A-B-A-B",
+      "function": "Reset button (tactile switch)",
+      "package": "SMD 6x6mm",
+      "value": null,
+      "known_lcsc": "C127509",
+      "symbol": "Switch:SW_Push",
+      "footprint": "Button_Switch_SMD:SW_SPST_TL3342",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/TS-1187A-B-A-B_C127509.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C127509",
+        "mpn": "TS-1187A-B-A-B",
+        "package": "SMD 6x6mm",
+        "description": "Reset button (tactile switch)",
+        "stock": null,
+        "price": null,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (API error)"
+      },
+      "error": "HTTP 500: 500 Server Error: Internal Server Error for url: https://jlcsearch.tscircuit.com/api/search?q=TS-1187A-B-A-B&limit=10"
+    },
+    {
+      "designator": "ENC1",
+      "query": "EC11E18244A5",
+      "function": "Rotary encoder with push button (tuning)",
+      "package": "TH",
+      "value": null,
+      "known_lcsc": "C255515",
+      "symbol": "Device:Rotary_Encoder_Switch",
+      "footprint": "Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm",
+      "datasheet": "https://tech.alpsalpine.com/prod/e/html/encoder/incremental/ec11/ec11e18244a5.html",
+      "candidates": [
+        {
+          "lcsc": 255515,
+          "mfr": "EC11E18244A5",
+          "package": "插件",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 69,
+          "price": 1.884285714
+        }
+      ],
+      "selection": {
+        "lcsc": "C255515",
+        "mpn": "EC11E18244A5",
+        "package": "插件",
+        "description": "",
+        "stock": 69,
+        "price": 1.884285714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "ENC2",
+      "query": "EC11E18244A5",
+      "function": "Rotary encoder with push button (volume)",
+      "package": "TH",
+      "value": null,
+      "known_lcsc": "C255515",
+      "symbol": "Device:Rotary_Encoder_Switch",
+      "footprint": "Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm",
+      "datasheet": "https://tech.alpsalpine.com/prod/e/html/encoder/incremental/ec11/ec11e18244a5.html",
+      "candidates": [
+        {
+          "lcsc": 255515,
+          "mfr": "EC11E18244A5",
+          "package": "插件",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 69,
+          "price": 1.884285714
+        }
+      ],
+      "selection": {
+        "lcsc": "C255515",
+        "mpn": "EC11E18244A5",
+        "package": "插件",
+        "description": "",
+        "stock": 69,
+        "price": 1.884285714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C1",
+      "query": "CL21A106KOQNNNE",
+      "function": "USB-C VBUS input filter",
+      "package": "0805",
+      "value": "10uF",
+      "known_lcsc": "C15850",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A106KOQNNNE_C15850.pdf",
+      "candidates": [
+        {
+          "lcsc": 1713,
+          "mfr": "CL21A106KOQNNNE",
+          "package": "0805",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 8576422,
+          "price": 0.008157143
+        }
+      ],
+      "selection": {
+        "lcsc": "C1713",
+        "mpn": "CL21A106KOQNNNE",
+        "package": "0805",
+        "description": "",
+        "stock": 8576422,
+        "price": 0.008157143,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C2",
+      "query": "CL21A106KOQNNNE",
+      "function": "TP4056 input capacitor",
+      "package": "0805",
+      "value": "10uF",
+      "known_lcsc": "C15850",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A106KOQNNNE_C15850.pdf",
+      "candidates": [
+        {
+          "lcsc": 1713,
+          "mfr": "CL21A106KOQNNNE",
+          "package": "0805",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 8576422,
+          "price": 0.008157143
+        }
+      ],
+      "selection": {
+        "lcsc": "C1713",
+        "mpn": "CL21A106KOQNNNE",
+        "package": "0805",
+        "description": "",
+        "stock": 8576422,
+        "price": 0.008157143,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C3",
+      "query": "CL21A106KOQNNNE",
+      "function": "TP4056 output/battery capacitor",
+      "package": "0805",
+      "value": "10uF",
+      "known_lcsc": "C15850",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A106KOQNNNE_C15850.pdf",
+      "candidates": [
+        {
+          "lcsc": 1713,
+          "mfr": "CL21A106KOQNNNE",
+          "package": "0805",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 8576422,
+          "price": 0.008157143
+        }
+      ],
+      "selection": {
+        "lcsc": "C1713",
+        "mpn": "CL21A106KOQNNNE",
+        "package": "0805",
+        "description": "",
+        "stock": 8576422,
+        "price": 0.008157143,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C4",
+      "query": "CL21A226MQQNNNE",
+      "function": "AMS1117 input capacitor",
+      "package": "0805",
+      "value": "22uF",
+      "known_lcsc": "C45783",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A226MQQNNNE_C45783.pdf",
+      "candidates": [
+        {
+          "lcsc": 5674,
+          "mfr": "CL21A226MQQNNNE",
+          "package": "0805",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 3055315,
+          "price": 0.010085714
+        }
+      ],
+      "selection": {
+        "lcsc": "C5674",
+        "mpn": "CL21A226MQQNNNE",
+        "package": "0805",
+        "description": "",
+        "stock": 3055315,
+        "price": 0.010085714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C5",
+      "query": "CL21A226MQQNNNE",
+      "function": "AMS1117 output capacitor",
+      "package": "0805",
+      "value": "22uF",
+      "known_lcsc": "C45783",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL21A226MQQNNNE_C45783.pdf",
+      "candidates": [
+        {
+          "lcsc": 5674,
+          "mfr": "CL21A226MQQNNNE",
+          "package": "0805",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 3055315,
+          "price": 0.010085714
+        }
+      ],
+      "selection": {
+        "lcsc": "C5674",
+        "mpn": "CL21A226MQQNNNE",
+        "package": "0805",
+        "description": "",
+        "stock": 3055315,
+        "price": 0.010085714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C6",
+      "query": "CL10B104KB8NNNC",
+      "function": "ESP32 decoupling",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C7",
+      "query": "CL10B104KB8NNNC",
+      "function": "ESP32 decoupling",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C8",
+      "query": "CL10B104KB8NNNC",
+      "function": "ESP32 decoupling",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C9",
+      "query": "CL10B104KB8NNNC",
+      "function": "WS2812B D1 decoupling",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C10",
+      "query": "CL10B104KB8NNNC",
+      "function": "WS2812B D2 decoupling",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C11",
+      "query": "CL10B104KB8NNNC",
+      "function": "WS2812B D3 decoupling",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C12",
+      "query": "CL10B104KB8NNNC",
+      "function": "SI4735 VDD bypass",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C13",
+      "query": "CL10C220JB8NNNC",
+      "function": "SI4735 crystal load capacitor",
+      "package": "0603",
+      "value": "22pF",
+      "known_lcsc": "C1653",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10C220JB8NNNC_C1653.pdf",
+      "candidates": [
+        {
+          "lcsc": 1653,
+          "mfr": "CL10C220JB8NNNC",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 1657425,
+          "price": 0.003685714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1653",
+        "mpn": "CL10C220JB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 1657425,
+        "price": 0.003685714,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C14",
+      "query": "CL10C220JB8NNNC",
+      "function": "SI4735 crystal load capacitor",
+      "package": "0603",
+      "value": "22pF",
+      "known_lcsc": "C1653",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10C220JB8NNNC_C1653.pdf",
+      "candidates": [
+        {
+          "lcsc": 1653,
+          "mfr": "CL10C220JB8NNNC",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 1657425,
+          "price": 0.003685714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1653",
+        "mpn": "CL10C220JB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 1657425,
+        "price": 0.003685714,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C15",
+      "query": "CL10B104KB8NNNC",
+      "function": "SI4735 VA bypass",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C16",
+      "query": "CL10B104KB8NNNC",
+      "function": "SI4735 VD bypass",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "C17",
+      "query": "CL10B104KB8NNNC",
+      "function": "ESP32 EN pin noise filter",
+      "package": "0603",
+      "value": "100nF",
+      "known_lcsc": "C14663",
+      "symbol": "Device:C",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Samsung-Electro-Mechanics-CL10B104KB8NNNC_C14663.pdf",
+      "candidates": [
+        {
+          "lcsc": 1591,
+          "mfr": "CL10B104KB8NNNC",
+          "package": "0603",
+          "is_basic": false,
+          "is_preferred": false,
+          "description": "",
+          "stock": 45893814,
+          "price": 0.002385714
+        }
+      ],
+      "selection": {
+        "lcsc": "C1591",
+        "mpn": "CL10B104KB8NNNC",
+        "package": "0603",
+        "description": "",
+        "stock": 45893814,
+        "price": 0.002385714,
+        "part_type": "extended",
+        "is_basic": false,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "R1",
+      "query": "0603WAF5101T5E",
+      "function": "USB-C CC1 pulldown",
+      "package": "0603",
+      "value": "5.1k",
+      "known_lcsc": "C23186",
+      "symbol": "Device:R",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF5101T5E_C23186.pdf",
+      "candidates": [
+        {
+          "lcsc": 23186,
+          "mfr": "0603WAF5101T5E",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 7571904,
+          "price": 0.000942857
+        }
+      ],
+      "selection": {
+        "lcsc": "C23186",
+        "mpn": "0603WAF5101T5E",
+        "package": "0603",
+        "description": "",
+        "stock": 7571904,
+        "price": 0.000942857,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "R2",
+      "query": "0603WAF5101T5E",
+      "function": "USB-C CC2 pulldown",
+      "package": "0603",
+      "value": "5.1k",
+      "known_lcsc": "C23186",
+      "symbol": "Device:R",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF5101T5E_C23186.pdf",
+      "candidates": [
+        {
+          "lcsc": 23186,
+          "mfr": "0603WAF5101T5E",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 7571904,
+          "price": 0.000942857
+        }
+      ],
+      "selection": {
+        "lcsc": "C23186",
+        "mpn": "0603WAF5101T5E",
+        "package": "0603",
+        "description": "",
+        "stock": 7571904,
+        "price": 0.000942857,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "R3",
+      "query": "0603WAF2001T5E",
+      "function": "TP4056 PROG (sets 500mA charge current)",
+      "package": "0603",
+      "value": "2k",
+      "known_lcsc": "C22975",
+      "symbol": "Device:R",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF2001T5E_C22975.pdf",
+      "candidates": [
+        {
+          "lcsc": 22975,
+          "mfr": "0603WAF2001T5E",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 6070501,
+          "price": 0.000942857
+        }
+      ],
+      "selection": {
+        "lcsc": "C22975",
+        "mpn": "0603WAF2001T5E",
+        "package": "0603",
+        "description": "",
+        "stock": 6070501,
+        "price": 0.000942857,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "R4",
+      "query": "0603WAF1002T5E",
+      "function": "ESP32 EN pullup",
+      "package": "0603",
+      "value": "10k",
+      "known_lcsc": "C25804",
+      "symbol": "Device:R",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF1002T5E_C25804.pdf",
+      "candidates": [
+        {
+          "lcsc": 25804,
+          "mfr": "0603WAF1002T5E",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 37165617,
+          "price": 0.000842857
+        }
+      ],
+      "selection": {
+        "lcsc": "C25804",
+        "mpn": "0603WAF1002T5E",
+        "package": "0603",
+        "description": "",
+        "stock": 37165617,
+        "price": 0.000842857,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "R5",
+      "query": "0603WAF4701T5E",
+      "function": "I2C SDA pullup",
+      "package": "0603",
+      "value": "4.7k",
+      "known_lcsc": "C25900",
+      "symbol": "Device:R",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF4701T5E_C25900.pdf",
+      "candidates": [
+        {
+          "lcsc": 23162,
+          "mfr": "0603WAF4701T5E",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 9126951,
+          "price": 0.001
+        }
+      ],
+      "selection": {
+        "lcsc": "C23162",
+        "mpn": "0603WAF4701T5E",
+        "package": "0603",
+        "description": "",
+        "stock": 9126951,
+        "price": 0.001,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "R6",
+      "query": "0603WAF4701T5E",
+      "function": "I2C SCL pullup",
+      "package": "0603",
+      "value": "4.7k",
+      "known_lcsc": "C25900",
+      "symbol": "Device:R",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF4701T5E_C25900.pdf",
+      "candidates": [
+        {
+          "lcsc": 23162,
+          "mfr": "0603WAF4701T5E",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 9126951,
+          "price": 0.001
+        }
+      ],
+      "selection": {
+        "lcsc": "C23162",
+        "mpn": "0603WAF4701T5E",
+        "package": "0603",
+        "description": "",
+        "stock": 9126951,
+        "price": 0.001,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "R7",
+      "query": "0603WAF1000T5E",
+      "function": "Audio output series resistor (Left)",
+      "package": "0603",
+      "value": "100R",
+      "known_lcsc": "C22775",
+      "symbol": "Device:R",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF1000T5E_C22775.pdf",
+      "candidates": [
+        {
+          "lcsc": 22775,
+          "mfr": "0603WAF1000T5E",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 14738958,
+          "price": 0.000942857
+        }
+      ],
+      "selection": {
+        "lcsc": "C22775",
+        "mpn": "0603WAF1000T5E",
+        "package": "0603",
+        "description": "",
+        "stock": 14738958,
+        "price": 0.000942857,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "R8",
+      "query": "0603WAF1000T5E",
+      "function": "Audio output series resistor (Right)",
+      "package": "0603",
+      "value": "100R",
+      "known_lcsc": "C22775",
+      "symbol": "Device:R",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Uniroyal-Elec-0603WAF1000T5E_C22775.pdf",
+      "candidates": [
+        {
+          "lcsc": 22775,
+          "mfr": "0603WAF1000T5E",
+          "package": "0603",
+          "is_basic": true,
+          "is_preferred": false,
+          "description": "",
+          "stock": 14738958,
+          "price": 0.000942857
+        }
+      ],
+      "selection": {
+        "lcsc": "C22775",
+        "mpn": "0603WAF1000T5E",
+        "package": "0603",
+        "description": "",
+        "stock": 14738958,
+        "price": 0.000942857,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false
+      },
+      "error": null
+    },
+    {
+      "designator": "Y1",
+      "query": "X322532768KSB4SI",
+      "function": "SI4735 32.768kHz reference crystal",
+      "package": "3215",
+      "value": "32.768kHz",
+      "known_lcsc": "C32346",
+      "symbol": "Device:Crystal",
+      "footprint": "Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm",
+      "datasheet": "https://datasheet.lcsc.com/szlcsc/Yangxing-Tech-X322532768KSB4SI_C32346.pdf",
+      "candidates": [],
+      "selection": {
+        "lcsc": "C32346",
+        "mpn": "X322532768KSB4SI",
+        "package": "3215",
+        "description": "SI4735 32.768kHz reference crystal",
+        "stock": null,
+        "price": null,
+        "part_type": "basic",
+        "is_basic": true,
+        "is_preferred": false,
+        "note": "Using known LCSC from requirements (no API match)"
+      },
+      "error": null
+    }
+  ],
+  "summary": {
+    "total_parts": 40,
+    "found": 40,
+    "not_found": 0,
+    "basic_parts": 16,
+    "preferred_parts": 1,
+    "extended_parts": 23
+  }
+}
