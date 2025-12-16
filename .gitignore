@@ -21,6 +21,13 @@ fp-info-cache
 .tabnine/
 .copilot/
 
+# Intermediate/generated files
+symbol_pins.json
+parts_with_netlabels.json
+connections.json
+*.net
+test_netlabels.kicad_sch
+
 # OS
 .DS_Store
 Thumbs.db
