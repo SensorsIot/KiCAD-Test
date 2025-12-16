@@ -1,0 +1,220 @@
+# Parts list for ESP32-S3 Portable Radio Receiver
+# Generated from FSD_ESP32_Radio_Receiver.md
+# Uses semantic names - designators assigned later
+
+components:
+  # === Active Components ===
+  - name: MCU
+    part: ESP32-S3-MINI-1-N8
+    package: Module
+    prefix: U
+    description: Main microcontroller with WiFi/BT
+
+  - name: Battery_Charger
+    part: TP4056
+    package: ESOP-8
+    prefix: U
+    description: Li-ion battery charger IC
+
+  - name: LDO
+    part: AMS1117-3.3
+    package: SOT-223
+    prefix: U
+    description: 3.3V low dropout regulator
+
+  - name: Radio_IC
+    part: SI4735-D60-GU
+    package: SSOP-24
+    prefix: U
+    description: AM/FM/SW radio receiver IC
+
+  - name: RGB_LED
+    part: WS2812B-B
+    package: 5050
+    prefix: D
+    quantity: 3
+    description: NeoPixel addressable RGB LED
+
+  # === Connectors ===
+  - name: USB_Connector
+    part: TYPE-C-31-M-12
+    package: SMD-16
+    prefix: J
+    description: USB-C connector for power and data
+
+  - name: Battery_Connector
+    part: JST-PH-2P
+    package: SMD
+    prefix: J
+    description: Battery connector JST-PH 2-pin
+
+  - name: Audio_Jack
+    part: PJ-327A
+    package: TH
+    prefix: J
+    description: 3.5mm stereo headphone jack
+
+  - name: OLED_Header
+    part: Header-1x04
+    package: TH-2.54mm
+    prefix: J
+    description: 4-pin header for OLED display module
+
+  # === Switches ===
+  - name: Reset_Button
+    part: TS-1102S
+    package: SMD-6x6mm
+    prefix: SW
+    description: Tactile reset button
+
+  - name: Rotary_Encoder1
+    part: EC11E18244A5
+    package: TH
+    prefix: ENC
+    description: Rotary encoder with push button (tuning)
+
+  - name: Rotary_Encoder2
+    part: EC11E18244A5
+    package: TH
+    prefix: ENC
+    description: Rotary encoder with push button (volume)
+
+  # === Resistors ===
+  - name: R_CC1
+    value: 5.1k
+    package: "0603"
+    prefix: R
+    description: USB-C CC1 pulldown resistor
+
+  - name: R_CC2
+    value: 5.1k
+    package: "0603"
+    prefix: R
+    description: USB-C CC2 pulldown resistor
+
+  - name: R_PROG
+    value: 2k
+    package: "0603"
+    prefix: R
+    description: TP4056 charge current set (500mA)
+
+  - name: R_EN_Pullup
+    value: 10k
+    package: "0603"
+    prefix: R
+    description: ESP32 EN pin pullup
+
+  - name: R_I2C_SDA
+    value: 4.7k
+    package: "0603"
+    prefix: R
+    description: I2C SDA pullup resistor
+
+  - name: R_I2C_SCL
+    value: 4.7k
+    package: "0603"
+    prefix: R
+    description: I2C SCL pullup resistor
+
+  - name: R_Audio_L
+    value: 100R
+    package: "0603"
+    prefix: R
+    description: Left audio output series resistor
+
+  - name: R_Audio_R
+    value: 100R
+    package: "0603"
+    prefix: R
+    description: Right audio output series resistor
+
+  # === Capacitors ===
+  - name: C_USB_VBUS
+    value: 10uF
+    package: "0805"
+    prefix: C
+    description: USB VBUS filter capacitor
+
+  - name: C_BAT_Filter
+    value: 10uF
+    package: "0805"
+    prefix: C
+    quantity: 2
+    description: Battery input filter capacitors
+
+  - name: C_LDO_In
+    value: 22uF
+    package: "0805"
+    prefix: C
+    description: LDO input capacitor
+
+  - name: C_LDO_Out
+    value: 22uF
+    package: "0805"
+    prefix: C
+    description: LDO output capacitor
+
+  - name: C_MCU_Bypass
+    value: 100nF
+    package: "0603"
+    prefix: C
+    quantity: 4
+    description: MCU bypass capacitors
+
+  - name: C_Radio_Bypass
+    value: 100nF
+    package: "0603"
+    prefix: C
+    quantity: 4
+    description: SI4735 bypass capacitors (VDD, VD, VA, RCLK)
+
+  - name: C_LED_Bypass
+    value: 100nF
+    package: "0603"
+    prefix: C
+    quantity: 3
+    description: WS2812B bypass capacitors
+
+  - name: C_Crystal
+    value: 22pF
+    package: "0603"
+    prefix: C
+    quantity: 2
+    description: Crystal load capacitors
+
+  # === Crystal ===
+  - name: Crystal_32K
+    part: 32.768kHz
+    package: 3215
+    prefix: Y
+    description: SI4735 reference crystal
+
+  # === Antenna Connections ===
+  - name: FM_Antenna
+    part: FM_Wire
+    package: Wire
+    prefix: ANT
+    description: FM wire antenna connection to FMI
+    skip_search: true
+    lcsc_hint: NOT_FOUND
+
+  - name: AM_Antenna
+    part: AM_Loop
+    package: Ferrite
+    prefix: ANT
+    description: AM ferrite/loop antenna connection to AMI
+    skip_search: true
+    lcsc_hint: NOT_FOUND
+
+  # === Protection ===
+  - name: ESD_USB_DP
+    part: ESD_Diode
+    package: SOD-323
+    prefix: D
+    description: ESD protection for USB D+
+
+  - name: ESD_USB_DM
+    part: ESD_Diode
+    package: SOD-323
+    prefix: D
+    description: ESD protection for USB D-

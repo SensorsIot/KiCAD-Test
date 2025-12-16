@@ -1,0 +1,7 @@
+---
+# Populate symbol_lib_id / footprint_lib_id for parts missing from JLCPCB library.
+# Example:
+# CXXXXXX:
+#   symbol_lib_id: "MyLib:CustomSymbol"
+#   footprint_lib_id: "MyLib:CustomFootprint"
+

@@ -1,0 +1,410 @@
+{
+  "MCU": {
+    "designators": [
+      "U1"
+    ],
+    "lcsc": "C2913206",
+    "mpn": "ESP32-S3-MINI-1-N8",
+    "package": "SMD",
+    "value": "",
+    "description": "Main microcontroller with WiFi/BT",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "Battery_Charger": {
+    "designators": [
+      "U2"
+    ],
+    "lcsc": "C16581",
+    "mpn": "TP4056-42-ESOP8",
+    "package": "ESOP-8",
+    "value": "",
+    "description": "Li-ion battery charger IC",
+    "is_basic": false,
+    "is_preferred": true
+  },
+  "LDO": {
+    "designators": [
+      "U3"
+    ],
+    "lcsc": "C6186",
+    "mpn": "AMS1117-3.3",
+    "package": "SOT-223",
+    "value": "",
+    "description": "3.3V low dropout regulator",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "Radio_IC": {
+    "designators": [
+      "U4"
+    ],
+    "lcsc": "C195417",
+    "mpn": "SI4735-D60-GU",
+    "package": "SSOP-24",
+    "value": "",
+    "description": "AM/FM/SW radio receiver IC",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "RGB_LED": {
+    "designators": [
+      "D1",
+      "D2",
+      "D3"
+    ],
+    "lcsc": "C2761795",
+    "mpn": "WS2812B-B/T",
+    "package": "SMD5050-4P",
+    "value": "",
+    "description": "NeoPixel addressable RGB LED",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "USB_Connector": {
+    "designators": [
+      "J1"
+    ],
+    "lcsc": "C393939",
+    "mpn": "TYPE-C16PIN",
+    "package": "SMD",
+    "value": "",
+    "description": "USB-C connector for power and data",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "Battery_Connector": {
+    "designators": [
+      "J2"
+    ],
+    "lcsc": "C131337",
+    "mpn": "B2B-PH-K-S(LF)(SN)",
+    "package": "\u63d2\u4ef6,P=2mm",
+    "value": "",
+    "description": "Battery connector JST-PH 2-pin",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "Audio_Jack": {
+    "designators": [
+      "J3"
+    ],
+    "lcsc": "C145819",
+    "mpn": "PJ-227-5A",
+    "package": "SMD",
+    "value": "",
+    "description": "3.5mm stereo headphone jack",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "OLED_Header": {
+    "designators": [
+      "J4"
+    ],
+    "lcsc": "C2337",
+    "mpn": "2.54-1*40P\u76f4\u9488",
+    "package": "\u63d2\u4ef6,P=2.54mm",
+    "value": "",
+    "description": "4-pin header for OLED display module",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "Reset_Button": {
+    "designators": [
+      "SW1"
+    ],
+    "lcsc": "C127509",
+    "mpn": "K2-1102SP-C4SC-04",
+    "package": "SMD-4P,6x6mm",
+    "value": "",
+    "description": "Tactile reset button",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "Rotary_Encoder1": {
+    "designators": [
+      "ENC1"
+    ],
+    "lcsc": "C255515",
+    "mpn": "EC11E18244A5",
+    "package": "\u63d2\u4ef6",
+    "value": "",
+    "description": "Rotary encoder with push button (tuning)",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "Rotary_Encoder2": {
+    "designators": [
+      "ENC2"
+    ],
+    "lcsc": "C255515",
+    "mpn": "EC11E18244A5",
+    "package": "\u63d2\u4ef6",
+    "value": "",
+    "description": "Rotary encoder with push button (volume)",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "R_CC1": {
+    "designators": [
+      "R1"
+    ],
+    "lcsc": "C23186",
+    "mpn": "0603WAF5101T5E",
+    "package": "0603",
+    "value": "5.1k",
+    "description": "USB-C CC1 pulldown resistor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "R_CC2": {
+    "designators": [
+      "R2"
+    ],
+    "lcsc": "C23186",
+    "mpn": "0603WAF5101T5E",
+    "package": "0603",
+    "value": "5.1k",
+    "description": "USB-C CC2 pulldown resistor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "R_PROG": {
+    "designators": [
+      "R3"
+    ],
+    "lcsc": "C269690",
+    "mpn": "RMC 0603 2K J N",
+    "package": "0603",
+    "value": "2k",
+    "description": "TP4056 charge current set (500mA)",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "R_EN_Pullup": {
+    "designators": [
+      "R4"
+    ],
+    "lcsc": "C5362358",
+    "mpn": "RMC 0603 10K J N",
+    "package": "0603",
+    "value": "10k",
+    "description": "ESP32 EN pin pullup",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "R_I2C_SDA": {
+    "designators": [
+      "R5"
+    ],
+    "lcsc": "C23162",
+    "mpn": "0603WAF4701T5E",
+    "package": "0603",
+    "value": "4.7k",
+    "description": "I2C SDA pullup resistor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "R_I2C_SCL": {
+    "designators": [
+      "R6"
+    ],
+    "lcsc": "C23162",
+    "mpn": "0603WAF4701T5E",
+    "package": "0603",
+    "value": "4.7k",
+    "description": "I2C SCL pullup resistor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "R_Audio_L": {
+    "designators": [
+      "R7"
+    ],
+    "lcsc": "C22775",
+    "mpn": "0603WAF1000T5E",
+    "package": "0603",
+    "value": "100R",
+    "description": "Left audio output series resistor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "R_Audio_R": {
+    "designators": [
+      "R8"
+    ],
+    "lcsc": "C22775",
+    "mpn": "0603WAF1000T5E",
+    "package": "0603",
+    "value": "100R",
+    "description": "Right audio output series resistor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "C_USB_VBUS": {
+    "designators": [
+      "C1"
+    ],
+    "lcsc": "C15850",
+    "mpn": "CL21A106KAYNNNE",
+    "package": "0805",
+    "value": "10uF",
+    "description": "USB VBUS filter capacitor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "C_BAT_Filter": {
+    "designators": [
+      "C2",
+      "C3"
+    ],
+    "lcsc": "C15850",
+    "mpn": "CL21A106KAYNNNE",
+    "package": "0805",
+    "value": "10uF",
+    "description": "Battery input filter capacitors",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "C_LDO_In": {
+    "designators": [
+      "C4"
+    ],
+    "lcsc": "C45783",
+    "mpn": "CL21A226MAQNNNE",
+    "package": "0805",
+    "value": "22uF",
+    "description": "LDO input capacitor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "C_LDO_Out": {
+    "designators": [
+      "C5"
+    ],
+    "lcsc": "C45783",
+    "mpn": "CL21A226MAQNNNE",
+    "package": "0805",
+    "value": "22uF",
+    "description": "LDO output capacitor",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "C_MCU_Bypass": {
+    "designators": [
+      "C6",
+      "C7",
+      "C8",
+      "C9"
+    ],
+    "lcsc": "C14663",
+    "mpn": "CC0603KRX7R9BB104",
+    "package": "0603",
+    "value": "100nF",
+    "description": "MCU bypass capacitors",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "C_Radio_Bypass": {
+    "designators": [
+      "C10",
+      "C11",
+      "C12",
+      "C13"
+    ],
+    "lcsc": "C14663",
+    "mpn": "CC0603KRX7R9BB104",
+    "package": "0603",
+    "value": "100nF",
+    "description": "SI4735 bypass capacitors (VDD, VD, VA, RCLK)",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "C_LED_Bypass": {
+    "designators": [
+      "C14",
+      "C15",
+      "C16"
+    ],
+    "lcsc": "C14663",
+    "mpn": "CC0603KRX7R9BB104",
+    "package": "0603",
+    "value": "100nF",
+    "description": "WS2812B bypass capacitors",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "C_Crystal": {
+    "designators": [
+      "C17",
+      "C18"
+    ],
+    "lcsc": "C1653",
+    "mpn": "CL10C220JB8NNNC",
+    "package": "0603",
+    "value": "22pF",
+    "description": "Crystal load capacitors",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "Crystal_32K": {
+    "designators": [
+      "Y1"
+    ],
+    "lcsc": "C32346",
+    "mpn": "Q13FC13500004",
+    "package": "SMD3215-2P",
+    "value": "",
+    "description": "SI4735 reference crystal",
+    "is_basic": true,
+    "is_preferred": false
+  },
+  "FM_Antenna": {
+    "designators": [
+      "ANT1"
+    ],
+    "lcsc": "DNP-FM",
+    "mpn": "FM_Wire",
+    "package": "Wire",
+    "value": "",
+    "description": "FM wire antenna connection to FMI",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "AM_Antenna": {
+    "designators": [
+      "ANT2"
+    ],
+    "lcsc": "DNP-AM",
+    "mpn": "AM_Loop",
+    "package": "Ferrite",
+    "value": "",
+    "description": "AM ferrite/loop antenna connection to AMI",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "ESD_USB_DP": {
+    "designators": [
+      "D4"
+    ],
+    "lcsc": "C112644",
+    "mpn": "BSP752R",
+    "package": "SO-8",
+    "value": "",
+    "description": "ESD protection for USB D+",
+    "is_basic": false,
+    "is_preferred": false
+  },
+  "ESD_USB_DM": {
+    "designators": [
+      "D5"
+    ],
+    "lcsc": "C112644",
+    "mpn": "BSP752R",
+    "package": "SO-8",
+    "value": "",
+    "description": "ESD protection for USB D-",
+    "is_basic": false,
+    "is_preferred": false
+  }
+}

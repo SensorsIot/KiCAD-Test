@@ -1,0 +1,32 @@
+﻿SI4735-D60-GU:
+  pins:
+    - {number: "1", name: RCLK}
+    - {number: "2", name: GND}
+    - {number: "3", name: GND}
+    - {number: "4", name: VA}
+    - {number: "5", name: VDD}
+    - {number: "6", name: VD}
+    - {number: "7", name: VD}
+    - {number: "8", name: VD}
+    - {number: "9", name: VDD}
+    - {number: "10", name: SDIO}
+    - {number: "11", name: SCLK}
+    - {number: "12", name: RST}
+    - {number: "13", name: FMI}
+    - {number: "14", name: AMI}
+    - {number: "15", name: VD}
+    - {number: "16", name: VD}
+    - {number: "17", name: VD}
+    - {number: "18", name: GND}
+    - {number: "19", name: GND}
+    - {number: "20", name: GND}
+    - {number: "21", name: RCLK}
+    - {number: "22", name: VD}
+    - {number: "23", name: LOUT}
+    - {number: "24", name: ROUT}
+FM_Wire:
+  pins:
+    - {number: "1", name: ANT}
+AM_Loop:
+  pins:
+    - {number: "1", name: ANT}
