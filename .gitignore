@@ -31,3 +31,6 @@ test_netlabels.kicad_sch
 # OS
 .DS_Store
 Thumbs.db
+
+# Enrich parts logs
+enrich_parts_*.log

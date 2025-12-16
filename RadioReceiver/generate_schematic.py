@@ -26,7 +26,14 @@ from datetime import datetime
 SCRIPT_DIR = Path(__file__).parent
 PARTS_JSON = SCRIPT_DIR / "parts_with_netlabels.json"
 CUSTOM_OVERRIDES = SCRIPT_DIR / "custom_library_overrides.yaml"
-KICAD_USER_DIR = Path(os.environ.get("USERPROFILE", "")) / "Documents" / "KiCad"
+
+# KiCAD library location - detect platform
+import platform
+if platform.system() == "Windows":
+    KICAD_USER_DIR = Path(os.environ.get("USERPROFILE", "")) / "Documents" / "KiCad"
+else:
+    # Linux/macOS
+    KICAD_USER_DIR = Path.home() / ".local" / "share" / "kicad" / "9.0"
 SYMBOL_LIB = KICAD_USER_DIR / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
 
 # Output files

@@ -14,8 +14,24 @@ import yaml
 import csv
 import requests
 import time
+import logging
+import json
 from collections import defaultdict
 from pathlib import Path
+from datetime import datetime
+
+# Set up logging
+LOG_DIR = Path(__file__).parent
+LOG_FILE = LOG_DIR / f"enrich_parts_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler(LOG_FILE, encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Known LCSC codes for parts that may not search well (defaults; override via parts.yaml lcsc_hint)
 KNOWN_LCSC = {
@@ -50,22 +66,71 @@ PASSIVE_LCSC = {
 
 
 def search_jlcpcb(query: str, limit: int = 5) -> list:
-    """Search jlcsearch API for parts."""
-    url = "https://jlcsearch.tscircuit.com/api/search"
-    params = {"q": query, "limit": limit}
+    """Search official JLCPCB BOM API for parts."""
+    url = "https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList"
+    payload = {
+        "keyword": query,
+        "currentPage": 1,
+        "pageSize": limit,
+        "componentLibraryType": "",
+        "stockSort": ""
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "User-Agent": "Mozilla/5.0"
+    }
 
+    logger.debug(f"API request: POST {url} payload={payload}")
     try:
-        response = requests.get(url, params=params, timeout=10)
+        response = requests.post(url, json=payload, headers=headers, timeout=30)
+        logger.debug(f"API response: status={response.status_code}")
         response.raise_for_status()
         data = response.json()
-        return data.get("components", [])
+        logger.debug(f"API response data: {json.dumps(data, indent=2, default=str)}")
+
+        if data.get("code") != 200:
+            logger.warning(f"API returned code {data.get('code')}: {data.get('message')}")
+            return []
+
+        # Extract component list from nested response
+        page_info = data.get("data", {}).get("componentPageInfo", {})
+        raw_components = page_info.get("list") or []
+
+        # Transform to common format
+        components = []
+        for comp in raw_components:
+            # Skip abolished/discontinued parts
+            if comp.get("componentTypeEn") == "Abolished Device":
+                continue
+
+            # Get best price (usually the 100+ tier)
+            prices = comp.get("componentPrices") or []
+            price = prices[-1].get("productPrice", "") if prices else ""
+
+            components.append({
+                "lcsc": comp.get("componentCode", ""),
+                "mfr": comp.get("componentModelEn", ""),
+                "package": comp.get("componentSpecificationEn", ""),
+                "stock": comp.get("stockCount", 0),
+                "price": price,
+                "is_basic": comp.get("componentLibraryType") == "base",
+                "is_preferred": comp.get("preferredComponentFlag", False),
+                "description": comp.get("describe", ""),
+                "datasheet": comp.get("dataManualUrl", ""),
+            })
+
+        logger.info(f"Search '{query}': {len(components)} results (filtered from {len(raw_components)})")
+        return components
     except Exception as e:
+        logger.error(f"Search error for '{query}': {e}")
         print(f"  Search error for '{query}': {e}")
         return []
 
 
 def get_lcsc_details(lcsc_code: str) -> dict:
     """Get details for a known LCSC code."""
+    logger.debug(f"Looking up LCSC details for: {lcsc_code}")
     # Strip C prefix if present for API
     code = lcsc_code.lstrip("C")
 
@@ -73,9 +138,11 @@ def get_lcsc_details(lcsc_code: str) -> dict:
         # Search by LCSC code
         results = search_jlcpcb(lcsc_code, limit=1)
         if results:
+            logger.info(f"LCSC lookup '{lcsc_code}': found")
             return results[0]
-    except:
-        pass
+        logger.warning(f"LCSC lookup '{lcsc_code}': not found")
+    except Exception as e:
+        logger.error(f"LCSC lookup error for '{lcsc_code}': {e}")
 
     return None
 
@@ -121,6 +188,7 @@ def enrich_parts(parts_yaml: Path, output_csv: Path):
 
     # CSV rows
     rows = []
+    missing = []
 
     for part in components:
         if "name" not in part:
@@ -306,15 +374,18 @@ def enrich_parts(parts_yaml: Path, output_csv: Path):
 
 
 def main():
+    logger.info(f"Starting enrich_parts.py - Log file: {LOG_FILE}")
     script_dir = Path(__file__).parent
     parts_yaml = script_dir / "parts.yaml"
     output_csv = script_dir / "parts_options.csv"
 
     if not parts_yaml.exists():
+        logger.error(f"{parts_yaml} not found")
         print(f"Error: {parts_yaml} not found")
         return
 
     enrich_parts(parts_yaml, output_csv)
+    logger.info(f"Completed - Output: {output_csv}")
 
 
 if __name__ == "__main__":

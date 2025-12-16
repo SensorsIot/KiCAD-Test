@@ -28,17 +28,26 @@ PARTS_JSON = Path(__file__).parent / "parts_with_designators.json"
 CUSTOM_OVERRIDES = Path(__file__).parent / "custom_library_overrides.yaml"
 MISSING_REPORT = Path(__file__).parent / "missing_parts.yaml"
 
-# KiCAD standard library location (Windows)
-KICAD_USER_DIR = Path(os.environ.get("USERPROFILE", "")) / "Documents" / "KiCad"
+# Detect platform and set paths accordingly
+import platform
+if platform.system() == "Windows":
+    KICAD_USER_DIR = Path(os.environ.get("USERPROFILE", "")) / "Documents" / "KiCad"
+    KICAD_CONFIG_DIR = Path(os.environ.get("APPDATA", "")) / "kicad" / "9.0"
+    JLC2KICAD_EXE = r"C:\Users\AndreasSpiess\AppData\Local\Programs\Python\Python312\Scripts\JLC2KiCadLib.exe"
+else:
+    # Linux/macOS
+    KICAD_USER_DIR = Path.home() / ".local" / "share" / "kicad" / "9.0"
+    KICAD_CONFIG_DIR = Path.home() / ".config" / "kicad" / "9.0"
+    # Use venv JLC2KiCadLib or system-installed
+    VENV_PATH = Path(__file__).parent.parent / ".venv" / "bin" / "JLC2KiCadLib"
+    if VENV_PATH.exists():
+        JLC2KICAD_EXE = str(VENV_PATH)
+    else:
+        JLC2KICAD_EXE = "JLC2KiCadLib"  # Assume in PATH
+
 OUTPUT_DIR = KICAD_USER_DIR / "JLCPCB"
 SYMBOL_LIB = "JLCPCB"
 FOOTPRINT_LIB = "JLCPCB"
-
-# KiCAD 9.0 config directory for global library tables
-KICAD_CONFIG_DIR = Path(os.environ.get("APPDATA", "")) / "kicad" / "9.0"
-
-# Path to JLC2KiCadLib executable
-JLC2KICAD_EXE = r"C:\Users\AndreasSpiess\AppData\Local\Programs\Python\Python312\Scripts\JLC2KiCadLib.exe"
 
 # Index file to track downloaded LCSC parts
 INDEX_FILE = OUTPUT_DIR / "lcsc_index.json"
@@ -327,10 +336,15 @@ def main():
         print("Run assign_designators.py first")
         return 1
 
-    if not Path(JLC2KICAD_EXE).exists():
+    import shutil
+    global JLC2KICAD_EXE
+    jlc2kicad_path = JLC2KICAD_EXE if Path(JLC2KICAD_EXE).exists() else shutil.which(JLC2KICAD_EXE)
+    if not jlc2kicad_path:
         print(f"\nError: JLC2KiCadLib not found at configured path: {JLC2KICAD_EXE}")
-        print("Ask the LLM to set JLC2KICAD_EXE to your installed JLC2KiCadLib.exe or install the tool via pip.")
+        print("Install via: pip install JLC2KiCadLib")
         return 1
+    JLC2KICAD_EXE = jlc2kicad_path
+    print(f"Using JLC2KiCadLib: {JLC2KICAD_EXE}")
 
     print(f"\nLoading parts from: {PARTS_JSON}")
     lcsc_parts = load_parts()

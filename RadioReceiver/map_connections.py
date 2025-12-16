@@ -197,39 +197,8 @@ def build_pin_assignments(
     # Initialize result with all pins having unique labels
     result = {}
 
-    # Inject manual pin maps for symbols missing from the library
-    manual_symbol_pins = {
-        "SI4735-D60-GU": {
-            "pins": [
-                {"number": "1", "name": "RCLK"},
-                {"number": "2", "name": "GND"},
-                {"number": "3", "name": "GND"},
-                {"number": "4", "name": "VA"},
-                {"number": "5", "name": "VDD"},
-                {"number": "6", "name": "VD"},
-                {"number": "7", "name": "VD"},
-                {"number": "8", "name": "VD"},
-                {"number": "9", "name": "VDD"},
-                {"number": "10", "name": "SDIO"},
-                {"number": "11", "name": "SCLK"},
-                {"number": "12", "name": "RST"},
-                {"number": "13", "name": "FMI"},
-                {"number": "14", "name": "AMI"},
-                {"number": "15", "name": "VD"},
-                {"number": "16", "name": "VD"},
-                {"number": "17", "name": "VD"},
-                {"number": "18", "name": "GND"},
-                {"number": "19", "name": "GND"},
-                {"number": "20", "name": "GND"},
-                {"number": "21", "name": "RCLK"},
-                {"number": "22", "name": "VD"},
-                {"number": "23", "name": "LOUT"},
-                {"number": "24", "name": "ROUT"},
-            ]
-        }
-    }
-    for sym_name, pin_data in manual_symbol_pins.items():
-        symbol_pins.setdefault(sym_name, pin_data)
+    # Manual symbol pins are loaded from manual_symbol_pins.yaml in the calling code
+    # No hardcoded product-specific data here
 
     # First, create entries for all parts with default unique labels
     for semantic_name, data in designators.items():
@@ -368,7 +337,11 @@ def main():
         if not lcsc or lcsc in {"NOT_SELECTED", "NOT_FOUND"}:
             # Allow override mapping for non-LCSC parts (DNP/custom)
             override_sym = overrides.get(lcsc, {}).get("symbol_lib_id") if overrides else None
-            if override_sym:
+            if override_sym == "DNP":
+                # Skip DNP (Do Not Place) parts - external components like antennas
+                print(f"  Skipping DNP component: {name}")
+                continue
+            elif override_sym:
                 lcsc_to_symbol[lcsc] = override_sym
             else:
                 raise ValueError(
@@ -376,47 +349,21 @@ def main():
                     "Ask the LLM to ensure parts_options.csv has a selection or add override to custom_library_overrides.yaml."
                 )
         else:
-            # Symbol name is typically the MPN with special chars replaced
-            mpn = data.get("mpn", "")
-            if mpn:
-                symbol_name = mpn.replace("-", "_").replace(".", "_")
-                lcsc_to_symbol[lcsc] = symbol_name
+            # Will be mapped from symbol_pins.json LCSC codes below
+            pass
 
-    # Also add known mappings
-    KNOWN_SYMBOL_NAMES = {
-        "C2913206": "ESP32-S3-MINI-1-N8",
-        "C16581": "TP4056",
-        "C6186": "AMS1117-3_3",
-        "C195417": "SI4735-D60-GU",
-        "C2761795": "WS2812B-B{slash}W",
-        "C393939": "TYPE-C16PIN",
-        "C131337": "B2B-PH-K-S(LF)(SN)",
-        "C145819": "PJ-227-5A",
-        "C2337": "Header-Male-2_54_1x40",
-        "C127509": "K2-1102SP-C4SC-04",
-        "C255515": "EC11E18244A5",
-        "C32346": "Q13FC1350000400",
-        "C23186": "0603WAF5101T5E",
-        "C22975": "0603WAF2001T5E",
-        "C25804": "0603WAF1002T5E",
-        "C23162": "0603WAF4701T5E",
-        "C22775": "0603WAF1000T5E",
-        "C15850": "CL21A106KOQNNNE",
-        "C45783": "CL21A226MQQNNNE",
-        "C14663": "CL10B104KB8NNNC",
-        "C1653": "CL10C220JB8NNNC",
-        "C269690": "RMC06032K5%N",
-        "C5362358": "RMC_0603_10K_J_N",
-        "DNP-FM": "FM_Wire",
-        "DNP-AM": "AM_Loop",
-    }
-    # Merge overrides (symbol_lib_id) into mapping
+    # Build LCSC-to-symbol mapping from symbol_pins.json (contains LCSC codes extracted from library)
+    for symbol_name, sym_data in symbol_pins.items():
+        sym_lcsc = sym_data.get("lcsc")
+        if sym_lcsc:
+            lcsc_to_symbol[sym_lcsc] = symbol_name
+
+    # Apply overrides from custom_library_overrides.yaml
     if overrides:
         for lcsc, data in overrides.items():
             sym_id = data.get("symbol_lib_id")
-            if sym_id:
-                KNOWN_SYMBOL_NAMES[lcsc] = sym_id
-    lcsc_to_symbol.update(KNOWN_SYMBOL_NAMES)
+            if sym_id and sym_id != "DNP":
+                lcsc_to_symbol[lcsc] = sym_id
 
     # Build pin assignments
     print("\nMapping connections to pins...")

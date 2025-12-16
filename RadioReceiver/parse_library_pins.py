@@ -13,8 +13,13 @@ import json
 import os
 from pathlib import Path
 
-# JLCPCB library location
-KICAD_USER_DIR = Path(os.environ.get("USERPROFILE", "")) / "Documents" / "KiCad"
+# JLCPCB library location - detect platform
+import platform
+if platform.system() == "Windows":
+    KICAD_USER_DIR = Path(os.environ.get("USERPROFILE", "")) / "Documents" / "KiCad"
+else:
+    # Linux/macOS
+    KICAD_USER_DIR = Path.home() / ".local" / "share" / "kicad" / "9.0"
 LIBRARY_PATH = KICAD_USER_DIR / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
 
 
@@ -42,6 +47,10 @@ def parse_library():
         if not match:
             continue
         symbol_name = match.group(1)
+
+        # Extract LCSC code from properties
+        lcsc_match = re.search(r'\(property "LCSC" "([^"]+)"', part)
+        lcsc_code = lcsc_match.group(1) if lcsc_match else None
 
         # Find all pins with position information
         # Pattern matches: (pin TYPE STYLE (at X Y ANGLE) ... (name "NAME") (number "NUM"))
@@ -73,7 +82,7 @@ def parse_library():
             })
 
         if pins:
-            symbols[symbol_name] = {"pins": pins}
+            symbols[symbol_name] = {"pins": pins, "lcsc": lcsc_code}
 
     return symbols
 

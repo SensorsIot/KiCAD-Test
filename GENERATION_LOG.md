@@ -666,3 +666,39 @@ python enrich_parts.py --in parts_requirements.yaml --out jlc_parts_enriched.jso
 1. LLM reads FSD → generates `parts_requirements.yaml`
 2. Python enriches with LCSC codes, stock, prices, datasheets
 3. Downstream tooling uses `selection.lcsc` for BOM/CPL generation
+
+---
+
+## Session Log: 2025-12-16
+
+### Completed Steps
+
+| Step | Script | Status | Notes |
+|------|--------|--------|-------|
+| 1 | `enrich_parts.py` | ✅ COMPLETE | Switched to official JLCPCB API, added logging |
+| 2 | Human review | ✅ COMPLETE | `parts_options.csv` reviewed and selections marked |
+| 3 | `assign_designators.py` | ✅ COMPLETE | 33 parts → 45 components with designators |
+| 4 | `download_jlcpcb_libs.py` | ✅ COMPLETE | 22 unique LCSC parts, 16 footprints, 16 3D models |
+| 5 | `parse_library_pins.py` | ✅ COMPLETE | 22 symbols, 202 pins with LCSC codes |
+| 6 | `map_connections.py` | ✅ COMPLETE | 259 pins mapped, 29 nets, 128 unconnected |
+| 7 | `generate_schematic.py` | ✅ COMPLETE | 45 components, 259 net labels |
+
+### Part Substitutions
+| Original | Issue | Replacement | LCSC |
+|----------|-------|-------------|------|
+| TS-1102S (C9900128854) | Not on EasyEDA | TS-1187A-B-A-B | C318884 |
+| PJ-327A (C19712376) | Not on EasyEDA | PJ-3537S-SMT | C2689709 |
+
+### Changes Made
+- **enrich_parts.py**: Migrated from jlcsearch (tscircuit) to official JLCPCB BOM API
+- **download_jlcpcb_libs.py**: Added Linux/macOS support, auto-detect JLC2KiCadLib location
+- **assign_designators.py**: Added validation for duplicates, auto-select first option if none marked
+- **parse_library_pins.py**: Added Linux/macOS support, extract LCSC codes from symbols
+- **map_connections.py**: Removed hardcoded product mappings, derive LCSC→symbol from symbol_pins.json
+- **generate_schematic.py**: Added Linux/macOS support
+
+### Output Files
+- `RadioReceiver.kicad_pro` - KiCAD 9 project
+- `RadioReceiver.kicad_sch` - Schematic with 45 components, net labels on all pins
+- `RadioReceiver.kicad_pcb` - Empty PCB (placeholder)
+- `sym-lib-table` / `fp-lib-table` - Library references

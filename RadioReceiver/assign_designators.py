@@ -46,8 +46,14 @@ def load_parts_yaml(path: Path) -> dict:
 
 
 def load_csv_selections(path: Path) -> dict:
-    """Load CSV and return selected parts keyed by name."""
-    selections = {}
+    """Load CSV and return selected parts keyed by name.
+
+    Parts with 'X' in selected column are explicitly selected.
+    Parts without selection auto-select the first option.
+    """
+    explicit_selections = {}
+    first_options = {}  # First option per part (for auto-select)
+    duplicates = []  # Track all duplicates to report together
 
     with open(path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
@@ -56,30 +62,52 @@ def load_csv_selections(path: Path) -> dict:
         if missing_cols:
             raise ValueError(
                 "CSV is missing required columns: "
-                f"{sorted(missing_cols)}. Ask the LLM to regenerate parts_options.csv "
-                "with headers: name,selected,lcsc,mpn,package,stock,price,is_basic,is_preferred"
+                f"{sorted(missing_cols)}. Expected headers: name,selected,lcsc,mpn,package,stock,price,is_basic,is_preferred"
             )
 
         for row in reader:
-            # Only process selected rows
+            name = row["name"]
+            row_data = {
+                "lcsc": row["lcsc"],
+                "mpn": row["mpn"],
+                "package": row["package"],
+                "stock": row["stock"],
+                "price": row["price"],
+                "is_basic": row.get("is_basic", "").strip().lower() == "yes",
+                "is_preferred": row.get("is_preferred", "").strip().lower() == "yes",
+            }
+
+            # Track first option per part for auto-select
+            if name not in first_options:
+                first_options[name] = row_data
+
+            # Process explicitly selected rows
             if row.get("selected", "").strip().upper() == "X":
-                name = row["name"]
-                # Keep first selection per name (in case of duplicates)
-                if name not in selections:
-                    selections[name] = {
-                        "lcsc": row["lcsc"],
-                        "mpn": row["mpn"],
-                        "package": row["package"],
-                        "stock": row["stock"],
-                        "price": row["price"],
-                        "is_basic": row.get("is_basic", "").strip().lower() == "yes",
-                        "is_preferred": row.get("is_preferred", "").strip().lower() == "yes",
-                    }
+                if name not in explicit_selections:
+                    explicit_selections[name] = row_data
                 else:
-                    raise ValueError(
-                        f"Duplicate selection for '{name}' in CSV; only one row may be marked selected. "
-                        "Ask the LLM to regenerate parts_options.csv so each part has exactly one 'selected' row."
-                    )
+                    duplicates.append(name)
+
+    # Report all duplicates at once
+    if duplicates:
+        raise ValueError(
+            f"DUPLICATE SELECTIONS: The following parts have multiple rows marked with 'X':\n"
+            f"  {', '.join(sorted(set(duplicates)))}\n"
+            f"Please edit {path.name} and ensure each part has at most ONE row selected."
+        )
+
+    # Merge: explicit selections override auto-selections
+    selections = {}
+    auto_selected = []
+    for name, first_opt in first_options.items():
+        if name in explicit_selections:
+            selections[name] = explicit_selections[name]
+        else:
+            selections[name] = first_opt
+            auto_selected.append(name)
+
+    if auto_selected:
+        print(f"  Auto-selected first option for: {', '.join(sorted(auto_selected))}")
 
     return selections
 
@@ -104,11 +132,8 @@ def assign_designators(parts: dict, selections: dict) -> dict:
         prefix = part_info["prefix"]
         quantity = part_info["quantity"]
 
-        # Get selection data
+        # Get selection data (validated upfront, so this should always exist)
         selection = selections.get(name, {})
-        if not selection:
-            print(f"WARNING: No selection for '{name}' - using placeholder")
-            selection = {"lcsc": "NOT_SELECTED", "mpn": "", "package": ""}
 
         # Assign designators
         designators = []
@@ -162,20 +187,26 @@ def main():
     selections = load_csv_selections(csv_path)
     print(f"  Found {len(selections)} selected parts")
 
-    # Check for missing selections
-    missing = set(parts.keys()) - set(selections.keys())
-    if missing:
-        raise ValueError(
-            f"Missing selections for: {sorted(missing)}. "
-            "Ask the LLM to regenerate parts_options.csv with exactly one row marked selected='X' for each part in parts.yaml."
-        )
-    # Check for selections that don't map to a part
+    # Validate: check for parts in CSV that aren't in parts.yaml
     extra = set(selections.keys()) - set(parts.keys())
     if extra:
-        raise ValueError(
-            f"Selections found for unknown parts: {sorted(extra)}. "
-            "Ask the LLM to regenerate parts_options.csv so it only contains parts from parts.yaml."
-        )
+        print("\n" + "=" * 60)
+        print("VALIDATION FAILED")
+        print("=" * 60)
+        print(f"\nUNKNOWN PARTS ({len(extra)} parts):")
+        print(f"  Selections found for parts not in {parts_yaml.name}:")
+        print(f"  {', '.join(sorted(extra))}")
+        print("\n" + "=" * 60)
+        raise SystemExit(1)
+
+    # Check for parts in parts.yaml not in CSV (warning only)
+    missing_in_csv = set(parts.keys()) - set(selections.keys())
+    if missing_in_csv:
+        print(f"\n⚠ Warning: {len(missing_in_csv)} parts in {parts_yaml.name} not found in {csv_path.name}:")
+        print(f"  {', '.join(sorted(missing_in_csv))}")
+        print("  Run enrich_parts.py to add them to the CSV.")
+
+    print(f"\n✓ Validation passed: {len(selections)} parts, no duplicate selections")
 
     # Assign designators
     print("\nAssigning designators...")

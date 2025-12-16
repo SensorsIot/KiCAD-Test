@@ -39,9 +39,9 @@
     "designators": [
       "U4"
     ],
-    "lcsc": "C195417",
+    "lcsc": "C1526089",
     "mpn": "SI4735-D60-GU",
-    "package": "SSOP-24",
+    "package": "SSOP-24-150mil",
     "value": "",
     "description": "AM/FM/SW radio receiver IC",
     "is_basic": false,
@@ -65,8 +65,8 @@
     "designators": [
       "J1"
     ],
-    "lcsc": "C393939",
-    "mpn": "TYPE-C16PIN",
+    "lcsc": "C165948",
+    "mpn": "TYPE-C-31-M-12",
     "package": "SMD",
     "value": "",
     "description": "USB-C connector for power and data",
@@ -79,7 +79,7 @@
     ],
     "lcsc": "C131337",
     "mpn": "B2B-PH-K-S(LF)(SN)",
-    "package": "\u63d2\u4ef6,P=2mm",
+    "package": "Plugin,P=2mm",
     "value": "",
     "description": "Battery connector JST-PH 2-pin",
     "is_basic": false,
@@ -89,8 +89,8 @@
     "designators": [
       "J3"
     ],
-    "lcsc": "C145819",
-    "mpn": "PJ-227-5A",
+    "lcsc": "C2689709",
+    "mpn": "PJ-3537S-SMT",
     "package": "SMD",
     "value": "",
     "description": "3.5mm stereo headphone jack",
@@ -102,8 +102,8 @@
       "J4"
     ],
     "lcsc": "C2337",
-    "mpn": "2.54-1*40P\u76f4\u9488",
-    "package": "\u63d2\u4ef6,P=2.54mm",
+    "mpn": "2.54-1*40PStraight pin",
+    "package": "Plugin,P=2.54mm",
     "value": "",
     "description": "4-pin header for OLED display module",
     "is_basic": false,
@@ -113,12 +113,12 @@
     "designators": [
       "SW1"
     ],
-    "lcsc": "C127509",
-    "mpn": "K2-1102SP-C4SC-04",
-    "package": "SMD-4P,6x6mm",
+    "lcsc": "C318884",
+    "mpn": "TS-1187A-B-A-B",
+    "package": "SMD-4P 5.1x5.1mm",
     "value": "",
     "description": "Tactile reset button",
-    "is_basic": false,
+    "is_basic": true,
     "is_preferred": false
   },
   "Rotary_Encoder1": {
@@ -127,7 +127,7 @@
     ],
     "lcsc": "C255515",
     "mpn": "EC11E18244A5",
-    "package": "\u63d2\u4ef6",
+    "package": "Plugin",
     "value": "",
     "description": "Rotary encoder with push button (tuning)",
     "is_basic": false,
@@ -139,7 +139,7 @@
     ],
     "lcsc": "C255515",
     "mpn": "EC11E18244A5",
-    "package": "\u63d2\u4ef6",
+    "package": "Plugin",
     "value": "",
     "description": "Rotary encoder with push button (volume)",
     "is_basic": false,
@@ -173,24 +173,24 @@
     "designators": [
       "R3"
     ],
-    "lcsc": "C269690",
-    "mpn": "RMC 0603 2K J N",
+    "lcsc": "C22975",
+    "mpn": "0603WAF2001T5E",
     "package": "0603",
     "value": "2k",
     "description": "TP4056 charge current set (500mA)",
-    "is_basic": false,
+    "is_basic": true,
     "is_preferred": false
   },
   "R_EN_Pullup": {
     "designators": [
       "R4"
     ],
-    "lcsc": "C5362358",
-    "mpn": "RMC 0603 10K J N",
+    "lcsc": "C25804",
+    "mpn": "0603WAF1002T5E",
     "package": "0603",
     "value": "10k",
     "description": "ESP32 EN pin pullup",
-    "is_basic": false,
+    "is_basic": true,
     "is_preferred": false
   },
   "R_I2C_SDA": {
@@ -351,19 +351,19 @@
     "designators": [
       "Y1"
     ],
-    "lcsc": "C32346",
-    "mpn": "Q13FC13500004",
-    "package": "SMD3215-2P",
+    "lcsc": "C2236",
+    "mpn": "X206032768KGB2SC",
+    "package": "DT-26",
     "value": "",
     "description": "SI4735 reference crystal",
-    "is_basic": true,
+    "is_basic": false,
     "is_preferred": false
   },
   "FM_Antenna": {
     "designators": [
       "ANT1"
     ],
-    "lcsc": "DNP-FM",
+    "lcsc": "NOT_FOUND",
     "mpn": "FM_Wire",
     "package": "Wire",
     "value": "",
@@ -375,7 +375,7 @@
     "designators": [
       "ANT2"
     ],
-    "lcsc": "DNP-AM",
+    "lcsc": "NOT_FOUND",
     "mpn": "AM_Loop",
     "package": "Ferrite",
     "value": "",
@@ -387,9 +387,9 @@
     "designators": [
       "D4"
     ],
-    "lcsc": "C112644",
-    "mpn": "BSP752R",
-    "package": "SO-8",
+    "lcsc": "C9980",
+    "mpn": "AP1501-50K5G-13",
+    "package": "TO-263-5",
     "value": "",
     "description": "ESD protection for USB D+",
     "is_basic": false,
@@ -399,9 +399,9 @@
     "designators": [
       "D5"
     ],
-    "lcsc": "C112644",
-    "mpn": "BSP752R",
-    "package": "SO-8",
+    "lcsc": "C9980",
+    "mpn": "AP1501-50K5G-13",
+    "package": "TO-263-5",
     "value": "",
     "description": "ESD protection for USB D-",
     "is_basic": false,

@@ -1,0 +1,130 @@
+name,query,option,lcsc,mpn,package,stock,price,is_basic,is_preferred,selected,review_note
+MCU,ESP32-S3-MINI-1-N8,1,C2913206,ESP32-S3-MINI-1-N8,SMD,6741,2.8275,,,X,Single option; verify package/stock
+Battery_Charger,TP4056,1,C16581,TP4056-42-ESOP8,ESOP-8,55577,0.0834,,yes,X,Selected option; other rows for this part should stay blank
+Battery_Charger,TP4056,2,C21417,TP4056-42-EMSOP8,MSOP-8-EP,4840,0.0984,,,,Selected option; other rows for this part should stay blank
+Battery_Charger,TP4056,3,C382139,TP4056,ESOP-8,43189,0.0471,,,,Selected option; other rows for this part should stay blank
+Battery_Charger,TP4056,4,C725790,TP4056,ESOP-8,319365,0.0309,,,,Selected option; other rows for this part should stay blank
+Battery_Charger,TP4056,5,C2763448,TP4056X-42-ESOP8,SOP-8-EP,3616,0.0947,,,,Selected option; other rows for this part should stay blank
+LDO,AMS1117-3.3,1,C6186,AMS1117-3.3,SOT-223,916536,0.0783,yes,,X,Selected option; other rows for this part should stay blank
+LDO,AMS1117-3.3,2,C347222,AMS1117-3.3,SOT-223,1463235,0.0186,,,,Selected option; other rows for this part should stay blank
+LDO,AMS1117-3.3,3,C347256,AMS1117-3.3S,SOT-89,355078,0.0204,,,,Selected option; other rows for this part should stay blank
+LDO,AMS1117-3.3,4,C351784,AMS1117-3.3,SOT-223-3,11942,0.0413,,,,Selected option; other rows for this part should stay blank
+LDO,AMS1117-3.3,5,C369933,AMS1117-3.3,SOT-223-4,27678,0.026,,,,Selected option; other rows for this part should stay blank
+Radio_IC,SI4735-D60-GU,1,C1526089,SI4735-D60-GU,SSOP-24-150mil,0,8.5005,,,X,Selected option; other rows for this part should stay blank
+Radio_IC,SI4735-D60-GU,2,C17686189,SI4735-D60-GUR,SSOP-24-150mil,0,2.949,,,,Selected option; other rows for this part should stay blank
+RGB_LED,WS2812B-B,1,C2761795,WS2812B-B/T,SMD5050-4P,162280,0.0414,,,X,Single option; verify package/stock
+USB_Connector,TYPE-C-31-M-12,1,C165948,TYPE-C-31-M-12,SMD,230463,0.0888,,,X,Selected option; other rows for this part should stay blank
+USB_Connector,TYPE-C-31-M-12,2,C9900091786,TYPE-C-31-M-12,type-c-16,0,0.0188,,,,Selected option; other rows for this part should stay blank
+USB_Connector,TYPE-C-31-M-12,3,C5337088,TYPE-C-31-M-12A,SMD,2095,0.117,,,,Selected option; other rows for this part should stay blank
+USB_Connector,TYPE-C-31-M-12,4,C9900015525,USB_C_Receptacle_HRO_TYPE-C-31-M-12,USB_C_Receptacle_USB2.0,0,0.0188,,,,Selected option; other rows for this part should stay blank
+Battery_Connector,JST-PH-2P,1,C131337,B2B-PH-K-S(LF)(SN),"Plugin,P=2mm",166635,0.0145,,,X,Single option; verify package/stock
+Audio_Jack,3.5mm SMD Jack,1,C2689709,PJ-3537S-SMT,SMD,267,0.3855,,,X,Replaced PJ-327A (not on EasyEDA) with PJ-3537S-SMT
+Audio_Jack,PJ-327A,2,C22355751,PJ-327A,SMD,159,0.0978,,,,Selected option; other rows for this part should stay blank
+Audio_Jack,PJ-327A,3,C49284723,PJ-327A,SMD,4711,0.0894,,,,Selected option; other rows for this part should stay blank
+Audio_Jack,PJ-327A,4,C2987384,PJ-327A,SMD,0,0.0962,,,,Selected option; other rows for this part should stay blank
+Audio_Jack,PJ-327A,5,C840364,PJ-327A-5A,SMD,3,0.053,,,,Selected option; other rows for this part should stay blank
+OLED_Header,Header-1x04,1,C2337,2.54-1*40PStraight pin,"Plugin,P=2.54mm",77804,0.062,,,X,Single option; verify package/stock
+Reset_Button,Tact Switch 6x6 SMD,1,C318884,TS-1187A-B-A-B,SMD-4P 5.1x5.1mm,448780,0.0099,yes,,X,Replaced TS-1102S (not on EasyEDA) with basic part
+Reset_Button,TS-1102S,2,C52190667,TS-1102SCCB,"SMD-4P,6x6mm",960,0.0106,,,,Selected option; other rows for this part should stay blank
+Reset_Button,TS-1102S,3,C428469,TS-1102S-6026,"SMD-4P,6x6mm",4,0.0363,,,,Selected option; other rows for this part should stay blank
+Reset_Button,TS-1102S,4,C7471772,TS-1102S10050,SMD,0,0.0161,,,,Selected option; other rows for this part should stay blank
+Reset_Button,TS-1102S,5,C7471781,TS-1102S16070,-,0,0.013,,,,Selected option; other rows for this part should stay blank
+Rotary_Encoder1,EC11E18244A5,1,C255515,EC11E18244A5,Plugin,2397,1.104,,,X,Single option; verify package/stock
+Rotary_Encoder2,EC11E18244A5,1,C255515,EC11E18244A5,Plugin,2397,1.104,,,X,Single option; verify package/stock
+R_CC1,5.1k 0603,1,C14677,RC0603JR-075K1L,0603,194576,0.0005,,,,Selected option; other rows for this part should stay blank
+R_CC1,5.1k 0603,2,C23186,0603WAF5101T5E,0603,6970905,0.0006,yes,,X,Selected option; other rows for this part should stay blank
+R_CC1,5.1k 0603,3,C26000,0603WAJ0512T5E,0603,1059846,0.0005,,,,Selected option; other rows for this part should stay blank
+R_CC1,5.1k 0603,4,C73801,RS-03K512JT,0603,58490,0.0007,,,,Selected option; other rows for this part should stay blank
+R_CC1,5.1k 0603,5,C101083,CR0603FA5101G,0603,13467,0.0005,,,,Selected option; other rows for this part should stay blank
+R_CC2,5.1k 0603,1,C14677,RC0603JR-075K1L,0603,194576,0.0005,,,,Selected option; other rows for this part should stay blank
+R_CC2,5.1k 0603,2,C23186,0603WAF5101T5E,0603,6970905,0.0006,yes,,X,Selected option; other rows for this part should stay blank
+R_CC2,5.1k 0603,3,C26000,0603WAJ0512T5E,0603,1059846,0.0005,,,,Selected option; other rows for this part should stay blank
+R_CC2,5.1k 0603,4,C73801,RS-03K512JT,0603,58490,0.0007,,,,Selected option; other rows for this part should stay blank
+R_CC2,5.1k 0603,5,C101083,CR0603FA5101G,0603,13467,0.0005,,,,Selected option; other rows for this part should stay blank
+R_PROG,2k 0603,1,C22975,0603WAF2001T5E,0603,11686386,0.0006,yes,,X,Selected option; other rows for this part should stay blank
+R_PROG,2k 0603,2,C25590,0603WAJ0202T5E,0603,1478210,0.0004,,,,Selected option; other rows for this part should stay blank
+R_PROG,2k 0603,3,C72817,RS-03K202JT,0603,46727,0.0006,,,,Selected option; other rows for this part should stay blank
+R_PROG,2k 0603,4,C100845,CR0603FA2001G,0603,4511,0.0008,,,,Selected option; other rows for this part should stay blank
+R_PROG,2k 0603,5,C101297,CR0603JA0202G,0603,1,0.0273,,,,Selected option; other rows for this part should stay blank
+R_EN_Pullup,10k 0603,1,C15401,0603WAJ0103T5E,0603,7170299,0.0004,,,,Selected option; other rows for this part should stay blank
+R_EN_Pullup,10k 0603,2,C25804,0603WAF1002T5E,0603,37188099,0.0005,yes,,X,Selected option; other rows for this part should stay blank
+R_EN_Pullup,10k 0603,3,C73809,RS-03K103JT,0603,1576416,0.0005,,,,Selected option; other rows for this part should stay blank
+R_EN_Pullup,10k 0603,4,C95204,RT0603BRD0710KL,0603,1185979,0.0103,,,,Selected option; other rows for this part should stay blank
+R_EN_Pullup,10k 0603,5,C98220,RC0603FR-0710KL,0603,14108254,0.0005,,,,Selected option; other rows for this part should stay blank
+R_I2C_SDA,4.7k 0603,1,C23162,0603WAF4701T5E,0603,14205802,0.0006,yes,,X,Selected option; other rows for this part should stay blank
+R_I2C_SDA,4.7k 0603,2,C25999,0603WAJ0472T5E,0603,2926979,0.0005,,,,Selected option; other rows for this part should stay blank
+R_I2C_SDA,4.7k 0603,3,C88615,RS-03K472JT,0603,213767,0.0005,,,,Selected option; other rows for this part should stay blank
+R_I2C_SDA,4.7k 0603,4,C99782,RC0603FR-074K7L,0603,7606886,0.0005,,,,Selected option; other rows for this part should stay blank
+R_I2C_SDA,4.7k 0603,5,C101062,CR0603FA4701G,0603,29077,0.0005,,,,Selected option; other rows for this part should stay blank
+R_I2C_SCL,4.7k 0603,1,C23162,0603WAF4701T5E,0603,14205802,0.0006,yes,,X,Selected option; other rows for this part should stay blank
+R_I2C_SCL,4.7k 0603,2,C25999,0603WAJ0472T5E,0603,2926979,0.0005,,,,Selected option; other rows for this part should stay blank
+R_I2C_SCL,4.7k 0603,3,C88615,RS-03K472JT,0603,213767,0.0005,,,,Selected option; other rows for this part should stay blank
+R_I2C_SCL,4.7k 0603,4,C99782,RC0603FR-074K7L,0603,7606886,0.0005,,,,Selected option; other rows for this part should stay blank
+R_I2C_SCL,4.7k 0603,5,C101062,CR0603FA4701G,0603,29077,0.0005,,,,Selected option; other rows for this part should stay blank
+R_Audio_L,100R 0603,1,C22775,0603WAF1000T5E,0603,8148066,0.0005,yes,,X,Selected option; other rows for this part should stay blank
+R_Audio_L,100R 0603,2,C25201,0603WAJ0101T5E,0603,2622558,0.0005,,,,Selected option; other rows for this part should stay blank
+R_Audio_L,100R 0603,3,C86983,RS-03K101JT,0603,130372,0.0005,,,,Selected option; other rows for this part should stay blank
+R_Audio_L,100R 0603,4,C100700,CR0603FA1000G,0603,1814,0.0005,,,,Selected option; other rows for this part should stay blank
+R_Audio_L,100R 0603,5,C101252,CR0603JA0101G,0603,11000,0.0005,,,,Selected option; other rows for this part should stay blank
+R_Audio_R,100R 0603,1,C22775,0603WAF1000T5E,0603,8148066,0.0005,yes,,X,Selected option; other rows for this part should stay blank
+R_Audio_R,100R 0603,2,C25201,0603WAJ0101T5E,0603,2622558,0.0005,,,,Selected option; other rows for this part should stay blank
+R_Audio_R,100R 0603,3,C86983,RS-03K101JT,0603,130372,0.0005,,,,Selected option; other rows for this part should stay blank
+R_Audio_R,100R 0603,4,C100700,CR0603FA1000G,0603,1814,0.0005,,,,Selected option; other rows for this part should stay blank
+R_Audio_R,100R 0603,5,C101252,CR0603JA0101G,0603,11000,0.0005,,,,Selected option; other rows for this part should stay blank
+C_USB_VBUS,10uF 0805,1,C1713,CL21A106KOQNNNE,0805,4419509,0.0044,,,,Selected option; other rows for this part should stay blank
+C_USB_VBUS,10uF 0805,2,C15850,CL21A106KAYNNNE,0805,9979576,0.0049,yes,,X,Selected option; other rows for this part should stay blank
+C_USB_VBUS,10uF 0805,3,C17024,CL21A106KPFNNNE,0805,2458226,0.0047,,,,Selected option; other rows for this part should stay blank
+C_USB_VBUS,10uF 0805,4,C32635,CL21B106KPQNNNE,0805,659450,0.0075,,,,Selected option; other rows for this part should stay blank
+C_USB_VBUS,10uF 0805,5,C39060,0805F106M250NT,0805,6,0.0084,,,,Selected option; other rows for this part should stay blank
+C_BAT_Filter,10uF 0805,1,C1713,CL21A106KOQNNNE,0805,4419509,0.0044,,,,Selected option; other rows for this part should stay blank
+C_BAT_Filter,10uF 0805,2,C15850,CL21A106KAYNNNE,0805,9979576,0.0049,yes,,X,Selected option; other rows for this part should stay blank
+C_BAT_Filter,10uF 0805,3,C17024,CL21A106KPFNNNE,0805,2458226,0.0047,,,,Selected option; other rows for this part should stay blank
+C_BAT_Filter,10uF 0805,4,C32635,CL21B106KPQNNNE,0805,659450,0.0075,,,,Selected option; other rows for this part should stay blank
+C_BAT_Filter,10uF 0805,5,C39060,0805F106M250NT,0805,6,0.0084,,,,Selected option; other rows for this part should stay blank
+C_LDO_In,22uF 0805,1,C5674,CL21A226MQQNNNE,0805,1045234,0.0054,,,,Selected option; other rows for this part should stay blank
+C_LDO_In,22uF 0805,2,C29277,CL21A226MPQNNNE,0805,2065715,0.009,,,,Selected option; other rows for this part should stay blank
+C_LDO_In,22uF 0805,3,C45783,CL21A226MAQNNNE,0805,3154226,0.0108,yes,,X,Selected option; other rows for this part should stay blank
+C_LDO_In,22uF 0805,4,C76634,C2012X5R1A226KT000N,0805,46933,0.1359,,,,Selected option; other rows for this part should stay blank
+C_LDO_In,22uF 0805,5,C76637,C2012X5R1C226KT000E,0805,8553,0.0825,,,,Selected option; other rows for this part should stay blank
+C_LDO_Out,22uF 0805,1,C5674,CL21A226MQQNNNE,0805,1045234,0.0054,,,,Selected option; other rows for this part should stay blank
+C_LDO_Out,22uF 0805,2,C29277,CL21A226MPQNNNE,0805,2065715,0.009,,,,Selected option; other rows for this part should stay blank
+C_LDO_Out,22uF 0805,3,C45783,CL21A226MAQNNNE,0805,3154226,0.0108,yes,,X,Selected option; other rows for this part should stay blank
+C_LDO_Out,22uF 0805,4,C76634,C2012X5R1A226KT000N,0805,46933,0.1359,,,,Selected option; other rows for this part should stay blank
+C_LDO_Out,22uF 0805,5,C76637,C2012X5R1C226KT000E,0805,8553,0.0825,,,,Selected option; other rows for this part should stay blank
+C_MCU_Bypass,100nF 0603,1,C1590,CL10B104KA8NNNC,0603,1308421,0.0016,,,,Selected option; other rows for this part should stay blank
+C_MCU_Bypass,100nF 0603,2,C1591,CL10B104KB8NNNC,0603,30116110,0.0012,,,,Selected option; other rows for this part should stay blank
+C_MCU_Bypass,100nF 0603,3,C1688,CL10F104ZB8NNNC,0603,149390,0.0038,,,,Selected option; other rows for this part should stay blank
+C_MCU_Bypass,100nF 0603,4,C14663,CC0603KRX7R9BB104,0603,70209411,0.0011,yes,,X,Selected option; other rows for this part should stay blank
+C_MCU_Bypass,100nF 0603,5,C15725,CL10B104KC8NNNC,0603,80934,0.0031,,,,Selected option; other rows for this part should stay blank
+C_Radio_Bypass,100nF 0603,1,C1590,CL10B104KA8NNNC,0603,1308421,0.0016,,,,Selected option; other rows for this part should stay blank
+C_Radio_Bypass,100nF 0603,2,C1591,CL10B104KB8NNNC,0603,30116110,0.0012,,,,Selected option; other rows for this part should stay blank
+C_Radio_Bypass,100nF 0603,3,C1688,CL10F104ZB8NNNC,0603,149390,0.0038,,,,Selected option; other rows for this part should stay blank
+C_Radio_Bypass,100nF 0603,4,C14663,CC0603KRX7R9BB104,0603,70209411,0.0011,yes,,X,Selected option; other rows for this part should stay blank
+C_Radio_Bypass,100nF 0603,5,C15725,CL10B104KC8NNNC,0603,80934,0.0031,,,,Selected option; other rows for this part should stay blank
+C_LED_Bypass,100nF 0603,1,C1590,CL10B104KA8NNNC,0603,1308421,0.0016,,,,Selected option; other rows for this part should stay blank
+C_LED_Bypass,100nF 0603,2,C1591,CL10B104KB8NNNC,0603,30116110,0.0012,,,,Selected option; other rows for this part should stay blank
+C_LED_Bypass,100nF 0603,3,C1688,CL10F104ZB8NNNC,0603,149390,0.0038,,,,Selected option; other rows for this part should stay blank
+C_LED_Bypass,100nF 0603,4,C14663,CC0603KRX7R9BB104,0603,70209411,0.0011,yes,,X,Selected option; other rows for this part should stay blank
+C_LED_Bypass,100nF 0603,5,C15725,CL10B104KC8NNNC,0603,80934,0.0031,,,,Selected option; other rows for this part should stay blank
+C_Crystal,22pF 0603,1,C1653,CL10C220JB8NNNC,0603,3113067,0.0021,yes,,X,Selected option; other rows for this part should stay blank
+C_Crystal,22pF 0603,2,C63681,0603CG220J201NT,0603,2348,0.0026,,,,Selected option; other rows for this part should stay blank
+C_Crystal,22pF 0603,3,C91701,0603CG220J500NT,0603,366633,0.0015,,,,Selected option; other rows for this part should stay blank
+C_Crystal,22pF 0603,4,C105620,CC0603JRNPO9BN220,0603,1933236,0.0011,,,,Selected option; other rows for this part should stay blank
+C_Crystal,22pF 0603,5,C107451,0603N220J500,0603,4610,0.0012,,,,Selected option; other rows for this part should stay blank
+Crystal_32K,32.768kHz,1,C2236,X206032768KGB2SC,DT-26,131315,0.0312,,,X,Selected option; other rows for this part should stay blank
+Crystal_32K,32.768kHz,2,C12675,X803832768KGD4GI,MC-306,17272,0.1262,,,,Selected option; other rows for this part should stay blank
+Crystal_32K,32.768kHz,3,C13712,X206032768KGA2SC,DT-26,38130,0.0378,,,,Selected option; other rows for this part should stay blank
+Crystal_32K,32.768kHz,4,C15482,Q13MC14620002,MC-146,49709,0.078,,,,Selected option; other rows for this part should stay blank
+Crystal_32K,32.768kHz,5,C16320,Q13MC30610003,MC-306,15912,0.1247,,,,Selected option; other rows for this part should stay blank
+FM_Antenna,FM_Wire,1,NOT_FOUND,FM_Wire,Wire,,,,,X,No LCSC; ask LLM to add lcsc_hint or mark DNP
+AM_Antenna,AM_Loop,1,NOT_FOUND,AM_Loop,Ferrite,,,,,X,No LCSC; ask LLM to add lcsc_hint or mark DNP
+ESD_USB_DP,ESD_Diode,1,C9980,AP1501-50K5G-13,TO-263-5,2278,0.5445,,,X,Selected option; other rows for this part should stay blank
+ESD_USB_DP,ESD_Diode,2,C9981,AP1501-K5G-13,TO-263-5,1321,0.498,,,,Selected option; other rows for this part should stay blank
+ESD_USB_DP,ESD_Diode,3,C9984,AP1509-50SG-13,SOP-8,6910,0.204,,,,Selected option; other rows for this part should stay blank
+ESD_USB_DP,ESD_Diode,4,C12889,B230A-13-F,SMA,10021,0.0389,,,,Selected option; other rows for this part should stay blank
+ESD_USB_DP,ESD_Diode,5,C13966,FMMT38CTA,SOT-23,2925,0.0839,,,,Selected option; other rows for this part should stay blank
+ESD_USB_DM,ESD_Diode,1,C9980,AP1501-50K5G-13,TO-263-5,2278,0.5445,,,X,Selected option; other rows for this part should stay blank
+ESD_USB_DM,ESD_Diode,2,C9981,AP1501-K5G-13,TO-263-5,1321,0.498,,,,Selected option; other rows for this part should stay blank
+ESD_USB_DM,ESD_Diode,3,C9984,AP1509-50SG-13,SOP-8,6910,0.204,,,,Selected option; other rows for this part should stay blank
+ESD_USB_DM,ESD_Diode,4,C12889,B230A-13-F,SMA,10021,0.0389,,,,Selected option; other rows for this part should stay blank
+ESD_USB_DM,ESD_Diode,5,C13966,FMMT38CTA,SOT-23,2925,0.0839,,,,Selected option; other rows for this part should stay blank
