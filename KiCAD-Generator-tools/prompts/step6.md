@@ -1,6 +1,6 @@
-# Step 6: Validation and Summary
+# Step 6: Validation
 
-Perform comprehensive design review and generate validation report.
+Verify design completeness and correctness before schematic generation.
 
 ---
 
@@ -42,146 +42,103 @@ Write to `design/work/step6_validation.yaml`:
 # Date: [YYYY-MM-DD]
 
 summary:
-  status: PASS  # PASS | PASS_WITH_WARNINGS | NEEDS_REVIEW | FAIL
-  total_parts: 45
-  total_nets: 32
-  issues_found: 2
-  critical_issues: 0
+  status: PASS  # PASS | PASS_WITH_WARNINGS | FAIL
+  total_parts: <count>
+  total_nets: <count>
+  errors_found: <count>
+  warnings_found: <count>
 
 # === FSD Requirements Coverage ===
 fsd_coverage:
-  - requirement: "ESP32-S3 microcontroller"
-    section: "4.1"
-    status: COVERED
-    implemented_by: mcu
+  - requirement: "<FSD requirement description>"
+    section: "<FSD section number>"
+    status: COVERED  # COVERED | PARTIAL | MISSING
+    implemented_by: <part_id>
 
-  - requirement: "USB-C for charging and programming"
-    section: "5.1"
+  - requirement: "<FSD requirement description>"
+    section: "<FSD section number>"
     status: COVERED
-    implemented_by: [usb_connector, battery_charger]
+    implemented_by: [<part_id_1>, <part_id_2>]
 
-  - requirement: "AM/FM radio reception"
-    section: "4.2"
-    status: COVERED
-    implemented_by: [radio_ic, antenna_fm, antenna_am]
-
-  - requirement: "OLED display"
-    section: "7.1"
+  - requirement: "<FSD requirement description>"
+    section: "<FSD section number>"
     status: PARTIAL
-    implemented_by: oled_header
-    note: "Header only, display not in BOM"
+    implemented_by: <part_id>
+    note: "<explanation of partial coverage>"
 
 # === Electrical Checks ===
 electrical_checks:
   power_rails:
-    - rail: "+3V3"
-      source: ldo
-      loads: [mcu, radio_ic, oled_header, rgb_led]
-      estimated_current_ma: 350
-      source_capacity_ma: 800
-      status: OK
+    - rail: "<POWER_RAIL_NAME>"       # e.g., +3V3, +5V, VBAT
+      source: <source_part_id>
+      loads: [<part_id_1>, <part_id_2>, <part_id_3>]
+      estimated_current_ma: <value>
+      source_capacity_ma: <value>
+      status: OK  # OK | WARNING | FAIL
 
-    - rail: "VBAT"
-      source: battery_connector
-      loads: [ldo, battery_charger]
-      voltage_range: "3.0-4.2V"
+    - rail: "<POWER_RAIL_NAME>"
+      source: <source_part_id>
+      loads: [<part_id_1>, <part_id_2>]
+      voltage_range: "<min>-<max>V"
       status: OK
 
   bypass_capacitors:
-    - component: mcu
-      required: 3
-      provided: 3
-      status: OK
-
-    - component: radio_ic
-      required: 4
-      provided: 4
+    - component: <ic_part_id>
+      required: <count>
+      provided: <count>
       status: OK
 
   pull_resistors:
-    - bus: I2C
-      pull_ups_required: 2
-      pull_ups_provided: 2
-      value: "4.7k"
+    - bus: <BUS_NAME>                 # e.g., I2C, SPI
+      pull_ups_required: <count>
+      pull_ups_provided: <count>
+      value: "<resistance>"
       status: OK
 
-# === Best Practice Checks ===
-best_practice:
-  - check: "ESD protection on USB"
-    status: PRESENT
-    components: [esd_usb_dp, esd_usb_dm]
-
-  - check: "Decoupling on all ICs"
-    status: OK
-
-  - check: "Test points for debug"
-    status: MISSING
-    recommendation: "Add test points for SDA, SCL, +3V3"
-    severity: info
-
-# === Issues Found ===
-issues:
+# === Errors Found ===
+# Only report actual errors that prevent schematic generation
+errors:
   - id: 1
-    severity: warning
-    category: best_practice
-    description: "No test points defined"
-    recommendation: "Add test points for power rails and I2C bus"
-    affected: [design]
+    severity: error  # warning | error | critical
+    category: <category>  # electrical | connection | missing_part | missing_symbol
+    description: "<error description>"
+    affected: [<part_id or net_name>]
 
   - id: 2
-    severity: info
-    category: documentation
-    description: "OLED display not in BOM"
-    recommendation: "Add OLED module to BOM or note as user-supplied"
-    affected: [oled_header]
+    severity: warning
+    category: <category>
+    description: "<warning description>"
+    affected: [<part_id>]
 
 # === Statistics ===
 statistics:
   by_category:
-    microcontroller: 1
-    radio: 1
-    power: 2
-    connector: 4
-    ui: 6
-    passive: 31
+    <category_1>: <count>
+    <category_2>: <count>
+    # ... list all categories with counts
 
   by_prefix:
-    U: 4
-    R: 8
-    C: 18
-    D: 3
-    J: 4
-    SW: 1
-    ENC: 2
-    Y: 1
-    ANT: 2
-
-# === Recommendations ===
-recommendations:
-  - "Consider adding reverse polarity protection on battery input"
-  - "Add 0-ohm resistors for antenna tuning flexibility"
-  - "Include programming header for development"
+    U: <count>
+    R: <count>
+    C: <count>
+    D: <count>
+    J: <count>
+    # ... list all prefixes with counts
 ```
 
 ## Validation Checks
 
 ### 1. Completeness
 - [ ] All FSD requirements addressed
-- [ ] Every part connected
-- [ ] All power pins connected
-- [ ] All ground pins connected
+- [ ] Every part has at least one connection
+- [ ] All IC power pins connected to power rail
+- [ ] All IC ground pins connected to GND
 
 ### 2. Electrical
-- [ ] Bypass capacitor values appropriate
-- [ ] Pull-up/pull-down values correct
-- [ ] Voltage levels compatible
-- [ ] Current requirements met
-
-### 3. Best Practice
-- [ ] ESD protection on external interfaces
-- [ ] Decoupling on all ICs
-- [ ] Test points available
-- [ ] Clear net naming
+- [ ] No duplicate pin assignments (same pin on multiple nets)
+- [ ] No single-pin nets (except test points)
+- [ ] Bypass capacitors have both pins connected
+- [ ] Voltage levels compatible between connected parts
 
 ## After YAML
 
@@ -205,11 +162,11 @@ python -c "import yaml; yaml.safe_load(open('design/work/step6_validation.yaml')
 ```
 - [ ] `step6_validation.yaml` exists and is valid YAML
 
-### 2. No Critical Issues
+### 2. No Critical Errors
 ```bash
 grep -E "severity: critical|severity: error" design/work/step6_validation.yaml
 ```
-- [ ] No critical or error severity issues (grep should return nothing)
+- [ ] No critical or error severity items (grep should return nothing)
 - [ ] Overall status is PASS or PASS_WITH_WARNINGS
 
 ### 3. FSD Coverage Complete
@@ -241,7 +198,7 @@ python scripts/ensure_symbols.py --parts work/step4_final_parts.yaml --dry-run
 
 **DO NOT proceed to schematic generation!**
 
-1. Review the issues in step6_validation.yaml
+1. Review the errors in step6_validation.yaml
 2. Go back to the appropriate step to fix:
    - Parts issues → Step 4
    - Connection issues → Step 5

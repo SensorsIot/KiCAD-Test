@@ -43,48 +43,19 @@ Write to `design/work/step5_connections.yaml`:
 nets:
   # === Power Rails ===
   GND:
-    - mcu.GND
-    - ldo.GND
-    - battery_charger.GND
-    - c_mcu_bypass_1.2
-    - c_ldo_in.2
-    - c_ldo_out.2
+    - <part_id>.GND
+    - <part_id>.GND
+    - <capacitor_id>.2        # Capacitor pin 2 = GND side
 
-  VBAT:
-    - battery_charger.BAT
-    - battery_connector.1
-    - ldo.VIN
-    - c_ldo_in.1
+  <POWER_RAIL_NAME>:          # e.g., VBAT, +3V3, +5V
+    - <part_id>.<power_pin>
+    - <capacitor_id>.1        # Capacitor pin 1 = power side
 
-  +3V3:
-    - ldo.VOUT
-    - mcu.3V3
-    - c_ldo_out.1
-    - c_mcu_bypass_1.1
-    - r_i2c_sda.1
-    - r_i2c_scl.1
-
-  # === I2C Bus ===
-  SDA:
-    - mcu.GPIO4
-    - radio_ic.SDIO
-    - oled_header.SDA
-    - r_i2c_sda.2
-
-  SCL:
-    - mcu.GPIO5
-    - radio_ic.SCLK
-    - oled_header.SCL
-    - r_i2c_scl.2
-
-  # === USB ===
-  USB_DP:
-    - mcu.GPIO20
-    - usb_connector.DP
-
-  USB_DM:
-    - mcu.GPIO19
-    - usb_connector.DM
+  # === Signal Buses ===
+  <SIGNAL_NAME>:              # e.g., SDA, SCL, MOSI, CS
+    - <part_id>.<signal_pin>
+    - <part_id>.<signal_pin>
+    - <pullup_resistor_id>.2  # Resistor pin 2 = signal side
 
 # Format: component_id.PIN_NAME
 # - Use component id from step4_final_parts.yaml
@@ -93,29 +64,19 @@ nets:
 
 # Explicitly unconnected pins
 no_connect:
-  - component: mcu
-    pin: GPIO0
-    reason: "Strapping pin, directly connected internally"
-
-  - component: radio_ic
-    pin: GPO2
-    reason: "General purpose output, not used in this design"
+  - component: <part_id>
+    pin: <pin_name>
+    reason: "<why not connected>"
 
 # Test points (optional)
 test_points:
-  - net: +3V3
-    purpose: "Power rail monitoring"
-
-  - net: SDA
-    purpose: "I2C debug"
+  - net: <net_name>
+    purpose: "<what this tests>"
 
 # Net notes
 notes:
-  - net: VBAT
-    note: "Battery voltage, 3.0-4.2V from Li-ion cell"
-
-  - net: +3V3
-    note: "Main logic supply, max 500mA from AMS1117"
+  - net: <NET_NAME>
+    note: "<description of the net, voltage range, current limit, etc.>"
 ```
 
 ## Connection Rules

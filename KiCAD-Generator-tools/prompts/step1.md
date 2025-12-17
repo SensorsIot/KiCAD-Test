@@ -1,217 +1,369 @@
-# Step 1: Parts Extraction and Design Decisions
+# Step 1: Extract Primary Parts from FSD
 
-Read the FSD and:
-1. Extract all components
-2. Look up JLCPCB pricing and availability for each part
-3. Present design choices as questions with pros/cons
-4. Wait for user decisions
-5. Document final selections in YAML and CSV
-6. **STOP HERE** - Do not proceed to Step 2 until explicitly requested
+Extract ALL parts from the FSD, including optional parts where the FSD requests design options.
+
+**IMPORTANT:** No new parts will be added after this step. This is the complete parts list.
+
+**This step focuses on:**
+1. WHAT parts are needed (not which specific JLCPCB variants to use)
+2. WHAT design options exist (protection circuits, optional features, etc.)
+3. Capturing ALL alternatives mentioned in the FSD
 
 ---
 
 ## Process
 
-### Part 1: Research Parts on JLCPCB
+### 1. Read the FSD Thoroughly
 
-For each component, look up on JLCPCB (https://jlcpcb.com/parts):
-- **LCSC code** (e.g., C12345)
-- **Part type**: Basic or Extended
-- **Unit price** (for qty 10-100)
-- **Stock availability**
+Identify all components mentioned in:
+- Bill of Materials sections
+- Block diagrams
+- Interface specifications
+- Pin allocations
+- Any "or equivalent" mentions
 
-Use web search or JLCPCB parts database to get current pricing.
+**Also identify design choices NOT explicitly in FSD but important for a robust design:**
+- Protection circuits (ESD, reverse polarity, overcurrent)
+- Optional features (debug headers, test points)
+- Interface options (antenna type, connector variants)
 
-### Part 2: Present Design Choices
+### 2. Extract Required Parts
 
-For each component or design decision where alternatives exist, present:
+For each component, capture:
+- **Functional role** (what it does in the circuit)
+- **Part number** from FSD (if specified)
+- **LCSC code** from FSD (if specified)
+- **Package** from FSD (if specified)
+- **Key specifications** (voltage, current, value, etc.)
 
-```
-## [Component/Decision Name]
+### 3. Identify Functional Alternatives
 
-**Context:** [Why this choice matters]
+Add alternatives where **functionally reasonable**:
 
-**Option A: [Name]** (Recommended)
-- Part: [part number]
-- LCSC: [code]
-- Type: Basic/Extended
-- Price: $X.XX (qty 10)
-- Pros: [list benefits]
-- Cons: [list drawbacks]
+| When to Add Alternatives | Examples |
+|--------------------------|----------|
+| FSD says "or equivalent" | "AMS1117 or equivalent LDO" |
+| Multiple valid topologies | Linear LDO vs switching regulator |
+| Package variants exist | SMD vs through-hole encoder |
+| Common substitutes exist | ME6211 vs AMS1117 (both 3.3V LDOs) |
+| FSD mentions options | "0603 minimum" implies 0805 is also OK |
 
-**Option B: [Name]**
-- Part: [part number]
-- LCSC: [code]
-- Type: Basic/Extended
-- Price: $X.XX (qty 10)
-- Pros: [list benefits]
-- Cons: [list drawbacks]
+**Do NOT add alternatives for:**
+- Specific ICs with unique functionality (SI4735, ESP32-S3)
+- Parts where FSD is explicit about requirements
+- Standard passives (just use FSD values)
 
-**My recommendation:** [A or B] because [reason]
+### 4. Group Options Together
 
-**Your choice?**
-```
+Parts that are alternatives to each other share the same `option_group`.
+Only ONE part from each option group will be selected in Step 2.
 
-### Part 3: Collect Decisions and Generate Output
+### 5. Identify Design Options
 
-After user responds, create TWO output files:
+Design options are choices that affect the circuit but aren't explicit part alternatives.
+These need user decisions before finalizing the design.
 
-#### File 1: `design/work/decisions.yaml`
+**Common design options to consider:**
+
+| Category | Option | Typical Choices |
+|----------|--------|-----------------|
+| Protection | USB ESD | Yes (add TVS/ESD IC) / No (rely on MCU) |
+| Protection | Battery reverse polarity | None / Schottky diode / P-FET |
+| Protection | Overcurrent | Fuse / PTC / None |
+| Debug | UART header | Yes / No |
+| Debug | SWD/JTAG header | Yes / No |
+| Interface | Antenna connection | Wire pad / SMA connector / Headphone cable |
+| Assembly | Through-hole parts | Allow TH / SMD only |
+
+**For each design option, capture:**
+- What the option is
+- Available choices with pros/cons
+- Recommended choice with reasoning
+- Parts that would be added if "yes" (include in parts list with `conditional: true`)
+
+---
+
+## Output Format
+
+Write to `design/work/step1_primary_parts.yaml`:
 
 ```yaml
-# decisions.yaml
-# User decisions from Step 1 discussion
+# step1_primary_parts.yaml
+# Extracted from: FSD_*.md
 # Date: [YYYY-MM-DD]
+#
+# This file contains ALL parts including optional parts and alternatives.
+# NO NEW PARTS will be added after this step.
+# Step 2 will enrich with JLCPCB data (pricing, stock, variants).
 
-component_choices:
-  mcu: "ESP32-S3-MINI-1-N8"
-  mcu_lcsc: "C2913206"
-  mcu_type: "Extended"
-  mcu_price: "3.50"
+parts:
+  # === Microcontroller (no alternatives - FSD specifies exact part) ===
+  - id: mcu
+    name: "ESP32-S3 MCU Module"
+    function: "Main microcontroller with WiFi/BLE"
+    part_number: "ESP32-S3-MINI-1-N8"
+    lcsc: "C2913206"              # From FSD
+    package: "Module"
+    category: microcontroller
+    quantity: 1
+    option_group: null            # No alternatives
+    specs:
+      voltage: "3.0-3.6V"
+      flash: "8MB"
 
-  ldo: "ME6211C33M5G"
-  ldo_lcsc: "C82942"
-  ldo_type: "Basic"
-  ldo_price: "0.05"
-  # ... all selected parts
+  # === Radio IC (no alternatives - specific functionality) ===
+  - id: radio_ic
+    name: "AM/FM/SW Radio Receiver"
+    function: "Multi-band radio reception"
+    part_number: "SI4735-D60-GU"
+    lcsc: "C195417"               # From FSD (verify in Step 2)
+    package: "SSOP-24"
+    category: radio
+    quantity: 1
+    option_group: null
+    specs:
+      interface: "I2C"
+      bands: "AM/FM/SW"
 
-design_choices:
-  power_topology: "linear"
-  passive_size: "0603"
-  # ... all design decisions
+  # === LDO Regulator (alternatives exist) ===
+  - id: ldo_ams1117
+    name: "3.3V LDO Regulator"
+    function: "Voltage regulation from battery to 3.3V"
+    part_number: "AMS1117-3.3"
+    lcsc: "C6186"                 # From FSD
+    package: "SOT-223"
+    category: power
+    quantity: 1
+    option_group: ldo_3v3         # Alternatives share this group
+    specs:
+      output_voltage: "3.3V"
+      max_current: "1A"
+      dropout: "1.1V"
+      quiescent: "5mA"
+    pros: "High current capacity, widely available"
+    cons: "Higher dropout, higher quiescent current"
+
+  - id: ldo_me6211
+    name: "3.3V LDO Regulator"
+    function: "Voltage regulation from battery to 3.3V"
+    part_number: "ME6211C33M5G-N"
+    lcsc: "C82942"
+    package: "SOT-23-5"
+    category: power
+    quantity: 1
+    option_group: ldo_3v3         # Same group as above
+    specs:
+      output_voltage: "3.3V"
+      max_current: "500mA"
+      dropout: "0.1V"
+      quiescent: "40uA"
+    pros: "Low dropout, ultra-low quiescent current, smaller"
+    cons: "Lower max current (500mA vs 1A)"
+
+  # === Rotary Encoder (SMD vs TH options) ===
+  - id: encoder_smd
+    name: "Rotary Encoder with Switch"
+    function: "User input for tuning and volume"
+    part_number: "EC11J1525402"   # SMD variant
+    lcsc: null                    # To be found in Step 2
+    package: "SMD"
+    category: ui
+    quantity: 2
+    option_group: encoder
+    specs:
+      type: "Incremental quadrature"
+      switch: "Integrated momentary"
+    pros: "SMD assembly, no manual soldering"
+    cons: "May need assembly fixture, typically more expensive"
+
+  - id: encoder_th
+    name: "Rotary Encoder with Switch"
+    function: "User input for tuning and volume"
+    part_number: "EC11E18244A5"   # Through-hole variant
+    lcsc: null                    # To be found in Step 2
+    package: "TH"
+    category: ui
+    quantity: 2
+    option_group: encoder
+    specs:
+      type: "Incremental quadrature"
+      switch: "Integrated momentary"
+    pros: "Easier to source, often cheaper, more mechanical options"
+    cons: "Requires manual soldering or selective assembly"
+
+  # === Parts without alternatives (standard values from FSD) ===
+  - id: c_bypass_100n
+    name: "Bypass Capacitor"
+    function: "IC power supply filtering"
+    part_number: "100nF"
+    lcsc: "C14663"                # Common 0603 100nF
+    package: "0603"
+    category: passive
+    quantity: 11                  # Count from FSD
+    option_group: null
+    specs:
+      capacitance: "100nF"
+      voltage: "16V+"
+      dielectric: "X7R"
+
+  # ... continue for all parts
+
+# === Option Groups Summary ===
+# List all option groups for Step 2 decision-making
+option_groups:
+  ldo_3v3:
+    description: "3.3V voltage regulator"
+    candidates: [ldo_ams1117, ldo_me6211]
+    decision_factors:
+      - "Current requirements (check power budget)"
+      - "Battery life (quiescent current)"
+      - "Cost and availability"
+
+  encoder:
+    description: "Rotary encoder type"
+    candidates: [encoder_smd, encoder_th]
+    decision_factors:
+      - "Assembly method (full SMD vs manual)"
+      - "Cost"
+      - "Mechanical feel preference"
+
+# === Design Options ===
+# Design choices identified that need user decision
+# Format: question, context, choices with pros/cons, recommendation
+design_options:
+  <option_id>:
+    question: "<What is being decided?>"
+    context: "<Why this matters for the design>"
+    choices:
+      - value: "<choice_value>"
+        description: "<What this choice means>"
+        pros: ["<advantage1>", "<advantage2>"]
+        cons: ["<disadvantage1>", "<disadvantage2>"]
+        adds_parts: [<part_id1>, <part_id2>]  # References conditional_parts
+    recommendation: "<recommended_value>"
+    reason: "<Why this is recommended>"
+
+# === Conditional Parts ===
+# Parts only included based on design_options decisions
+# These get enriched in Step 2 along with regular parts
+conditional_parts:
+  - id: <part_id>
+    name: "<Part name>"
+    function: "<What it does>"
+    part_number: "<Suggested part>"
+    lcsc: null  # Will be found in Step 2
+    package: "<Package>"
+    category: protection|connector|passive
+    quantity: 1
+    condition: "<option_id> == <value>"
 ```
-
-#### File 2: `design/work/step1_parts.csv`
-
-```csv
-id,name,part_number,lcsc,type,price_qty10,package,category,quantity,selected,notes
-mcu,Main Microcontroller,ESP32-S3-MINI-1-N8,C2913206,Extended,3.50,Module,microcontroller,1,X,WiFi/BLE dual-core
-radio_ic,Radio Receiver IC,SI4735-D60-GU,C195417,Extended,2.80,SSOP-24,radio,1,X,AM/FM/SW receiver
-ldo,3.3V LDO Regulator,ME6211C33M5G,C82942,Basic,0.05,SOT-23-5,power,1,X,Low quiescent current
-ldo_alt,3.3V LDO Regulator,AMS1117-3.3,C6186,Basic,0.08,SOT-223,power,1,,Higher current capacity
-encoder,Rotary Encoder,EC11J1524413,C370986,Extended,0.45,SMD,ui,2,X,SMD version
-encoder_alt,Rotary Encoder,EC11E18244A5,C470747,Extended,0.35,TH,ui,2,,Through-hole version
-# ... all parts with alternatives
-```
-
-**CSV Column Definitions:**
-| Column | Description |
-|--------|-------------|
-| id | Unique identifier for the part |
-| name | Human-readable description |
-| part_number | Manufacturer part number |
-| lcsc | JLCPCB/LCSC part code |
-| type | Basic or Extended |
-| price_qty10 | Unit price at qty 10 (USD) |
-| package | Footprint/package type |
-| category | microcontroller/power/radio/ui/connector/passive |
-| quantity | Number needed |
-| selected | X if this option was chosen, empty otherwise |
-| notes | Brief note about the part |
 
 ---
 
-## What to Present as Choices
+## Categories Reference
 
-### Always ask about:
-- MCU variant (if options exist)
-- Voltage regulator type (linear vs switching, specific part)
-- Passive component size (0402 vs 0603 vs 0805)
-- Protection level (minimal vs full ESD/overcurrent)
-- Any part where FSD says "or equivalent"
-- Encoder type (TH vs SMD)
-- Connector variants
-
-### Don't ask about (just use standard):
-- Decoupling capacitor values (use 100nF)
-- I2C pull-up values (use 4.7k)
-- Standard resistor tolerances (use 1%)
-
-### Prefer Basic Parts When Possible
-- **Basic parts**: Lower assembly fee ($0.0017/joint vs $0.0173/joint for extended)
-- **Extended parts**: May have minimum order quantities or setup fees
-- When a Basic part meets requirements, recommend it over Extended
+| Category | Description | Examples |
+|----------|-------------|----------|
+| microcontroller | Main MCU | ESP32-S3 |
+| radio | RF/radio ICs | SI4735 |
+| power | Voltage regulators, chargers | LDO, TP4056 |
+| audio | Amplifiers, DACs | TDA1308 |
+| ui | User interface | Encoders, buttons, LEDs |
+| connector | Physical connectors | USB-C, JST, audio jack |
+| passive | R, C, L, crystals | Resistors, capacitors |
+| protection | ESD, fuses | TVS diodes |
 
 ---
 
-## JLCPCB Part Type Reference
+## Checklist: When to Add Alternatives
 
-| Type | Assembly Fee | Notes |
-|------|--------------|-------|
-| Basic | $0.0017/joint | No setup fee, preferred |
-| Extended | $0.0173/joint | $3 setup fee per unique part |
+- [ ] FSD explicitly mentions alternatives ("or equivalent")
+- [ ] Different packages available (SMD vs TH)
+- [ ] Different power topologies possible (linear vs switching)
+- [ ] Common drop-in replacements exist
+- [ ] FSD gives minimum spec (implies larger/better is OK)
 
-**Cost example for 10 boards:**
-- Basic part (8 pins): 10 boards × 8 joints × $0.0017 = $0.14
-- Extended part (8 pins): 10 boards × 8 joints × $0.0173 + $3 = $4.38
+## Checklist: When NOT to Add Alternatives
 
----
-
-## After Decisions
-
-Once user has answered all questions:
-1. Save `decisions.yaml`
-2. Save `step1_parts.csv`
-3. Display summary table of selected parts with total estimated cost
-4. **STOP AND WAIT** - Do not proceed to Step 2
-5. User will explicitly request Step 2 when ready
-
-```
-## Summary
-
-| Category | Part | LCSC | Type | Price | Qty | Subtotal |
-|----------|------|------|------|-------|-----|----------|
-| MCU | ESP32-S3-MINI-1-N8 | C2913206 | Ext | $3.50 | 1 | $3.50 |
-| Power | ME6211C33M5G | C82942 | Basic | $0.05 | 1 | $0.05 |
-| ... | ... | ... | ... | ... | ... | ... |
-| **Total** | | | | | | **$XX.XX** |
-
-Basic parts: X
-Extended parts: Y
-Estimated assembly fee (10 boards): $Z.ZZ
-
-Files saved:
-- design/work/decisions.yaml
-- design/work/step1_parts.csv
-
-**Step 1 complete. Run Step 2 when ready to generate full parts list.**
-```
+- [ ] FSD specifies exact part number for unique functionality
+- [ ] Part has no common substitutes (specialized ICs)
+- [ ] Standard passive values (use what FSD says)
+- [ ] Adding alternatives would require circuit changes
 
 ---
 
 ## Exit Validation Checklist
 
-**Before proceeding to Step 2, verify ALL of the following:**
+**Before proceeding to Step 2, ALL checks must pass:**
 
-### File Checks
-- [ ] `design/work/decisions.yaml` exists and is valid YAML
-- [ ] `design/work/step1_parts.csv` exists and is valid CSV
+### 1. File Exists and Valid
+```bash
+ls -la design/work/step1_primary_parts.yaml
+python -c "import yaml; yaml.safe_load(open('design/work/step1_primary_parts.yaml'))"
+```
+- [ ] `step1_primary_parts.yaml` exists and is valid YAML
 
-### decisions.yaml Validation
-- [ ] Every component choice has: part name, lcsc code, type (Basic/Extended), price
-- [ ] All LCSC codes start with "C" followed by digits (e.g., C82942)
-- [ ] No TBD or placeholder values remain
-- [ ] Design choices section is complete (passive_size, power_topology, etc.)
+### 2. All FSD Parts Captured
+- [ ] Every component from FSD BOM is represented
+- [ ] Every IC from block diagram is included
+- [ ] All connectors are listed
+- [ ] All passives are counted correctly
 
-### step1_parts.csv Validation
-- [ ] Every row has all required columns filled
-- [ ] Exactly ONE part per category has "X" in the `selected` column
-- [ ] All LCSC codes are valid format
-- [ ] Prices are numeric (no currency symbols in data)
+### 3. Required Fields Present
+Every part must have:
+- [ ] `id` - unique identifier
+- [ ] `name` - human-readable name
+- [ ] `function` - what it does in the circuit
+- [ ] `part_number` - from FSD or suggested
+- [ ] `package` - footprint type
+- [ ] `category` - component category
+- [ ] `quantity` - number needed
+- [ ] `option_group` - null or group name
 
-### Cross-Reference Check
-- [ ] Every selected part in CSV matches a choice in decisions.yaml
-- [ ] LCSC codes match between CSV and YAML
+### 4. Option Groups Valid
+- [ ] Each option_group has 2+ candidates
+- [ ] All candidates in a group serve the same function
+- [ ] decision_factors explain trade-offs
+- [ ] No part belongs to multiple option_groups
+
+### 5. Design Options Complete
+- [ ] Common protection options considered (USB ESD, battery reverse polarity)
+- [ ] Each design_option has question, context, choices, recommendation
+- [ ] Each choice has value, description, pros, cons, adds_parts
+- [ ] Conditional parts listed for each "adds_parts" reference
+- [ ] Conditional parts have valid `condition` field
+
+### 6. No Pricing Data (That's Step 2)
+```bash
+grep -E "price|cost|\\\$" design/work/step1_primary_parts.yaml
+```
+- [ ] No pricing information in file (grep should return nothing except comments)
+
+---
 
 ## If Validation Fails
 
 **DO NOT proceed to Step 2!**
 
 1. Identify which check(s) failed
-2. Fix the issue in the appropriate file
-3. Re-run the validation checklist
+2. Fix the issue in step1_primary_parts.yaml
+3. Re-run ALL validation checks
 4. Only proceed when ALL checks pass
 
 ```
-⚠️  VALIDATION LOOP: Step 1 → Validate → Fix if needed → Validate again → Step 2
+VALIDATION LOOP: Step 1 → Validate → Fix if needed → Validate again → Step 2
 ```
+
+---
+
+## What Happens Next
+
+Step 2 will:
+1. Run automated script to fetch JLCPCB data (pricing, stock, variants) for ALL parts
+2. Select best variant for each part (in stock, Basic preferred)
+3. Output enriched parts list with JLCPCB details
+
+Step 3 will:
+1. Present design options to user
+2. Collect decisions on optional parts
+3. Output final design options for Step 4

@@ -2,6 +2,8 @@
 
 This guide documents the complete pipeline for generating KiCAD schematics from a Functional Specification Document (FSD).
 
+All steps and all python scripts are generic and can be used for all kind of projects
+
 ## Prerequisites
 
 ### Software Requirements
@@ -57,16 +59,19 @@ KiCAD-Generator-tools/              # Shared tools and libraries
 │   ├── kicad9_schematic.py         # Main generator
 │   └── validate_step*.py           # Validators
 │
-RadioReceiverV2/                    # Project directory
+<ProjectName>/                       # Project directory
 ├── design/
 │   ├── input/
 │   │   └── FSD_*.md                # Functional Specification Document
 │   ├── work/
-│   │   ├── decisions.yaml          # User selections from Step 1
-│   │   ├── step1_parts.csv         # Parts with JLCPCB pricing
-│   │   ├── step2_parts_complete.yaml
-│   │   ├── step3_connections.yaml
-│   │   └── pin_model.json          # Generated pin model
+│   │   ├── step1_primary_parts.yaml    # All parts + design options
+│   │   ├── step2_parts_extended.yaml   # Enriched with JLCPCB data
+│   │   ├── step3_design_options.yaml   # Options presented
+│   │   ├── decisions.yaml              # User decisions (created in Step 3)
+│   │   ├── step4_final_parts.yaml      # Final parts after decisions
+│   │   ├── step5_connections.yaml      # All connections
+│   │   ├── step6_validation.yaml       # Validation report
+│   │   └── pin_model.json              # Generated pin model
 │   └── output/
 │       ├── Debug.kicad_pro         # KiCad project
 │       ├── Debug.kicad_sch         # Generated schematic
@@ -93,17 +98,25 @@ This ensures symbols are downloaded once and reused across all projects.
 
 ```
 FSD.md
-   ↓ [Step 1] LLM extracts parts, presents options with JLCPCB pricing
-decisions.yaml + step1_parts.csv
-   ↓ [Step 2] LLM generates complete parts list (MUST match decisions.yaml!)
-step2_parts_complete.yaml → ensure_symbols.py downloads missing symbols
-   ↓ [Step 3] LLM generates connections
-step3_connections.yaml
+   ↓ [Step 1] Extract ALL parts from FSD (including optional/conditional)
+step1_primary_parts.yaml (design_options + conditional_parts identified)
+   ↓ [Step 2] Enrich with JLCPCB data (pricing, stock, variants)
+step2_parts_extended.yaml
+   ↓ [Step 3] Present options with pricing, collect user decisions ⚠️ STOP
+decisions.yaml + step3_design_options.yaml
+   ↓ [Step 4] Apply decisions to create final parts list
+step4_final_parts.yaml → ensure_symbols.py downloads missing symbols
+   ↓ [Step 5] Generate all connections
+step5_connections.yaml
+   ↓ [Step 6] Validate design
+step6_validation.yaml
    ↓ [Python] Generate pin model + schematic
 pin_model.json → Debug.kicad_sch
    ↓ [KiCad] Run ERC
 ERC Report (0 errors expected)
 ```
+
+**Key principle:** Steps 1-3 are design/decision steps. Steps 4-6 are execution steps (no new recommendations).
 
 ## Validation Loop
 
@@ -145,76 +158,102 @@ Step 1 ──► Step 2 ──► Step 3 ──► Step 4 ──► Step 5 ─�
 
 ---
 
-## Phase 1: LLM Design Steps (1-6)
+## Phase 1: Design Steps (1-3)
 
-### Step 1: Extract Primary Parts
+These steps involve design decisions and user input.
+
+### Step 0: Review and Challenge FSD
+
+**Input:** `design/input/FSD_*.md`
+**Output:** Enhanced version of `design/input/FSD_*.md`
+
+### Step 1: Extract Primary Parts from FSD
+
+**Purpose:** Extract ALL parts from FSD, including optional parts and design options. No new parts will be added after this step.
+
+**Key outputs:**
+- `parts` - All components mentioned in FSD
+- `option_groups` - Alternative parts (e.g., different LDO options)
+- `design_options` - Optional features (e.g., USB ESD protection yes/no)
+- `conditional_parts` - Parts added only if design_option is selected
 
 **Input:** `design/input/FSD_*.md`
 **Output:** `design/work/step1_primary_parts.yaml`
-**Prompt:** `design/prompts/step1.md`
+**Prompt:** `prompts/step1.md`
 
 ```bash
-# Validate output
-python design/scripts/validate_step1.py
+python scripts/validate_step1.py
 ```
 
-### Step 2: Extend with Supporting Parts
+### Step 2: Enrich with JLCPCB Data
+
+**Purpose:** Fetch pricing, stock, and variant data from JLCPCB. Select best variant for each part (in stock, Basic preferred over Extended).
 
 **Input:** `design/work/step1_primary_parts.yaml`
 **Output:** `design/work/step2_parts_extended.yaml`
-**Prompt:** `design/prompts/step2.md`
+**Prompt:** `prompts/step2.md`
 
 ```bash
-python design/scripts/validate_step2.py
+python scripts/enrich_parts.py --input work/step1_primary_parts.yaml --output work/step2_parts_extended.yaml
+python scripts/validate_step2.py
 ```
 
-### Step 3: Design Options
+### Step 3: Design Options and Decisions
+
+**Purpose:** Present option_groups and design_options with real pricing. Collect user decisions.
 
 **Input:** `design/work/step2_parts_extended.yaml`
-**Output:** `design/work/step3_design_options.yaml`
-**Prompt:** `design/prompts/step3.md`
+**Output:** `design/work/step3_design_options.yaml` + `design/work/decisions.yaml`
+**Prompt:** `prompts/step3.md`
 
-**⚠️ STOP HERE** - Create `design/work/decisions.yaml`:
-```yaml
-decisions:
-  esp32_variant: "ESP32-S3-MINI-1-N8"
-  power_topology: "linear_3v3"
-  # ... add decisions based on step3 questions
-```
+**⚠️ STOP HERE** - Wait for user to review and confirm decisions in `decisions.yaml`
+
+---
+
+## Phase 2: Execution Steps (4-6)
+
+These steps strictly apply decisions. No new recommendations.
 
 ### Step 4: Apply Decisions
 
-**Input:** `step3_design_options.yaml`, `decisions.yaml`
+**Purpose:** Apply decisions.yaml to create final parts list. Remove unselected alternatives, add conditional parts.
+
+**Input:** `step2_parts_extended.yaml` + `step3_design_options.yaml` + `decisions.yaml`
 **Output:** `design/work/step4_final_parts.yaml`
-**Prompt:** `design/prompts/step4.md`
+**Prompt:** `prompts/step4.md`
 
 ```bash
-python design/scripts/validate_step4.py
+python scripts/validate_step4.py
+python scripts/ensure_symbols.py --parts work/step4_final_parts.yaml
 ```
 
 ### Step 5: Generate Connections
 
+**Purpose:** Create all electrical connections based on final parts list and FSD requirements.
+
 **Input:** `design/work/step4_final_parts.yaml`
 **Output:** `design/work/step5_connections.yaml`
-**Prompt:** `design/prompts/step5.md`
+**Prompt:** `prompts/step5.md`
 
 ```bash
-python design/scripts/validate_step5.py
+python scripts/validate_step5.py
 ```
 
 ### Step 6: Validation
 
-**Input:** All previous outputs
+**Purpose:** Verify design completeness and correctness. Report errors only (no recommendations).
+
+**Input:** `step4_final_parts.yaml` + `step5_connections.yaml`
 **Output:** `design/work/step6_validation.yaml`
-**Prompt:** `design/prompts/step6.md`
+**Prompt:** `prompts/step6.md`
 
 ```bash
-python design/scripts/summarize_progress.py
+python scripts/validate_step6.py
 ```
 
 ---
 
-## Phase 2: Pin Model Generation
+## Phase 3: Pin Model Generation
 
 Generate `pin_model.json` from step4 (parts) and step5 (connections):
 
@@ -232,7 +271,7 @@ python scripts/validate_pin_model.py
 
 ---
 
-## Phase 3: KiCad Schematic Generation
+## Phase 4: KiCad Schematic Generation
 
 ### Generate Schematic
 
@@ -282,7 +321,7 @@ This ensures KiCad loads the library tables correctly.
 
 ---
 
-## Phase 4: Post-Generation Steps
+## Phase 5: Post-Generation Steps
 
 ### In KiCad GUI
 

@@ -1,6 +1,8 @@
-# Step 3: Design Options and Questions
+# Step 3: Design Options
 
-Analyze `design/work/step2_parts_extended.yaml` and identify all design choices that require user decisions.
+Present options with REAL pricing data and collect user decisions.
+
+**Purpose:** Decide which optional parts to keep and which variant to select for each option_group.
 
 ---
 
@@ -9,140 +11,171 @@ Analyze `design/work/step2_parts_extended.yaml` and identify all design choices 
 **Verify these files exist and are valid:**
 
 ```
-□ design/work/step2_parts_complete.yaml exists (or step2_parts_extended.yaml)
-□ design/work/decisions.yaml exists
-□ All symbols exist in JLCPCB library (run ensure_symbols.py --dry-run)
+[ ] design/work/step2_parts_extended.yaml exists
+[ ] All parts have jlcpcb_price and jlcpcb_stock data
 ```
 
 **Quick validation:**
 ```bash
-ls -la design/work/step2_parts_complete.yaml
-python scripts/ensure_symbols.py --parts work/step2_parts_complete.yaml --dry-run
+ls -la design/work/step2_parts_extended.yaml
+python -c "import yaml; yaml.safe_load(open('design/work/step2_parts_extended.yaml'))"
 ```
 
-**If prerequisites fail → Go back to Step 2 and complete it first!**
+**If prerequisites fail -> Go back to Step 2 and complete it first!**
 
 ---
 
-## Output Format
+## Process Overview
 
-Write to `design/work/step3_design_options.yaml`:
+```
+step2_parts_extended.yaml (with pricing)
+        |
+        v
+[Present option_groups with pricing]
+        |
+        v
+[Present design_options]
+        |
+        v
+User Decisions
+        |
+        v
+step3_design_options.yaml + decisions.yaml
+```
+
+---
+
+## Step 3.1: Present Option Groups
+
+For each `option_group` in step2_parts_extended.yaml, present choices with REAL pricing:
+
+```
+## Option Group: <option_group_id>
+
+**Description:** <description from step1>
+
+| Option | Part Number | LCSC | Type | Price | Stock | Pros | Cons |
+|--------|-------------|------|------|-------|-------|------|------|
+| A | <part_number> | <lcsc> | <Basic/Ext> | $<price> | <stock> | <pros> | <cons> |
+| B | <part_number> | <lcsc> | <Basic/Ext> | $<price> | <stock> | <pros> | <cons> |
+
+**Recommendation:** Option <X> - <reason>
+
+**Your choice?** [A/B/...]
+```
+
+**Selection criteria:**
+1. In stock (jlcpcb_available: true)
+2. Basic part preferred over Extended ($3 less assembly fee)
+3. Adequate specs for the application
+4. Cost-effective
+
+---
+
+## Step 3.2: Present Design Options
+
+For each `design_option` in step1_primary_parts.yaml, present choices:
+
+```
+## Design Option: <option_id>
+
+**Question:** <question>
+**Context:** <context>
+
+| Choice | Description | Adds Parts | Est. Cost |
+|--------|-------------|------------|-----------|
+| <value1> | <description> | <parts if any> | <cost> |
+| <value2> | <description> | <parts if any> | <cost> |
+
+**Recommendation:** <value> - <reason>
+
+**Your choice?** [<value1>/<value2>/...]
+```
+
+---
+
+## Step 3.3: Collect Decisions
+
+After user responds, create TWO output files:
+
+### File 1: `design/work/decisions.yaml`
+
+```yaml
+# decisions.yaml
+# User decisions from Step 3
+# Date: [YYYY-MM-DD]
+
+component_selections:
+  # For each option_group, record which candidate was selected
+  <option_group_id>: <selected_part_id>
+
+design_options:
+  # For each design_option, record the user's choice
+  <design_option_id>: "<selected_value>"
+
+notes:
+  - "<Reason for selection 1>"
+  - "<Reason for selection 2>"
+```
+
+### File 2: `design/work/step3_design_options.yaml`
 
 ```yaml
 # step3_design_options.yaml
-# Generated from: step2_parts_extended.yaml
+# Design options presented and decisions made
 # Date: [YYYY-MM-DD]
 
-options:
-  - id: power_topology
-    question: "What power topology should be used?"
-    context: "Battery-powered device needs efficient regulation"
-    affects:
-      - ldo
-      - battery_charger
-    choices:
-      - value: "linear_ldo"
-        description: "Linear LDO (AMS1117-3.3)"
-        pros:
-          - "Simple design"
-          - "Low noise"
-          - "Low cost"
-        cons:
-          - "Low efficiency (60-70%)"
-          - "Heat dissipation at high current"
-        recommendation: false
+option_groups_presented:
+  <option_group_id>:
+    candidates_shown: [<id1>, <id2>]
+    selected: <selected_id>
+    reason: "<why selected>"
 
-      - value: "buck_converter"
-        description: "Switching buck converter"
-        pros:
-          - "High efficiency (85-95%)"
-          - "Better battery life"
-        cons:
-          - "More complex design"
-          - "Potential EMI issues"
-          - "Higher cost"
-        recommendation: true
-        reason: "Better for battery-powered portable device"
+design_options_presented:
+  <design_option_id>:
+    choices_shown: [<value1>, <value2>]
+    selected: "<selected_value>"
+    reason: "<why selected>"
+    parts_added: [<part_ids if any>]
 
-  - id: usb_esd_protection
-    question: "Add dedicated USB ESD protection?"
-    context: "USB-C port exposed to external connections"
-    affects:
-      - usb_connector
-    choices:
-      - value: "yes"
-        description: "Add TPD2E001 or similar ESD diodes"
-        pros:
-          - "Better protection"
-          - "IEC 61000-4-2 compliance"
-        cons:
-          - "Additional cost"
-          - "Two more components"
-        recommendation: true
-        reason: "Best practice for consumer devices"
-
-      - value: "no"
-        description: "Rely on MCU internal protection"
-        pros:
-          - "Simpler design"
-          - "Lower cost"
-        cons:
-          - "Risk of ESD damage"
-        recommendation: false
-
-questions:
-  - id: q_antenna_type
-    question: "What type of FM antenna will be used?"
-    context: "SI4735 needs antenna matching network"
-    options:
-      - "Wire whip antenna (simple)"
-      - "PCB trace antenna (compact)"
-      - "External connector (flexible)"
-    default: "Wire whip antenna"
-    impact: "Affects RF matching network design"
-
-  - id: q_oled_interface
-    question: "What OLED display will be used?"
-    context: "Need to confirm I2C address and pin count"
-    options:
-      - "SSD1306 128x64 I2C"
-      - "SSD1306 128x32 I2C"
-      - "SH1106 128x64 I2C"
-    default: "SSD1306 128x64 I2C"
-    impact: "Affects header pinout and pull-up resistor values"
-
-missing_info:
-  - item: "Battery capacity"
-    needed_for: "Charge current resistor calculation"
-    default_assumption: "1000mAh, so PROG resistor = 1.2k for 1A charge"
-
-  - item: "Operating temperature range"
-    needed_for: "Component selection (standard vs extended temp)"
-    default_assumption: "0-50°C consumer grade"
+summary:
+  total_options: <count>
+  decisions_made: <count>
+  parts_from_options: <count>
 ```
 
-## Rules
+---
 
-1. **Identify ALL design choices** - anything with multiple valid approaches
-2. **Provide pros/cons** for each option
-3. **Give recommendations** with reasoning
-4. **Note defaults** for questions without critical impact
-5. **List missing info** that would improve the design
+## Step 3.4: Display Summary
 
-## Categories of Options
+Show cost summary with selected parts:
 
-- **Architecture choices** - power topology, communication protocols
-- **Component selection** - specific part vs alternatives
-- **Protection features** - ESD, reverse polarity, overcurrent
-- **Optional features** - test points, debug headers, status LEDs
+```
+## Design Decisions Summary
 
-## STOP HERE
+### Option Group Selections
+| Option Group | Selected | LCSC | Type | Price |
+|--------------|----------|------|------|-------|
+| <group_id> | <part_id> | <lcsc> | <type> | $<price> |
 
-After writing `step3_design_options.yaml`:
+### Design Option Selections
+| Design Option | Selected | Parts Added |
+|---------------|----------|-------------|
+| <option_id> | <value> | <parts or "none"> |
 
-**STOP and wait for the user to create `design/work/decisions.yaml`**
+### Cost Impact
+- Basic parts: <count>
+- Extended parts: <count>
+- Extended setup fee: $<count * 3>
+```
 
-Do not proceed to Step 4 until decisions are provided.
+---
+
+## ⚠️ STOP HERE
+
+**Create `design/work/decisions.yaml` with ALL user decisions before proceeding!**
+
+Do NOT proceed to Step 4 until decisions.yaml is complete and validated.
 
 ---
 
@@ -150,25 +183,37 @@ Do not proceed to Step 4 until decisions are provided.
 
 **Before proceeding to Step 4, ALL checks must pass:**
 
-### 1. File Exists
+### 1. Files Exist and Valid
 ```bash
-ls -la design/work/step3_design_options.yaml
+ls -la design/work/decisions.yaml design/work/step3_design_options.yaml
+python -c "import yaml; yaml.safe_load(open('design/work/decisions.yaml'))"
 python -c "import yaml; yaml.safe_load(open('design/work/step3_design_options.yaml'))"
 ```
-- [ ] `step3_design_options.yaml` exists and is valid YAML
+- [ ] Both files exist and are valid YAML
 
-### 2. All Options Have Required Fields
-- [ ] Every option has `id`, `question`, `context`, `affects`, `choices`
-- [ ] Every choice has `value`, `description`, `pros`, `cons`
-- [ ] At least one choice per option has `recommendation: true`
+### 2. All Option Groups Decided
+```bash
+# List option_groups from step1
+grep "option_group:" design/work/step1_primary_parts.yaml | grep -v "null" | sort -u
 
-### 3. Questions Are Complete
-- [ ] All questions have `id`, `question`, `options`, `default`
-- [ ] Missing info section documents any assumptions
+# Check decisions.yaml has selection for each
+cat design/work/decisions.yaml
+```
+- [ ] Every option_group has a selection in decisions.yaml
 
-### 4. User Decisions Received
-- [ ] User has provided decisions for all options
-- [ ] decisions.yaml is updated with new choices (if any)
+### 3. All Design Options Decided
+```bash
+# List design_options from step1
+grep -A1 "design_options:" design/work/step1_primary_parts.yaml
+
+# Check decisions.yaml has selection for each
+cat design/work/decisions.yaml
+```
+- [ ] Every design_option has a selection in decisions.yaml
+
+### 4. Selected Parts Are Available
+- [ ] All selected parts have jlcpcb_available: true
+- [ ] Or documented plan for sourcing unavailable parts
 
 ---
 
@@ -177,10 +222,21 @@ python -c "import yaml; yaml.safe_load(open('design/work/step3_design_options.ya
 **DO NOT proceed to Step 4!**
 
 1. Identify which check(s) failed
-2. Fix the issue in step3_design_options.yaml
-3. Re-run validation
-4. Only proceed when ALL checks pass
+2. Get missing decisions from user
+3. Update decisions.yaml
+4. Re-run ALL validation checks
+5. Only proceed when ALL checks pass
 
 ```
-⚠️  VALIDATION LOOP: Step 3 → Validate → Fix if needed → Validate again → Step 4
+VALIDATION LOOP: Step 3 -> Validate -> Get decisions -> Validate again -> Step 4
 ```
+
+---
+
+## What Happens Next
+
+Step 4 will:
+1. Read decisions.yaml
+2. Apply selections to create final parts list
+3. Add conditional parts based on design_options
+4. Output step4_final_parts.yaml with ONLY selected parts

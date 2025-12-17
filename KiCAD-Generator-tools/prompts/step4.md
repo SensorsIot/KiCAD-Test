@@ -40,40 +40,44 @@ Write to `design/work/step4_final_parts.yaml`:
 # Date: [YYYY-MM-DD]
 
 parts:
-  # === Microcontroller ===
-  - id: mcu
-    name: "Main Microcontroller"
-    part: "ESP32-S3-MINI-1-N8"
-    package: "SMD-Module"
-    prefix: U
-    category: microcontroller
-    quantity: 1
-    belongs_to: null
-    lcsc_hint: "ESP32-S3-MINI"
+  # === Parts without options (direct from step2) ===
+  - id: <part_id>
+    name: "<Part name>"
+    part_number: "<Part number>"
+    lcsc: "<LCSC code from step2>"
+    package: "<Package>"
+    prefix: <U/R/C/D/J/SW/ENC/Y>
+    category: <category>
+    quantity: <number>
+    jlcpcb_type: "<Basic|Extended>"
+    jlcpcb_price: <price>
 
-  - id: c_mcu_bypass_1
-    name: "MCU 3V3 Bypass"
-    part: "100nF"
-    package: "0603"
-    prefix: C
-    category: passive
-    quantity: 3
-    belongs_to: mcu
-    lcsc_hint: "100nF 0603 X7R"
+  # === Parts selected from option_groups ===
+  - id: <selected_part_id>
+    name: "<Part name>"
+    part_number: "<Part number>"
+    lcsc: "<LCSC code>"
+    package: "<Package>"
+    prefix: <prefix>
+    category: <category>
+    quantity: <number>
+    jlcpcb_type: "<Basic|Extended>"
+    jlcpcb_price: <price>
+    selected_from: <option_group_id>
+    decision_applied: "<option_group_id>=<selected_id>"
 
-  # === Power ===
-  - id: ldo
-    name: "3.3V LDO Regulator"
-    part: "AMS1117-3.3"
-    package: "SOT-223"
-    prefix: U
-    category: power
-    quantity: 1
-    belongs_to: null
-    decision_applied: "power_topology=linear_ldo"
-    lcsc_hint: "AMS1117-3.3"
-
-  # ... all parts with final values
+  # === Conditional parts (added based on design_options) ===
+  - id: <conditional_part_id>
+    name: "<Part name>"
+    part_number: "<Part number>"
+    lcsc: "<LCSC code>"
+    package: "<Package>"
+    prefix: <prefix>
+    category: <category>
+    quantity: <number>
+    jlcpcb_type: "<Basic|Extended>"
+    jlcpcb_price: <price>
+    added_by: "<design_option_id>=<value>"
 ```
 
 ## Rules
@@ -91,14 +95,16 @@ parts:
 |-------|----------|-------------|
 | id | Yes | Unique identifier |
 | name | Yes | Human-readable name |
-| part | Yes | Part number or value |
+| part_number | Yes | Part number or value |
+| lcsc | Yes | LCSC code (from step2 enrichment) |
 | package | Yes | Footprint package |
 | prefix | Yes | Schematic prefix (R/C/U/etc) |
 | category | Yes | Component category |
 | quantity | Yes | Number needed |
-| belongs_to | Yes | Parent id or null |
-| lcsc_hint | Yes | JLCPCB search term |
-| decision_applied | If applicable | Which decision affected this part |
+| jlcpcb_type | Yes | Basic or Extended |
+| jlcpcb_price | Yes | Unit price |
+| selected_from | If from option_group | Which option_group this came from |
+| added_by | If conditional | Which design_option added this part |
 
 ## Prefix Reference
 
