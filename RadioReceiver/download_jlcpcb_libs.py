@@ -128,11 +128,11 @@ def load_overrides():
 
 
 def save_missing_parts(missing):
-    """Save missing parts report to YAML for LLM/human to fill."""
+    """Save missing parts report to YAML for manual entry."""
     with open(MISSING_REPORT, "w", encoding="utf-8") as f:
         yaml.safe_dump(missing, f, sort_keys=False)
     print(f"\nMissing parts report written to {MISSING_REPORT}")
-    print("Ask the LLM to populate symbol_lib_id/footprint_lib_id in custom_library_overrides.yaml and rerun.")
+    print("Populate symbol_lib_id/footprint_lib_id in custom_library_overrides.yaml and rerun.")
 
 
 def download_parts(lcsc_list, index):
@@ -188,7 +188,7 @@ def download_parts(lcsc_list, index):
         return False
     except FileNotFoundError:
         print(f"\nError: JLC2KiCadLib not found at {JLC2KICAD_EXE}")
-        print("Ask the LLM to set JLC2KICAD_EXE to your installed path or install JLC2KiCadLib via pip.")
+        print("Set JLC2KICAD_EXE to your installed path or install JLC2KiCadLib via pip.")
         return False
 
     return True
@@ -352,7 +352,7 @@ def main():
 
     if not lcsc_parts:
         print("Error: No LCSC parts found in JSON")
-        print("Ask the LLM to ensure parts_options.csv has selections and rerun assign_designators.py.")
+        print("Ensure parts_options.csv has selections and rerun assign_designators.py.")
         return 1
 
     print(f"Found {len(lcsc_parts)} unique LCSC parts in project:")

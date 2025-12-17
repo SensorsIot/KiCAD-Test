@@ -213,12 +213,12 @@ def build_pin_assignments(
                     # Symbol present but pins empty
                     print(
                         f"WARNING: Symbol '{symbol_name}' has no pins for {des} (LCSC={lcsc}). "
-                        "Ask the LLM to add pins to manual_symbol_pins.yaml."
+                        "Add pins to manual_symbol_pins.yaml."
                     )
                 else:
                     print(
                         f"WARNING: No pin data for {des} (LCSC={lcsc}, symbol={symbol_name}). "
-                        "Ask the LLM to add this symbol's pin map to manual_symbol_pins.yaml."
+                        "Add this symbol's pin map to manual_symbol_pins.yaml."
                     )
                 pins = [{"number": "1", "name": "1"}, {"number": "2", "name": "2"}]  # Fallback
 
@@ -281,7 +281,7 @@ def build_pin_assignments(
 
 def main():
     script_dir = Path(__file__).parent
-    connections_yaml = script_dir / "connections.yaml"
+    connections_yaml = script_dir / "LLM-connections.yaml"
     designators_json = script_dir / "parts_with_designators.json"
     symbol_pins_json = script_dir / "symbol_pins.json"
     output_json = script_dir / "parts_with_netlabels.json"
@@ -297,13 +297,13 @@ def main():
         if not path.exists():
             raise FileNotFoundError(
                 f"Missing input {path}. "
-                "Ask the LLM to ensure parts.yaml/connections.yaml are generated and assign_designators.py has been run."
+                "Ensure parts.yaml/connections.yaml are generated and assign_designators.py has been run."
             )
 
     if not symbol_pins_json.exists():
         raise FileNotFoundError(
             f"Missing symbol pins file: {symbol_pins_json}. "
-            "Ask the LLM to run parse_library_pins.py after downloading libraries."
+            "Run parse_library_pins.py after downloading libraries."
         )
 
     # Load data
@@ -346,7 +346,7 @@ def main():
             else:
                 raise ValueError(
                     f"Component '{name}' has no valid LCSC code ({lcsc}). "
-                    "Ask the LLM to ensure parts_options.csv has a selection or add override to custom_library_overrides.yaml."
+                    "Ensure parts_options.csv has a selection or add override to custom_library_overrides.yaml."
                 )
         else:
             # Will be mapped from symbol_pins.json LCSC codes below

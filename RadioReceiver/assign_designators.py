@@ -32,7 +32,7 @@ def load_parts_yaml(path: Path) -> dict:
         if not isinstance(quantity, int) or quantity < 1:
             raise ValueError(
                 f"Invalid quantity for '{name}': {quantity!r} (must be positive integer). "
-                "Ask the LLM to regenerate parts.yaml with integer quantities."
+                "Regenerate parts.yaml with integer quantities."
             )
         parts[name] = {
             "prefix": comp.get("prefix", "X"),
@@ -145,7 +145,7 @@ def assign_designators(parts: dict, selections: dict) -> dict:
         if len(designators) != quantity:
             raise ValueError(
                 f"Designator count mismatch for '{name}': expected {quantity}, got {len(designators)}. "
-                "Ask the LLM to regenerate parts.yaml with correct quantities."
+                "Regenerate parts.yaml with correct quantities."
             )
 
         result[name] = {
@@ -164,7 +164,7 @@ def assign_designators(parts: dict, selections: dict) -> dict:
 
 def main():
     script_dir = Path(__file__).parent
-    parts_yaml = script_dir / "parts.yaml"
+    parts_yaml = script_dir / "LLM-parts.yaml"
     csv_path = script_dir / "parts_options.csv"
     output_json = script_dir / "parts_with_designators.json"
 

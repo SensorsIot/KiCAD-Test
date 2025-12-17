@@ -1,4 +1,4 @@
 (sym_lib_table
   (version 7)
-  (lib (name "JLCPCB")(type "KiCad")(uri "${KIPRJMOD}/libs/JLCPCB/symbol/JLCPCB.kicad_sym")(options "")(descr "JLCPCB/LCSC parts"))
+  (lib (name "JLCPCB")(type "KiCad")(uri "${KIPRJMOD}/libs/JLCPCB/symbol/JLCPCB.kicad_sym")(options "")(descr "JLCPCB parts"))
 )

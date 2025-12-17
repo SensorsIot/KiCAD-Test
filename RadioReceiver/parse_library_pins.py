@@ -13,14 +13,23 @@ import json
 import os
 from pathlib import Path
 
-# JLCPCB library location - detect platform
+# JLCPCB library location - check project folder first, then system location
 import platform
+SCRIPT_DIR = Path(__file__).parent
+
+# First check project-local library (portable)
+LOCAL_LIBRARY_PATH = SCRIPT_DIR / "libs" / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
+
+# Fallback to system location
 if platform.system() == "Windows":
     KICAD_USER_DIR = Path(os.environ.get("USERPROFILE", "")) / "Documents" / "KiCad"
 else:
     # Linux/macOS
     KICAD_USER_DIR = Path.home() / ".local" / "share" / "kicad" / "9.0"
-LIBRARY_PATH = KICAD_USER_DIR / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
+SYSTEM_LIBRARY_PATH = KICAD_USER_DIR / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
+
+# Use local if exists, otherwise system
+LIBRARY_PATH = LOCAL_LIBRARY_PATH if LOCAL_LIBRARY_PATH.exists() else SYSTEM_LIBRARY_PATH
 
 
 def parse_library():
@@ -28,7 +37,7 @@ def parse_library():
     if not LIBRARY_PATH.exists():
         raise FileNotFoundError(
             f"Library not found at {LIBRARY_PATH}. "
-            "Ask the LLM to run download_jlcpcb_libs.py or set LIBRARY_PATH to the correct JLCPCB.kicad_sym."
+            "Run download_jlcpcb_libs.py or set LIBRARY_PATH to the correct JLCPCB.kicad_sym."
         )
 
     content = LIBRARY_PATH.read_text(encoding='utf-8')
@@ -99,7 +108,7 @@ def main():
 
     if not symbols:
         print("Error: No symbols parsed from library. "
-              "Ask the LLM to verify the library file or rerun download_jlcpcb_libs.py.")
+              "Verify the library file or rerun download_jlcpcb_libs.py.")
         return
 
     print(f"\nFound {len(symbols)} symbols with pins:\n")

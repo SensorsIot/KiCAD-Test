@@ -3,10 +3,14 @@ __pycache__/
 *.pyc
 *.pyo
 
-# KiCAD backups
+# KiCAD backups and temp files
 *-backups/
 *.kicad_prl
 fp-info-cache
+\#auto_saved_files#
+_autosave-*
+~*.lck
+*.kicad_sch-bak
 
 # IDE
 .vscode/
@@ -21,7 +25,22 @@ fp-info-cache
 .tabnine/
 .copilot/
 
-# Intermediate/generated files
+# Generated/intermediate files (pipeline output)
+**/work/*.json
+**/work/*.yaml
+**/work/*.csv
+**/output/*.kicad_sch
+**/output/*.kicad_pro
+**/output/*.kicad_pcb
+**/output/debug.csv
+**/output/erc_report.txt
+**/output/netlist.net
+**/output/libs/
+**/output/sym-lib-table
+**/output/fp-lib-table
+**/output/README.md
+
+# Legacy intermediate files
 symbol_pins.json
 parts_with_netlabels.json
 connections.json
@@ -34,3 +53,7 @@ Thumbs.db
 
 # Enrich parts logs
 enrich_parts_*.log
+
+# Separate repositories
+Circuit-Designs/
+RadioReceiver/llm-research-v2/

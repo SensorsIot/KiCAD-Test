@@ -27,14 +27,22 @@ SCRIPT_DIR = Path(__file__).parent
 PARTS_JSON = SCRIPT_DIR / "parts_with_netlabels.json"
 CUSTOM_OVERRIDES = SCRIPT_DIR / "custom_library_overrides.yaml"
 
-# KiCAD library location - detect platform
+# KiCAD library location - check project folder first, then system location
 import platform
+
+# First check project-local library (portable)
+LOCAL_SYMBOL_LIB = SCRIPT_DIR / "libs" / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
+
+# Fallback to system location
 if platform.system() == "Windows":
     KICAD_USER_DIR = Path(os.environ.get("USERPROFILE", "")) / "Documents" / "KiCad"
 else:
     # Linux/macOS
     KICAD_USER_DIR = Path.home() / ".local" / "share" / "kicad" / "9.0"
-SYMBOL_LIB = KICAD_USER_DIR / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
+SYSTEM_SYMBOL_LIB = KICAD_USER_DIR / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
+
+# Use local if exists, otherwise system
+SYMBOL_LIB = LOCAL_SYMBOL_LIB if LOCAL_SYMBOL_LIB.exists() else SYSTEM_SYMBOL_LIB
 
 # Output files
 PROJECT_NAME = "RadioReceiver"
@@ -66,7 +74,7 @@ def parse_symbol_pins(symbol_lib_path):
     if not symbol_lib_path.exists():
         raise FileNotFoundError(
             f"Symbol library not found at {symbol_lib_path}. "
-            "Ask the LLM to run download_jlcpcb_libs.py to fetch libraries or point SYMBOL_LIB to the correct path."
+            "Run download_jlcpcb_libs.py to fetch libraries or point SYMBOL_LIB to the correct path."
         )
 
     content = symbol_lib_path.read_text(encoding='utf-8')
@@ -215,21 +223,47 @@ def generate_pcb_file():
 
 
 def generate_lib_tables():
-    """Generate project-specific library tables."""
-    jlcpcb_sym = KICAD_USER_DIR / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
-    jlcpcb_fp = KICAD_USER_DIR / "JLCPCB" / "JLCPCB"
+    """Generate project-specific library tables with portable paths."""
+    import shutil
 
-    sym_path = str(jlcpcb_sym).replace("\\", "/")
-    fp_path = str(jlcpcb_fp).replace("\\", "/")
+    # Source library location
+    src_sym = KICAD_USER_DIR / "JLCPCB" / "symbol" / "JLCPCB.kicad_sym"
+    src_fp = KICAD_USER_DIR / "JLCPCB" / "JLCPCB"
 
-    sym_table = f'''(sym_lib_table
+    # Destination in project folder (portable)
+    dest_lib_dir = SCRIPT_DIR / "libs" / "JLCPCB"
+    dest_sym_dir = dest_lib_dir / "symbol"
+    dest_fp_dir = dest_lib_dir / "JLCPCB"
+
+    # Create directories and copy libraries
+    dest_sym_dir.mkdir(parents=True, exist_ok=True)
+    dest_fp_dir.mkdir(parents=True, exist_ok=True)
+
+    if src_sym.exists():
+        shutil.copy2(src_sym, dest_sym_dir / "JLCPCB.kicad_sym")
+        print(f"  Copied symbol library to libs/JLCPCB/symbol/")
+
+    if src_fp.exists():
+        # Copy footprints directory contents
+        for fp_file in src_fp.glob("*"):
+            if fp_file.is_file():
+                shutil.copy2(fp_file, dest_fp_dir / fp_file.name)
+            elif fp_file.is_dir():
+                dest_subdir = dest_fp_dir / fp_file.name
+                if dest_subdir.exists():
+                    shutil.rmtree(dest_subdir)
+                shutil.copytree(fp_file, dest_subdir)
+        print(f"  Copied footprint library to libs/JLCPCB/JLCPCB/")
+
+    # Use ${KIPRJMOD} for portable paths (works on Windows and Linux)
+    sym_table = '''(sym_lib_table
   (version 7)
-  (lib (name "JLCPCB")(type "KiCad")(uri "{sym_path}")(options "")(descr "JLCPCB parts"))
+  (lib (name "JLCPCB")(type "KiCad")(uri "${KIPRJMOD}/libs/JLCPCB/symbol/JLCPCB.kicad_sym")(options "")(descr "JLCPCB parts"))
 )'''
 
-    fp_table = f'''(fp_lib_table
+    fp_table = '''(fp_lib_table
   (version 7)
-  (lib (name "JLCPCB")(type "KiCad")(uri "{fp_path}")(options "")(descr "JLCPCB footprints"))
+  (lib (name "JLCPCB")(type "KiCad")(uri "${KIPRJMOD}/libs/JLCPCB/JLCPCB")(options "")(descr "JLCPCB footprints"))
 )'''
 
     SYM_LIB_TABLE.write_text(sym_table, encoding='utf-8')
@@ -288,7 +322,7 @@ def generate_schematic(parts_data, symbol_pins, overrides):
         else:
             raise ValueError(
                 f"No symbol mapping for {designator} (LCSC={lcsc}). "
-                "Ask the LLM to add symbol_lib_id to custom_library_overrides.yaml or ensure parts_with_netlabels.json includes 'symbol'."
+                "Add symbol_lib_id to custom_library_overrides.yaml or ensure parts_with_netlabels.json includes 'symbol'."
             )
 
         # Determine footprint
@@ -299,7 +333,7 @@ def generate_schematic(parts_data, symbol_pins, overrides):
             if not footprint:
                 print(
                     f"WARNING: No footprint mapping for {designator} (LCSC={lcsc}). "
-                    "Ask the LLM to add footprint_lib_id to custom_library_overrides.yaml."
+                    "Add footprint_lib_id to custom_library_overrides.yaml."
                 )
                 footprint = ""
 
@@ -360,7 +394,7 @@ def main():
     if not PARTS_JSON.exists():
         raise FileNotFoundError(
             f"{PARTS_JSON} not found. "
-            "Ask the LLM to run map_connections.py after completing selections and pin parsing."
+            "Run map_connections.py after completing selections and pin parsing."
         )
 
     # Load parts data
@@ -381,7 +415,7 @@ def main():
     if not symbol_pins:
         raise ValueError(
             "No symbols parsed from the JLCPCB library. "
-            "Ask the LLM to verify the downloaded library or rerun download_jlcpcb_libs.py and parse_library_pins.py."
+            "Verify the downloaded library or rerun download_jlcpcb_libs.py and parse_library_pins.py."
         )
     print(f"  Found {len(symbol_pins)} symbols")
 
@@ -406,7 +440,7 @@ def main():
     ]
     if unmapped:
         print(f"Warning: {len(unmapped)} parts have no symbol mapping; using fallbacks: {unmapped}")
-        print("Ask the LLM to update LCSC_TO_SYMBOL or ensure map_connections generated symbol names.")
+        print("Update LCSC_TO_SYMBOL or ensure map_connections generated symbol names.")
 
     num_parts, num_labels = generate_schematic(parts_data, symbol_pins, overrides)
 

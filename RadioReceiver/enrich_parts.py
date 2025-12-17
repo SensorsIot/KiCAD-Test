@@ -182,7 +182,7 @@ def enrich_parts(parts_yaml: Path, output_csv: Path):
     if not isinstance(components, list):
         raise ValueError(
             "parts.yaml does not contain a list under 'components'. "
-            "Ask the LLM to regenerate parts.yaml with a top-level 'components' list."
+            "Regenerate parts.yaml with a top-level 'components' list."
         )
     print(f"Loaded {len(components)} components from {parts_yaml.name}")
 
@@ -194,13 +194,13 @@ def enrich_parts(parts_yaml: Path, output_csv: Path):
         if "name" not in part:
             raise ValueError(
                 "Component entry missing 'name'. "
-                "Ask the LLM to regenerate parts.yaml ensuring every component has a name."
+                "Regenerate parts.yaml ensuring every component has a name."
             )
         name = part["name"]
         if "part" not in part and "value" not in part:
             raise ValueError(
                 f"Component '{name}' missing both 'part' and 'value'. "
-                "Ask the LLM to regenerate parts.yaml with either 'part' (for actives/connectors) "
+                "Regenerate parts.yaml with either 'part' (for actives/connectors) "
                 "or 'value' (for passives) plus 'package'."
             )
         query = build_query(part)
@@ -342,7 +342,7 @@ def enrich_parts(parts_yaml: Path, output_csv: Path):
         name = row["name"]
         selected = str(row.get("selected", "")).strip().upper() == "X"
         if row["lcsc"] == "NOT_FOUND":
-            note = "No LCSC; ask LLM to add lcsc_hint or mark DNP"
+            note = "No LCSC; add add lcsc_hint or mark DNP"
         elif name_counts[name] > 1:
             if selection_counts[name] == 0:
                 note = "Multiple options; choose one and set selected='X'"
@@ -370,13 +370,13 @@ def enrich_parts(parts_yaml: Path, output_csv: Path):
         with open(missing_path, "w", encoding="utf-8") as f:
             yaml.safe_dump({"missing": missing}, f, sort_keys=False)
         print(f"\nMissing parts written to {missing_path}")
-        print("Ask the LLM to update parts.yaml with lcsc_hint or skip_search for these entries.")
+        print("Update parts.yaml with lcsc_hint or skip_search for these entries.")
 
 
 def main():
     logger.info(f"Starting enrich_parts.py - Log file: {LOG_FILE}")
     script_dir = Path(__file__).parent
-    parts_yaml = script_dir / "parts.yaml"
+    parts_yaml = script_dir / "LLM-parts.yaml"
     output_csv = script_dir / "parts_options.csv"
 
     if not parts_yaml.exists():
