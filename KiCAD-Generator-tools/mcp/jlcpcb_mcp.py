@@ -269,7 +269,7 @@ def search_family_variants(family: str, module: str = "", quantity: int = 1) -> 
             variants.append({
                 "family": family,
                 "module": module,
-                "quantity": quantity if is_proposed else None,
+                "quantity": quantity,
                 "mfr_part": v.get("mfr_part", ""),
                 "proposed_by_claude": is_proposed,
                 "lcsc": v.get("lcsc", ""),
