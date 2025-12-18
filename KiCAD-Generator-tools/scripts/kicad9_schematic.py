@@ -224,7 +224,8 @@ def parse_kicad_sym(lib_path: Path) -> Dict[str, SymbolDef]:
         return -1
 
     # Find all top-level symbols (handle both tab and space indentation)
-    pattern = re.compile(r'\n(\s+)\(symbol "([^"]+)" \(in_bom')
+    # Note: Some symbols have extra spaces before (in_bom, so we use \s+ instead of single space
+    pattern = re.compile(r'\n(\s+)\(symbol "([^"]+)"\s+\(in_bom')
     for match in pattern.finditer(content):
         indent = match.group(1)
         sym_name = match.group(2)
@@ -1997,40 +1998,14 @@ def generate_debug_schematic(
 
     parts_data = model.get('parts', [])
 
-    # LCSC to symbol mapping
-    lcsc_to_symbol = {
-        "C2913206": "ESP32-S3-MINI-1-N8",
-        "C195417": "SI4735-D60-GU",
-        "C7971": "TDA1306T",
-        "C16581": "TP4056",
-        "C6186": "AMS1117-3.3",
-        "C7519": "USBLC6-2SC6",
-        "C393939": "TYPE-C-31-M-12",
-        "C131337": "S2B-PH-K-S",
-        "C145819": "PJ-327A",
-        "C124378": "Header-1x04",
-        "C238128": "TestPoint",
-        "C470747": "EC11E18244A5",
-        "C127509": "TS-1102S",
-        "C2761795": "WS2812B-B",
-        "C32346": "Crystal-32.768kHz",
-        "C23186": "R",
-        "C22975": "R",
-        "C25804": "R",
-        "C25900": "R",
-        "C22775": "R",
-        "C45783": "C",
-        "C134760": "C",
-        "C15850": "C",
-        "C15849": "C",
-        "C14663": "C",
-        "C1653": "C",
-    }
-
     # Parse symbol library
     print(f"Parsing symbol library: {symbol_lib_path}")
     symbols = parse_kicad_sym(symbol_lib_path)
     print(f"  Found {len(symbols)} symbols")
+
+    # Build dynamic LCSC to symbol mapping from parsed symbols
+    lcsc_to_symbol = build_lcsc_to_symbol(symbols)
+    print(f"  LCSC mappings: {len(lcsc_to_symbol)}")
 
     # Place ALL parts (keep all parts in schematic)
     print(f"Placing {len(parts_data)} parts...")
@@ -2141,10 +2116,10 @@ if __name__ == "__main__":
         )
     else:
         # Normal mode: generate full schematic
-        output = output_dir / "RadioReceiver_v3.kicad_sch"
+        output = output_dir / "Schematic.kicad_sch"
         generate_from_pin_model(
             pin_model,
             symbol_lib,
             output,
-            title="ESP32-S3 Portable Radio Receiver"
+            title="Generated Schematic"
         )

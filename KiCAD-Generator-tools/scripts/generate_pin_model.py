@@ -98,7 +98,7 @@ def generate_pin_model(parts_file: Path, connections_file: Path) -> dict:
             "symbol": f"JLCPCB:{part.get('lcsc_hint', 'UNKNOWN')}",
             "footprint": f"JLCPCB:{part.get('package', 'UNKNOWN')}",
             "value": part.get('part', ''),
-            "lcsc": part.get('lcsc_hint', ''),
+            "lcsc": part.get('lcsc', ''),
             "belongs_to": part.get('belongs_to'),
             "category": part.get('category', ''),
             "pins": pins

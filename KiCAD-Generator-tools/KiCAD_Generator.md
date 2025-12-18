@@ -39,8 +39,21 @@ brew install kicad
 
 ### Python Packages
 ```bash
-pip install pyyaml JLC2KiCadLib
+pip install pyyaml JLC2KiCadLib requests
 ```
+
+### JLCPCB MCP (for Step 0)
+
+The `fsd-review` skill uses the JLCPCB MCP for part lookups. Configure it:
+
+```bash
+claude mcp add --transport stdio jlcpcb -- python3 /path/to/KiCAD-Generator-tools/mcp/jlcpcb_mcp.py
+```
+
+**MCP Tools:**
+- `search_family` - Returns ALL variants with `proposed_by_claude` selection (primary tool for parts.csv)
+- `search_parts` - General keyword search
+- `get_part_by_lcsc` - Lookup by LCSC code (e.g., C2913206)
 
 ## Directory Structure
 
@@ -60,22 +73,22 @@ KiCAD-Generator-tools/              # Shared tools and libraries
 │   └── validate_step*.py           # Validators
 │
 <ProjectName>/                       # Project directory
-├── design/
-│   ├── input/
-│   │   └── FSD_*.md                # Functional Specification Document
-│   ├── work/
-│   │   ├── step1_primary_parts.yaml    # All parts + design options
-│   │   ├── step2_parts_extended.yaml   # Enriched with JLCPCB data
-│   │   ├── step3_design_options.yaml   # Options presented
-│   │   ├── decisions.yaml              # User decisions (created in Step 3)
-│   │   ├── step4_final_parts.yaml      # Final parts after decisions
-│   │   ├── step5_connections.yaml      # All connections
-│   │   ├── step6_validation.yaml       # Validation report
-│   │   └── pin_model.json              # Generated pin model
-│   └── output/
-│       ├── Debug.kicad_pro         # KiCad project
-│       ├── Debug.kicad_sch         # Generated schematic
-│       └── sym-lib-table           # Points to central library
+├── FSD_*.md                        # Functional Specification Document
+├── parts.csv                       # Step 0 output: All variants with proposed_by_claude
+├── fsd_review.md                   # Step 0 output: Review findings
+├── work/
+│   ├── step1_primary_parts.yaml    # All parts + design options
+│   ├── step2_parts_extended.yaml   # Enriched with JLCPCB data
+│   ├── step3_design_options.yaml   # Options presented
+│   ├── decisions.yaml              # User decisions (created in Step 3)
+│   ├── step4_final_parts.yaml      # Final parts after decisions
+│   ├── step5_connections.yaml      # All connections
+│   ├── step6_validation.yaml       # Validation report
+│   └── pin_model.json              # Generated pin model
+└── output/
+    ├── Debug.kicad_pro             # KiCad project
+    ├── Debug.kicad_sch             # Generated schematic
+    └── sym-lib-table               # Points to central library
 ```
 
 ## Central Symbol Library
@@ -98,6 +111,8 @@ This ensures symbols are downloaded once and reused across all projects.
 
 ```
 FSD.md
+   ↓ [Step 0] Review FSD, validate JLCPCB availability (fsd-review skill + MCP)
+parts.csv + fsd_review.md
    ↓ [Step 1] Extract ALL parts from FSD (including optional/conditional)
 step1_primary_parts.yaml (design_options + conditional_parts identified)
    ↓ [Step 2] Enrich with JLCPCB data (pricing, stock, variants)
@@ -162,10 +177,35 @@ Step 1 ──► Step 2 ──► Step 3 ──► Step 4 ──► Step 5 ─�
 
 These steps involve design decisions and user input.
 
-### Step 0: Review and Challenge FSD
+### Step 0: Review FSD and Generate Parts List
 
-**Input:** `design/input/FSD_*.md`
-**Output:** Enhanced version of `design/input/FSD_*.md`
+**Purpose:** Review the FSD for electrical feasibility, validate part availability at JLCPCB, and generate `parts.csv` with all component variants.
+
+**Skill:** `fsd-review` (uses JLCPCB MCP `search_family` tool)
+
+**Process:**
+1. Read FSD completely
+2. Identify MCU, power rails, and major components
+3. Check for strapping pin conflicts (ESP32)
+4. Validate power system (LDO dropout, current budget)
+5. Use MCP `search_family` tool for each part family:
+   ```
+   MCP call: search_family
+     family: "ESP32-S3-MINI"
+     module: "MCU"
+     quantity: 1
+   ```
+6. Write all variants to `parts.csv`
+7. Create `fsd_review.md` with findings
+
+**Input:** `FSD_*.md`
+**Output:** `parts.csv`, `fsd_review.md`
+
+**parts.csv columns:**
+- `family, module, quantity, mfr_part, proposed_by_claude` (required)
+- `lcsc, type, package, stock, in_stock, price, description` (extra info)
+
+**Selection criteria:** In-stock > Type (Basic > Preferred > Extended) > Stock > Price
 
 ### Step 1: Extract Primary Parts from FSD
 

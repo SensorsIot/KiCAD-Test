@@ -90,7 +90,7 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
                                     └────────┬────────┘
                                              │
 ┌──────────┐     ┌──────────┐     ┌──────────┴────────┐     ┌──────────┐
-│  USB-C   │────▶│  TP4056  │────▶│     SI4735       │────▶│  TDA1306 │────▶│ Headphone│
+│  USB-C   │────▶│  TP4056  │────▶│     SI4735       │────▶│ PAM8908  │────▶│ Headphone│
 │Connector │     │ Charger  │     │   Radio IC       │     │  Amp IC  │     │   Jack   │
 └──────────┘     └────┬─────┘     └──────────┬───────┘     └──────────┘
       │               │                      │
@@ -163,7 +163,7 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
 | Parameter | Requirement |
 |-----------|-------------|
 | Output Type | Stereo headphone (3.5mm TRS) |
-| Audio Amplifier | TDA1306 stereo headphone amplifier (single-supply) |
+| Audio Amplifier | PAM8908 stereo headphone amplifier (single-supply) |
 | Output Impedance | 32 - 300 ohm headphones |
 | Volume Control | Digital, 64 steps |
 | Frequency Response | 20 Hz - 15 kHz |
@@ -217,7 +217,6 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
 | Parameter | Specification |
 |-----------|---------------|
 | Part Number | ESP32-S3-MINI-1-N8 |
-| LCSC Part | C2913206 |
 | CPU | Dual-core Xtensa LX7, 240 MHz |
 | Flash | 8 MB |
 | PSRAM | None |
@@ -233,7 +232,6 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
 | Parameter | Specification |
 |-----------|---------------|
 | Part Number | SI4735-D60-GU |
-| LCSC Part | C195417 |
 | Package | SSOP-24 |
 | Interface | I2C (400 kHz) |
 | I2C Address | 0x11 (DFS pin low) |
@@ -242,20 +240,22 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
 | Reference Clock | 32.768 kHz crystal |
 
 
-### 4.3 Audio Amplifier - TDA1306 (Headphone Amplifier)
+### 4.3 Audio Amplifier - PAM8908 (Headphone Amplifier)
 
 | Parameter | Specification |
 |-----------|---------------|
-| Part Number | TDA1306 |
+| Part Number | PAM8908JER |
+| Package | MSOP-10 |
 | Function | Stereo headphone amplifier for SI4735 audio outputs |
-| Supply Voltage | 2.7 - 5.5 V (powered from 3.3V rail) |
+| Supply Voltage | 2.5 - 5.5 V (powered from 3.3V rail) |
+| Output Power | 25 mW × 2 @ 32Ω |
 | Channels | 2 (L/R) |
-| Control | Optional shutdown/enable from MCU GPIO (recommended for power saving) |
+| Features | Capless output, low quiescent current |
 
-#### 4.3.1 Audio Signal Path (High-Level)
-- SI4735 audio outputs (LOUT/ROUT) feed the TDA1306 inputs via AC coupling capacitors.
-- TDA1306 outputs drive the 3.5mm headphone jack.
-- Provide output coupling and local decoupling per the TDA1306 typical application circuit.
+#### 4.3.1 Audio Signal Path
+- SI4735 audio outputs (LOUT/ROUT) → 1µF coupling capacitors → PAM8908 inputs
+- PAM8908 outputs → Direct to 3.5mm headphone jack (capless design)
+- Supply decoupling: 100nF + 10µF on VDD pin
 
 ### 4.4 GPIO Allocation
 
@@ -269,7 +269,7 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
 | GPIO9 | Encoder1 B | Input | Internal pullup |
 | GPIO10 | Encoder1 SW | Input | Internal pullup |
 | GPIO12 | BFO Button | Input | Internal pullup; active low recommended |
-| GPIO13 | TDA1306 SHDN | Output | Optional amp enable/shutdown (polarity per selected part) |
+| GPIO13 | PAM8908 SHDN | Output | Amplifier shutdown control (active low) |
 | GPIO19 | USB D- | Bidirectional | Native USB |
 | GPIO20 | USB D+ | Bidirectional | Native USB |
 | GPIO21 | Encoder2 A | Input | Internal pullup |
@@ -292,7 +292,6 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
 | Parameter | Specification |
 |-----------|---------------|
 | Part Number | TYPE-C-31-M-12 (or equivalent) |
-| LCSC Part | C393939 |
 | Pins Used | VBUS, D+, D-, GND, CC1, CC2 |
 | Data Protocol | USB 2.0 Full Speed |
 | Power Delivery | 5V @ 500mA (USB 2.0 default) |
@@ -300,6 +299,15 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
 #### 5.1.1 CC Pin Configuration
 - CC1: 5.1k resistor to GND (indicates device, requests 5V)
 - CC2: 5.1k resistor to GND
+
+#### 5.1.2 USB ESD Protection
+| Parameter | Specification |
+|-----------|---------------|
+| Part Number | USBLC6-2SC6 |
+| Package | SOT-23-6 |
+| Function | ESD protection for USB D+/D- lines |
+| ESD Rating | ±8kV contact, ±15kV air |
+| Capacitance | 3.5pF (minimal signal impact) |
 
 ### 5.2 OLED Header
 
@@ -327,14 +335,13 @@ The ESP32-S3 Portable Radio Receiver is a compact, battery-powered device capabl
 | Tip | Left channel |
 | Ring | Right channel |
 | Sleeve | Ground |
-| Output Impedance | Driven by TDA1306; series resistors optional for protection/stability |
+| Output Impedance | Driven by PAM8908 capless outputs |
 
 ### 5.5 Antenna Connections
 
-| Antenna | Connection | Notes |
-|---------|------------|-------|
-| FM | Wire antenna to FMI pin | ~75cm wire recommended |
-| AM | Ferrite bar antenna or loop | Connect to AMI pin |
+
+
+only headers. Antennas are external and will be connected to this header
 
 ---
 
@@ -345,79 +352,95 @@ AMS1117 and TP4056 are only examples. propose different chips if appropriate
 ### 6.1 Power Architecture
 
 ```
-USB 5V ──┬──▶ TP4056 ──▶ Battery (4.2V max)
-         │                    │
-         │                    ▼
-         │              ┌──────────┐
-         └──────────────┤ AMS1117  ├──▶ 3.3V Rail
-                        │   3.3V   │
-                        └──────────┘
+USB 5V ───────────────────────▶ TP4056 VCC (charging input)
+
+
+                              ┌────────────┐
+                              │  Battery   │
+                              │ 3.3-4.2V   │
+                              └─────┬──────┘
+                                    │
+                              ┌─────┴──────┐
+                              │   P-FET    │ SI2301CDS
+                              │  Reverse   │
+                              │  Protect   │
+                              └─────┬──────┘
+                                    │
+                             VBAT_PROTECTED
+                                    │
+         ┌──────────────────────────┼──────────────────────────┐
+         │                          │                          │
+         ▼                          ▼                          ▼
+   ┌──────────┐               ┌──────────┐               ┌──────────┐
+   │  TP4056  │               │  ME6211  │               │ WS2812B  │
+   │  BAT+    │               │   LDO    │               │   LEDs   │
+   └──────────┘               └────┬─────┘               └──────────┘
+                                   │
+                                   ▼
+                              3.3V Rail
+                                   │
+         ┌────────────┬────────────┼────────────┬────────────┐
+         │            │            │            │            │
+         ▼            ▼            ▼            ▼            ▼
+   ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+   │ ESP32-S3 │ │  SI4735  │ │ PAM8908  │ │   OLED   │ │  I2C     │
+   │   MCU    │ │  Radio   │ │  Audio   │ │ Display  │ │ Pullups  │
+   └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
 ```
 
-### 6.2 Battery Specifications
+**Notes:**
+- P-FET sits between battery connector and all loads (VBAT_PROTECTED rail)
+- TP4056 VCC receives USB 5V for charging; BAT+ connects to VBAT_PROTECTED
+- When charging: current flows through P-FET body diode to battery
+- When battery reversed: P-FET blocks, all loads protected
+
+### 6.2 Reverse Polarity Protection
+
+| Parameter | Specification |
+|-----------|---------------|
+| Part Number | SI2301CDS (or equivalent P-FET) |
+| Package | SOT-23 |
+| Function | Battery reverse polarity protection |
+| Topology | P-channel FET in high-side |
+| Rds(on) | < 100mΩ (minimal voltage drop) |
+| Voltage Drop | < 50mV at 500mA |
+
+**Circuit:** P-FET source to battery+, drain to load, gate to battery- via 10k resistor.
+When battery correct: FET on, low Rds drop.
+When battery reversed: FET off, circuit protected.
+
+### 6.3 Battery Specifications
 
 | Parameter | Specification |
 |-----------|---------------|
 | Type | Li-ion or Li-Po |
 | Nominal Voltage | 3.7 V |
 | Charge Voltage | 4.2 V |
-| Minimum Voltage | 3.0 V (cutoff) |
+| Minimum Voltage | 3.3 V (cutoff) |
 | Recommended Capacity | 1000 - 2000 mAh |
 
-### 6.3 Battery Charger - TP4056
+### 6.4 Battery Charger - TP4056
 
 | Parameter | Specification |
 |-----------|---------------|
 | Part Number | TP4056 |
-| LCSC Part | C16581 |
 | Charge Current | 500 mA (set by 2k PROG resistor) |
 | Charge Voltage | 4.2 V ± 1% |
 | Input Voltage | 4.5 - 5.5 V |
 | Thermal Regulation | Yes (junction temp limit) |
 
-#### 6.3.1 Charge Current Selection
-
-| PROG Resistor | Charge Current |
-|---------------|----------------|
-| 10k | 130 mA |
-| 5k | 250 mA |
-| 2k | 500 mA |
-| 1.2k | 780 mA |
-| 1k | 1000 mA |
-
-### 6.4 Voltage Regulator - AMS1117-3.3
+### 6.5 Voltage Regulator - ME6211C33M5G-N
 
 | Parameter | Specification |
 |-----------|---------------|
-| Part Number | AMS1117-3.3 |
-| LCSC Part | C6186 (Basic) |
+| Part Number | ME6211 |
 | Output Voltage | 3.3 V ± 1% |
-| Output Current | 1 A maximum |
-| Dropout Voltage | 1.1 V typical |
-| Input Voltage | 4.5 - 12 V |
-| Quiescent Current | 5 mA typical |
+| Output Current | 500 mA maximum |
+| Dropout Voltage | 100 mV typical |
+| Input Voltage | 2.0 - 6.0 V |
+| Quiescent Current | 40 µA typical |
 
-### 6.5 Power Budget
-
-| Component | Current (typical) | Current (max) |
-|-----------|-------------------|---------------|
-| ESP32-S3 (active) | 80 mA | 350 mA |
-| ESP32-S3 (light sleep) | 2 mA | - |
-| SI4735 (FM) | 18 mA | 24 mA |
-| OLED Display | 20 mA | 30 mA |
-| WS2812B (3x, white) | 60 mA | 180 mA |
-| AMS1117 quiescent | 5 mA | 10 mA |
-| **Total (typical)** | **183 mA** | **594 mA** |
-
-### 6.6 Battery Life Estimate
-
-| Battery Capacity | Estimated Runtime |
-|------------------|-------------------|
-| 1000 mAh | ~5 hours |
-| 1500 mAh | ~8 hours |
-| 2000 mAh | ~11 hours |
-
-*Based on typical current of 183mA with LEDs at low brightness*
+*Note: ME6211 selected over AMS1117 for low dropout (100mV vs 1.1V), enabling operation down to 3.4V battery.*
 
 ---
 
@@ -447,7 +470,6 @@ USB 5V ──┬──▶ TP4056 ──▶ Battery (4.2V max)
 | Parameter | Specification |
 |-----------|---------------|
 | Part Number | WS2812B-B |
-| LCSC Part | C2761795 |
 | Package | 5050 SMD |
 | Quantity | 3 |
 | Data Protocol | Single-wire, 800 kHz |
@@ -501,192 +523,3 @@ USB 5V ──┬──▶ TP4056 ──▶ Battery (4.2V max)
 
 ---
 
-## 9. Performance Requirements
-
-### 9.1 Startup Time
-
-| Event | Maximum Time |
-|-------|--------------|
-| Power on to radio playing | 3 seconds |
-| Wake from sleep | 500 ms |
-| Band change | 200 ms |
-
-### 9.2 Tuning Performance
-
-| Parameter | Requirement |
-|-----------|-------------|
-| Frequency change response | < 100 ms |
-| Seek time (per station) | < 50 ms |
-| Full band scan | < 30 seconds |
-
-### 9.3 Display Update Rate
-
-| Parameter | Requirement |
-|-----------|-------------|
-| Frequency display | < 50 ms after change |
-| Signal strength | 200 ms update interval |
-| Volume indicator | Immediate |
-
----
-
-## 10. Environmental Requirements
-
-### 10.1 Operating Conditions
-
-| Parameter | Range |
-|-----------|-------|
-| Temperature | 0°C to +45°C |
-| Humidity | 20% to 80% RH (non-condensing) |
-| Altitude | 0 to 3000m |
-
-### 10.2 Storage Conditions
-
-| Parameter | Range |
-|-----------|-------|
-| Temperature | -20°C to +60°C |
-| Humidity | 10% to 90% RH |
-
-### 10.3 ESD Protection
-
-| Parameter | Requirement |
-|-----------|-------------|
-| HBM (Human Body Model) | ± 2 kV on USB connector |
-| Contact discharge | ± 4 kV on exposed metal |
-
----
-
-## 11. Manufacturing Requirements
-
-### 11.1 PCB Specifications
-
-| Parameter | Specification |
-|-----------|---------------|
-| Layers | 2 (minimum) |
-| Thickness | 1.6 mm |
-| Copper Weight | 1 oz (35 μm) |
-| Surface Finish | HASL or ENIG |
-| Solder Mask | Green (default) |
-| Silkscreen | White |
-| Minimum Trace | 0.2 mm / 8 mil |
-| Minimum Space | 0.2 mm / 8 mil |
-
-### 11.2 Component Requirements
-
-| Parameter | Specification |
-|-----------|---------------|
-| Minimum Passive Size | 0603 (1608 metric) |
-| Assembly Service | JLCPCB SMT |
-| Preferred Parts | JLCPCB Basic parts where possible |
-
-### 11.3 Assembly Notes
-
-1. USB-C connector requires careful alignment - use stencil
-2. ESP32-S3-MINI module has exposed pad - ensure thermal via
-3. SI4735 SSOP-24 requires fine pitch soldering
-4. WS2812B LEDs are heat sensitive - reflow < 260°C, 10s max
-5. Crystal Y1 requires clean pads - no flux residue
-
----
-
-## 12. Bill of Materials
-
-### 12.1 Active Components
-
-| Ref | Description | Value/Part | Package | LCSC | Type |
-|-----|-------------|------------|---------|------|------|
-| U1 | MCU Module | ESP32-S3-MINI-1-N8 | Module | C2913206 | Extended |
-| U2 | Battery Charger | TP4056 | ESOP-8 | C16581 | Extended |
-| U3 | LDO Regulator | AMS1117-3.3 | SOT-223 | C6186 | Basic |
-| U4 | Radio IC | SI4735-D60-GU | SSOP-24 | C195417 | Extended |
-| U5 | Headphone Amplifier | TDA1306 | SOP-8 (typical) | (select LCSC) | Extended |
-| D1-D3 | RGB LED | WS2812B-B | 5050 | C2761795 | Extended |
-
-### 12.2 Connectors
-
-| Ref | Description | Value/Part | Package | LCSC | Type |
-|-----|-------------|------------|---------|------|------|
-| J1 | USB Connector | USB-C 16-pin | SMD | C393939 | Basic |
-| J2 | Battery Connector | JST-PH 2-pin | SMD | C131337 | Basic |
-| J3 | Audio Jack | 3.5mm TRS | TH | C145819 | Extended |
-| J4 | OLED Header | 1x04 2.54mm | TH | - | - |
-
-### 12.3 Switches
-
-| Ref | Description | Package | LCSC | Type |
-|-----|-------------|---------|------|------|
-| SW1 | Reset Button | 6x6mm SMD | C127509 | Basic |
-| ENC1, ENC2 | Rotary Encoder | SMD EC11 | - | Extended |
-
-### 12.4 Passive Components
-
-| Ref | Value | Package | LCSC | Type | Purpose |
-|-----|-------|---------|------|------|---------|
-| R1, R2 | 5.1k | 0603 | C23186 | Basic | USB-C CC pulldown |
-| R3 | 2k | 0603 | C22975 | Basic | TP4056 PROG |
-| R4 | 10k | 0603 | C25804 | Basic | ESP32 EN pullup |
-| R5, R6 | 4.7k | 0603 | C25900 | Basic | I2C pullup |
-| R7, R8 | 100R | 0603 | C22775 | Basic | Audio output (optional, if used) |
-| R9, R10 | 10k | 0603 | C25804 | Basic | TDA1306 gain/bias network (typical) |
-| C17, C18 | 1uF | 0603/0805 | (select LCSC) | Basic | Audio input coupling (SI4735 -> TDA1306) |
-| C19, C20 | 220uF | TH/SMD | (select LCSC) | Extended | Headphone output coupling (TDA1306 -> jack) |
-| C21 | 1uF | 0603/0805 | (select LCSC) | Basic | TDA1306 local supply decoupling |
-| C1-C3 | 10uF | 0805 | C15850 | Basic | Power filter |
-| C4, C5 | 22uF | 0805 | C45783 | Basic | LDO caps |
-| C6-C16 | 100nF | 0603 | C14663 | Basic | Bypass caps |
-| C13, C14 | 22pF | 0603 | C1653 | Basic | Crystal load |
-| Y1 | 32.768kHz | 3215 | C32346 | Basic | SI4735 reference |
-
-### 12.5 Cost Estimate
-
-| Category | Est. Cost (1 unit) |
-|----------|-------------------|
-| PCB (JLCPCB) | $2-5 |
-| Basic Parts Assembly | $3-5 |
-| Extended Parts | $8-12 |
-| ESP32-S3-MINI | $3 |
-| SI4735 | $4 |
-| Battery (not included) | $5-10 |
-| OLED Module (not included) | $3-5 |
-| **Total (excl. battery/OLED)** | **$20-30** |
-
----
-
-## 13. Revision History
-
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2025-12-16 | - | Initial release |
-| 1.1 | 2025-12-17 | - | Added BFO button (GPIO) and TDA1306 headphone amplifier |
-
----
-
-## Appendix A: Schematic Checklist
-
-- [ ] USB-C connector with CC resistors
-- [ ] TP4056 charger with PROG resistor
-- [ ] AMS1117-3.3 with input/output caps
-- [ ] Battery connector (JST-PH)
-- [ ] ESP32-S3-MINI with decoupling
-- [ ] EN pin RC circuit and reset button
-- [ ] Native USB connections (D+/D-)
-- [ ] SI4735 with crystal and bypass caps
-- [ ] I2C bus with pullup resistors
-- [ ] OLED header
-- [ ] TDA1306 headphone amplifier stage with coupling and decoupling capacitors
-- [ ] Headphone jack (driven by TDA1306; series resistors optional)
-- [ ] 3x WS2812B with bypass caps
-- [ ] 2x Rotary encoders
-- [ ] BFO button (GPIO input with pull-up and debounce)
-- [ ] Antenna connections (FM/AM)
-- [ ] Power symbols and net labels
-
-## Appendix B: PCB Layout Guidelines
-
-1. **Power Section**: Place near USB-C connector, minimize high-current trace length
-2. **ESP32-S3**: Central location, ground plane under module
-3. **SI4735**: Keep analog section away from digital noise
-4. **Crystal**: Close to SI4735, minimize trace length
-5. **Antenna traces**: Keep FM antenna trace away from digital signals
-6. **USB traces**: Match D+/D- length, keep short
-7. **Decoupling caps**: Place close to IC power pins
-8. **NeoPixels**: Can be placed along edge for visibility

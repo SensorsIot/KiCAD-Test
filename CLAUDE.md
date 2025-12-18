@@ -111,9 +111,22 @@ The schematic generator (`kicad9_schematic.py`) includes:
 - Footprints: `%USERPROFILE%\Documents\KiCad\JLCPCB\JLCPCB\`
 - Index: `%USERPROFILE%\Documents\KiCad\JLCPCB\lcsc_index.json`
 
+## Skills and Scripts Guidelines
+
+**All skills and scripts must be GENERIC:**
+- No hardcoded part numbers, LCSC codes, or manufacturer part names
+- No project-specific pin names or component references
+- Examples in SKILL.md files should use placeholder names (U1, IC-FAMILY, etc.)
+- Scripts should work with any project, not just the current one
+
+**Pin number convention:**
+- Use pin NUMBERS (from datasheets) in connections.csv, not pin names
+- Pin names vary between datasheets and JLC2KiCadLib symbols
+- Pin numbers are consistent and unambiguous
+- csv_to_pin_model.py converts pin numbers to actual symbol pin names
+
 ## Known Issues
 
 - JLC2KiCadLib generates KiCAD 6 format; scripts patch to KiCAD 9 format
-- SI4735 (C195417) not available on EasyEDA - manually added to JLCPCB.kicad_sym with all 24 pins
 - After schematic generation, must run "Update Schematic from Symbol Libraries" in KiCAD to populate lib_symbols section
 - Closely placed parts may cause routing to fall back to crossing paths if no obstacle-free route exists

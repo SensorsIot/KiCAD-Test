@@ -38,7 +38,8 @@ except ImportError:
 
 
 # Generic parts that use standard symbols (don't need individual LCSC symbols)
-GENERIC_PREFIXES = {'R', 'C', 'L'}  # Resistor, Capacitor, Inductor
+# Set to empty to download ALL symbols including passives
+GENERIC_PREFIXES = set()  # Previously: {'R', 'C', 'L'}
 
 
 def extract_lcsc_from_yaml(yaml_path: Path) -> Dict[str, str]:
